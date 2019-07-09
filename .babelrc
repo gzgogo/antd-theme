@@ -1,0 +1,16 @@
+{
+  "presets": ["env", "stage-0", "react"],
+
+  "plugins": [
+    "syntax-dynamic-import",
+    "react-hot-loader/babel",
+    "transform-decorators-legacy",
+    ["import", { "libraryName": "antd"}],
+    ["import", {
+      "libraryName": "ant-design-pro",
+      "libraryDirectory": "lib",
+      "style": true,
+      "camel2DashComponentName": false
+    }]
+  ]
+}

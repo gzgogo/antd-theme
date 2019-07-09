@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="set antd theme">
+  <meta name="theme-color" content="1890FF" />
+  <title>Antd Theme</title>
+  <link rel="manifest" href="/manifest.json">
+  <style>
+    html,body,#app {
+      height: 100%;
+      min-width: 1200px;
+    }
+  </style>
+</head>
+<body>
+  <link rel="stylesheet/less" type="text/css" href="antd.less" />
+  <script>
+      window.less = {
+        async: false,
+        env: 'production'
+      };
+    </script>
+    <script type="text/javascript" src="/less.min.js"></script>
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+  <section id="app"></section>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then((reg) => {
+            console.log('Service worker registered.', reg);
+          });
+      });
+    }
+  </script>
+</body>
+</html>

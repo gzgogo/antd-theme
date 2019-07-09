@@ -1,0 +1,31 @@
+{
+  "extends": "eslint-config-ali/react",
+  "parser": "babel-eslint",
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 7,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "comma-dangle": ["error", "never"],
+    "object-curly-spacing": ["error", "always"],
+    "no-void": "warn",
+    "new-cap": ["warn", { "newIsCap": true, "properties": false }],
+    "no-plusplus": "warn",
+    "no-mixed-operators": ["error",{"allowSamePrecedence": true}],
+    "no-fallthrough": ["error", { "commentPattern": "break[\\s\\w]*omitted" }],
+    "no-nested-ternary": "warn",
+    "no-console": "off",
+    "no-param-reassign": "off",
+    "eqeqeq": "error",
+    "react/prop-types": "off",
+    "no-script-url": 0
+  }
+}
