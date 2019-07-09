@@ -10,8 +10,8 @@ const FILES_TO_CACHE = [
   '/index.html',
   '/antd.less',
   '/less.min.js',
-  '/main.6c1e897e.js',
-  '/main.c9b0b38835405c9043d3.css',
+  '/main.78e97cbd.js',
+  '/main.a6de76f48fd299b96eab.css',
   '/vendor.a015c1d9.js',
   '/favicon.png'
 ];

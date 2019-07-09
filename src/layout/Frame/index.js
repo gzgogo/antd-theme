@@ -263,17 +263,17 @@ class App extends Component {
     defaultVars.forEach(item => (fileds.push(this.getField(item))));
 
     return (
-      <Layout style={{ height: '100%' }}>
-        <Header className="header">
+      <Layout style={{ minHeight: '100%' }}>
+        <Header className="header" style={{ padding: '0 20px' }}>
           <Row type="flex">
-            <Col xs={24} sm={6}>
+            <Col xs={24} sm={10}>
               {/* <div className="logo">Live Theme</div> */}
               <div className="logo">
                 <img src={require('../../asset/image/logo.svg')} alt="logo" />
                 <h1>Ant Design</h1>
               </div>
             </Col>
-            <Col xs={0} sm={18}>
+            <Col xs={0} sm={14}>
               <Menu
                 theme="dark"
                 mode="horizontal"
