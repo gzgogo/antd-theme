@@ -11,7 +11,8 @@ import {
   Button,
   InputNumber,
   Input,
-  Tooltip
+  Tooltip,
+  Collapse
 } from 'antd';
 import ColorPicker from 'component/ColorPicker';
 import ExampleForm from './ExampleForm';
@@ -21,6 +22,7 @@ import './style.less';
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
+const { Panel } = Collapse;
 
 class App extends Component {
   constructor(props) {
@@ -29,15 +31,16 @@ class App extends Component {
     const vars = {};
     const cacheTheme = JSON.parse(localStorage.getItem('app-theme'));
     try {
-      defaultVars.forEach((item) => {
-        const copy = { ...item };
-        if (cacheTheme && cacheTheme[item.name]) {
-          copy.value = cacheTheme[item.name];
-        }
-        vars[item.name] = copy;
+      defaultVars.forEach((group) => {
+        group.children.forEach((item) => {
+          if (cacheTheme && cacheTheme[item.name]) {
+            item.value = cacheTheme[item.name];
+          }
+          vars[item.name] = item;
+        });
       });
     } finally {
-      this.state = { 
+      this.state = {
         vars,
         menuTheme: 'light'
       };
@@ -86,19 +89,18 @@ class App extends Component {
 
   handleNumberChange = (varname, value) => {
     const { vars } = this.state;
-    value = `${value}px`;
     if (varname) {
       vars[varname].value = value;
-    }
 
-    window.less
-      .modifyVars(this.extractTheme(vars))
-      .then(() => {
-        this.setState({ vars });
-      })
-      .catch(() => {
-        message.error('Failed to update theme');
-      });
+      window.less
+        .modifyVars(this.extractTheme(vars))
+        .then(() => {
+          this.setState({ vars });
+        })
+        .catch(() => {
+          message.error('Failed to update theme');
+        });
+    }
   }
 
   handleStringChange = (varname, value) => {
@@ -141,7 +143,7 @@ class App extends Component {
     let content = '';
     const theme = {};
     Object.keys(vars).forEach((key) => {
-      content += `${key}: ${vars[key].value};\n`;
+      content += vars[key].type === 'number' ? `${key}: ${vars[key].value}${vars[key].unit};\n` : `${key}: ${vars[key].value};\n`;
       theme[key] = vars[key].value;
     });
 
@@ -170,7 +172,9 @@ class App extends Component {
 
   extractTheme = (vars) => {
     const theme = {};
-    Object.keys(vars).forEach(key => (theme[key] = vars[key].value));
+    Object.keys(vars).forEach((key) => {
+      theme[key] = vars[key].type === 'number' ? `${vars[key].value}${vars[key].unit}` : vars[key].value;
+    });
 
     return theme;
   }
@@ -258,9 +262,15 @@ class App extends Component {
     }
   }
 
-  render() {
-    const fileds = [];
-    defaultVars.forEach(item => (fileds.push(this.getField(item))));
+  render() {    
+    const panels = defaultVars.map((group) => {
+      const fileds = group.children.map(item => (this.getField(item)));
+      return (
+        <Panel header={group.name} key={group.name}>
+          {fileds}
+        </Panel>
+      );
+    });
 
     return (
       <Layout style={{ minHeight: '100%' }}>
@@ -270,7 +280,7 @@ class App extends Component {
               {/* <div className="logo">Live Theme</div> */}
               <div className="logo">
                 <img src={require('../../asset/image/logo.svg')} alt="logo" />
-                <h1>Ant Design</h1>
+                <h1 className="logo-title">Ant Design</h1>
               </div>
             </Col>
             <Col xs={0} sm={14}>
@@ -374,9 +384,9 @@ class App extends Component {
                       </Button>
                     ]}
                   >
-                    <div style={{ marginTop: '10px' }}>
-                      {fileds}
-                    </div>
+                    <Collapse style={{ marginTop: '10px' }}>
+                      {panels}
+                    </Collapse>
                   </Card>
                 </Col>
                 <Col xs={24} sm={{ span: 15, offset: 2 }}>

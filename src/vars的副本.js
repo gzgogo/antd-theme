@@ -205,7 +205,7 @@ const vars = [
   },
 
   {
-    name: 'Vertical paddings',
+    name: 'vertical paddings',
     children: [
       {
         name: '@padding-lg',
@@ -341,7 +341,7 @@ const vars = [
   },
 
   {
-    name: 'Disabled states',
+    name: 'disabled states',
     children: [
       {
         name: '@disabled-color',
@@ -365,7 +365,7 @@ const vars = [
   },
 
   {
-    name: 'Shadow',
+    name: 'shadow',
     children: [
       {
         name: '@shadow-color',
@@ -418,7 +418,7 @@ const vars = [
     ]
   },
   {
-    name: 'Button',
+    name: 'button',
     children: [
       {
         name: '@btn-font-weight',
@@ -530,7 +530,7 @@ const vars = [
     ]
   },
   {
-    name: 'Checkbox',
+    name: 'checkbox',
     children: [
       {
         name: '@checkbox-size',

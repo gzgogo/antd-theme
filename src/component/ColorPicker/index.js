@@ -5,21 +5,21 @@ const noop = () => { };
 
 const pickers = {
   chrome: ChromePicker,
-  sketch: SketchPicker,
+  sketch: SketchPicker
 };
 
 export default class ColorPicker extends Component {
   static defaultProps = {
     onChange: noop,
     onChangeComplete: noop,
-    position: 'bottom',
+    position: 'bottom'
   }
 
   constructor(props) {
     super();
     this.state = {
       displayColorPicker: false,
-      color: props.color,
+      color: props.color
     };
   }
 
@@ -55,7 +55,7 @@ export default class ColorPicker extends Component {
         width: small ? '16px' : '120px',
         height: small ? '16px' : '24px',
         borderRadius: '2px',
-        background: this.state.color,
+        background: this.state.color
       },
       swatch: {
         padding: '4px',
@@ -63,23 +63,23 @@ export default class ColorPicker extends Component {
         borderRadius: '2px',
         boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
         display: 'inline-block',
-        cursor: 'pointer',
+        cursor: 'pointer'
       },
       popover: {
         position: 'absolute',
-        zIndex: '2',
+        zIndex: '2'
       },
       cover: {
         position: 'fixed',
         top: '0px',
         right: '0px',
         bottom: '0px',
-        left: '0px',
+        left: '0px'
       },
       wrapper: {
         position: 'inherit',
-        zIndex: '100',
-      },
+        zIndex: '100'
+      }
     };
 
     if (position === 'top') {
