@@ -9,7 +9,8 @@ import {
   Button,
   Upload,
   DatePicker,
-  Progress
+  Progress,
+  Input
 } from 'antd';
 
 import './style.less';
@@ -107,8 +108,8 @@ class App extends Component {
             initialValue: true
           })(<Switch />)}
         </FormItem>
-        <FormItem {...formItemLayout} label="超链接">
-          <a href="#">跳转到首页</a>
+        <FormItem {...formItemLayout} label="名称">
+          <Input placeholder="Name" style={{ width: 300 }} />
         </FormItem>
         <FormItem {...formItemLayout} label="Radio.Group">
           {getFieldDecorator('radio-group', {
@@ -154,16 +155,15 @@ class App extends Component {
               <Button>
                 <Icon type="upload" /> Click to upload
               </Button>
+
+              <a href="#" style={{ marginLeft: 20 }}>上传文件</a>
             </Upload>
           )}
         </FormItem>
         <FormItem {...formItemLayout} label=" ">
-          我们曾经仰望星空，思考我们在宇宙中的位置，而现在我们只会低着头，担心如何在这片土地上活下去
+          服务于企业级产品的设计体系，基于确定和自然的设计价值观上的模块化解决方案，让设计者和开发者专注于更好的用户体验。
         </FormItem>
-        <FormItem {...formItemLayout} label=" ">
-          We used to look up at the sky and wonder at our place in the stars, now we just look down and worry about our place in the dirt
-        </FormItem>
-        <FormItem style={{ marginTop: 30 }} wrapperCol={{ span: 12, offset: 6 }}>
+        <FormItem wrapperCol={{ span: 12, offset: 6 }}>
           <Button type="default" style={{ marginRight: 10 }}>Cancel</Button>
           <Button type="primary" htmlType="submit">
                 Submit

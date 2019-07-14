@@ -17,6 +17,7 @@ import './style.less';
 
 const { Panel } = Collapse;
 const { Option } = Select;
+const { Search } = Input;
 
 class ThemeCard extends Component {
   constructor(props) {
@@ -39,6 +40,7 @@ class ThemeCard extends Component {
     } finally {
       this.state = {
         vars,
+        keyword: '',
         expanded: true
       };
       window.less
@@ -128,6 +130,12 @@ class ThemeCard extends Component {
           message.error('Failed to update theme');
         });
     }
+  }
+
+  handleSearch = (e) => {
+    this.setState({
+      keyword: e.target.value
+    });
   }
 
   handleResetTheme = () => {
@@ -290,6 +298,8 @@ class ThemeCard extends Component {
   }
 
   render() {
+    const { keyword, expanded } = this.state;
+
     // const hint = (
     //   <div>
     //     <p>1. 点击“Save js”保存主题</p>
@@ -338,14 +348,45 @@ class ThemeCard extends Component {
         </Select>
       </div>
     );
-    const panels = defaultVars.map((group) => {
-      const fileds = group.children.map(item => (this.getField(item)));
-      return (
-        <Panel header={group.name} key={group.name}>
-          {fileds}
-        </Panel>
+
+    let varsBody = null;
+    if (keyword) {
+      const fileds = [];
+
+      defaultVars.forEach((group) => {
+        group.children.forEach((item) => {
+          if (item.name.indexOf(keyword) >= 0) {
+            fileds.push(this.getField(item));
+          }
+        });
+      });
+
+      if (fileds.length) {
+        varsBody = (
+          <div className="search-fileds">
+            {fileds}
+          </div>
+        );
+      }
+    } else {
+      const panels = defaultVars.map((group) => {
+        const fileds = group.children.map(item => (this.getField(item)));
+        return (
+          <Panel header={group.name} key={group.name}>
+            {fileds}
+          </Panel>
+        );
+      });
+
+      varsBody = (
+        <Collapse
+          style={{ marginTop: '10px' }}
+          defaultActiveKey="Colors"
+        >
+          {panels}
+        </Collapse>
       );
-    });
+    }
 
     return (
       <div className="theme-card">
@@ -360,35 +401,37 @@ class ThemeCard extends Component {
           />
         </div>
         <Card
-          className={this.state.expanded ? '' : 'hide'}
+          className={expanded ? '' : 'hide'}
           title={title}
           actions={[
             <Button
               type="primary"
+              size="small"
               onClick={this.handleResetTheme}
             >
-                  Reset
+              Reset
             </Button>,
             <Button
               type="primary"
+              size="small"
               onClick={this.handleSaveLess}
             >
-                  Save less
+              Save less
             </Button>,
             <Button
               type="primary"
+              size="small"
               onClick={this.handleSaveJs}
             >
-                  Save js
+              Save js
             </Button>
           ]}
         >
-          <Collapse
-            style={{ marginTop: '10px' }}
-            defaultActiveKey="Colors"
-          >
-            {panels}
-          </Collapse>
+          <Search
+            placeholder="input search text"
+            onChange={this.handleSearch}
+          />
+          {varsBody}
         </Card>
       </div>
     );
