@@ -136,6 +136,42 @@ const vars = [
     ]
   },
   {
+    name: 'Border color',
+    children: [
+      {
+        name: '@border-color-base',
+        type: 'color',
+        value: '#D8D8D8',
+        desc: 'base border outline a component'
+      },
+      {
+        name: '@border-color-split',
+        type: 'color',
+        value: '#E8E8E8',
+        desc: 'split border inside a component'
+      },
+      {
+        name: '@border-color-inverse',
+        type: 'string',
+        value: '@white',
+        desc: ''
+      },
+      {
+        name: '@border-width-base',
+        type: 'number',
+        value: 1,
+        unit: 'px',
+        desc: 'width of the border for a component'
+      },
+      {
+        name: '@border-style-base',
+        type: 'string',
+        value: 'solid',
+        desc: 'style of a components border'
+      }
+    ]
+  },
+  {
     name: 'Font',
     children: [
       {
@@ -180,6 +216,7 @@ const vars = [
         name: '@line-height-base',
         type: 'number',
         value: 1.5,
+        unit: '',
         desc: ''
       }
     ]
@@ -203,7 +240,6 @@ const vars = [
       }
     ]
   },
-
   {
     name: 'Vertical paddings',
     children: [
@@ -257,42 +293,6 @@ const vars = [
         type: 'string',
         value: 'none',
         desc: ''
-      }
-    ]
-  },
-  {
-    name: 'Border color',
-    children: [
-      {
-        name: '@border-color-base',
-        type: 'color',
-        value: '#D8D8D8',
-        desc: 'base border outline a component'
-      },
-      {
-        name: '@border-color-split',
-        type: 'color',
-        value: '#E8E8E8',
-        desc: 'split border inside a component'
-      },
-      {
-        name: '@border-color-inverse',
-        type: 'string',
-        value: '@white',
-        desc: ''
-      },
-      {
-        name: '@border-width-base',
-        type: 'number',
-        value: 1,
-        unit: 'px',
-        desc: 'width of the border for a component'
-      },
-      {
-        name: '@border-style-base',
-        type: 'string',
-        value: 'solid',
-        desc: 'style of a components border'
       }
     ]
   },
@@ -504,21 +504,21 @@ const vars = [
         name: '@btn-height-base',
         type: 'number',
         value: 32,
-        unit: '',
+        unit: 'px',
         desc: ''
       },
       {
         name: '@btn-height-lg',
         type: 'number',
         value: 40,
-        unit: '',
+        unit: 'px',
         desc: ''
       },
       {
         name: '@btn-height-sm',
         type: 'number',
         value: 24,
-        unit: '',
+        unit: 'px',
         desc: ''
       }
 

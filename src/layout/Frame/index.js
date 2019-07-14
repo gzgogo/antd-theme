@@ -1,156 +1,28 @@
 import React, { Component } from 'react';
+import Draggable from 'react-draggable';
 import {
   Row,
   Col,
   Icon,
   Breadcrumb,
   Menu,
-  Layout,
-  Card,
-  message,
-  Button,
-  InputNumber,
-  Input,
-  Tooltip,
-  Collapse
+  Layout
 } from 'antd';
-import ColorPicker from 'component/ColorPicker';
-import ExampleForm from './ExampleForm';
-import defaultVars from '../../vars';
+import ExampleForm from 'component/ExampleForm';
+import ThemeCard from 'component/ThemeCard';
 
 import './style.less';
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
-const { Panel } = Collapse;
 
 class App extends Component {
   constructor(props) {
     super(props);
 
-    const vars = {};
-    const cacheTheme = JSON.parse(localStorage.getItem('app-theme'));
-    try {
-      defaultVars.forEach((group) => {
-        group.children.forEach((item) => {
-          if (cacheTheme && cacheTheme[item.name]) {
-            item.value = cacheTheme[item.name];
-          }
-          vars[item.name] = item;
-        });
-      });
-    } finally {
-      this.state = {
-        vars,
-        menuTheme: 'light'
-      };
-      window.less
-        .modifyVars(this.extractTheme(vars))
-        .then(() => { })
-        .catch(() => {
-          message.error('Failed to update theme');
-        });
-    }
-  }
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-      }
-    });
-  };
-
-  normFile = (e) => {
-    console.log('Upload event:', e);
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e && e.fileList;
-  }
-
-  handleColorChange = (varname, color) => {
-    const { vars } = this.state;
-    if (varname) {
-      vars[varname].value = color;
-    }
-
-    window.less
-      .modifyVars(this.extractTheme(vars))
-      .then(() => {
-        this.setState({ vars });
-      })
-      .catch(() => {
-        message.error('Failed to update theme');
-      });
-  }
-
-  handleNumberChange = (varname, value) => {
-    const { vars } = this.state;
-    if (varname) {
-      vars[varname].value = value;
-
-      window.less
-        .modifyVars(this.extractTheme(vars))
-        .then(() => {
-          this.setState({ vars });
-        })
-        .catch(() => {
-          message.error('Failed to update theme');
-        });
-    }
-  }
-
-  handleStringChange = (varname, value) => {
-    const { vars } = this.state;
-    if (varname) {
-      vars[varname].value = value;
-    }
-
-    window.less
-      .modifyVars(this.extractTheme(vars))
-      .then(() => {
-        this.setState({ vars });
-      })
-      .catch(() => {
-        message.error('Failed to update theme');
-      });
-  }
-
-  handleResetTheme = () => {
-    localStorage.setItem('app-theme', '{}');
-
-    const vars = {};
-    const theme = {};
-    defaultVars.forEach((item) => {
-      const copy = { ...item };
-      vars[item.name] = copy;
-      theme[item.name] = item.value;
-    });
-    this.setState({ vars });
-    window.less
-      .modifyVars(theme)
-      .catch(() => {
-        message.error('Failed to reset theme');
-      });
-  }
-
-  handleSaveTheme = () => {
-    const { vars } = this.state;
-
-    let content = '';
-    const theme = {};
-    Object.keys(vars).forEach((key) => {
-      content += vars[key].type === 'number' ? `${key}: ${vars[key].value}${vars[key].unit};\n` : `${key}: ${vars[key].value};\n`;
-      theme[key] = vars[key].value;
-    });
-
-    if (content) {
-      localStorage.setItem('app-theme', JSON.stringify(theme));
-      this.downloadFile('antd-theme.less', content);
-    }
+    this.state = {
+      menuTheme: 'light'
+    };
   }
 
   handleMenuThemeChange = (theme) => {
@@ -159,119 +31,7 @@ class App extends Component {
     });
   }
 
-  downloadFile = (fileName, content) => {
-    const aLink = document.createElement('a');
-    const blob = new Blob([content]);
-    // const evt = document.createEvent('HTMLEvents');
-    // evt.initEvent('click', false, false); // initEvent 不加后两个参数在FF下会报错, 感谢 Barret Lee 的反馈
-    aLink.download = fileName;
-    aLink.href = URL.createObjectURL(blob);
-    aLink.click();
-    // aLink.dispatchEvent(evt);
-  }
-
-  extractTheme = (vars) => {
-    const theme = {};
-    Object.keys(vars).forEach((key) => {
-      theme[key] = vars[key].type === 'number' ? `${vars[key].value}${vars[key].unit}` : vars[key].value;
-    });
-
-    return theme;
-  }
-
-  getColorField = varName => (
-    <div className="field-row" key={varName}>
-      <div className="field-name">
-        <Tooltip title={this.state.vars[varName].desc}>
-          {varName}
-        </Tooltip>
-      </div>
-      <div className="field-value">
-        <ColorPicker
-          type="sketch"
-          small
-          color={this.state.vars[varName].value}
-          position="bottom"
-          presetColors={[
-            '#F5222D',
-            '#FA541C',
-            '#FA8C16',
-            '#FAAD14',
-            '#FADB14',
-            '#A0D911',
-            '#52C41A',
-            '#13C2C2',
-            '#1890FF',
-            '#2F54EB',
-            '#722ED1',
-            '#EB2F96'
-          ]}
-          onChangeComplete={color => this.handleColorChange(varName, color)}
-        />
-      </div>
-    </div>
-  )
-
-  getNumberField = varName => (
-    <div className="field-row" key={varName}>
-      <div className="field-name">
-        <Tooltip title={this.state.vars[varName].desc}>
-          {varName}
-        </Tooltip>
-      </div>
-      <div className="field-value">
-        <InputNumber
-          style={{ width: 60 }}
-          size="small"
-          min={0}
-          defaultValue={this.state.vars[varName].value}
-          onChange={value => this.handleNumberChange(varName, value)}
-        />
-      </div>
-    </div>
-  )
-
-  getStringField = varName => (
-    <div className="field-row" key={varName}>
-      <div className="field-name">
-        <Tooltip title={this.state.vars[varName].desc}>
-          {varName}
-        </Tooltip>
-      </div>
-      <div className="field-value">
-        <Input
-          style={{ width: 120 }}
-          size="small"
-          defaultValue={this.state.vars[varName].value}
-          onChange={e => this.handleStringChange(varName, e.target.value)}
-        />
-      </div>
-    </div>
-  )
-
-  getField = (item) => {
-    switch (item.type) {
-      case 'color':
-        return this.getColorField(item.name);
-      case 'number':
-        return this.getNumberField(item.name);
-      case 'string':
-        return this.getStringField(item.name);
-      default:
-        break;
-    }
-  }
-
-  render() {    
-    const panels = defaultVars.map((group) => {
-      const fileds = group.children.map(item => (this.getField(item)));
-      return (
-        <Panel header={group.name} key={group.name}>
-          {fileds}
-        </Panel>
-      );
-    });
-
+  render() {
     return (
       <Layout style={{ minHeight: '100%' }}>
         <Header className="header" style={{ padding: '0 20px' }}>
@@ -358,37 +118,10 @@ class App extends Component {
             </Breadcrumb>
             <Content
               style={{
-                background: '#fff',
-                padding: 24,
-                margin: 0,
                 minHeight: 280
               }}
             >
               <Row>
-                <Col xs={24} sm={6}>
-                  <Card
-                    title="Theme"
-                    style={{ width: 320 }}
-                    actions={[
-                      <Button
-                        type="primary"
-                        onClick={this.handleResetTheme}
-                      >
-                            Reset Theme
-                      </Button>,
-                      <Button
-                        type="primary"
-                        onClick={this.handleSaveTheme}
-                      >
-                            Save Theme
-                      </Button>
-                    ]}
-                  >
-                    <Collapse style={{ marginTop: '10px' }}>
-                      {panels}
-                    </Collapse>
-                  </Card>
-                </Col>
                 <Col xs={24} sm={{ span: 15, offset: 2 }}>
                   <ExampleForm
                     menuTheme={this.state.menuTheme}
@@ -399,6 +132,14 @@ class App extends Component {
             </Content>
           </Layout>
         </Layout>
+        <Draggable
+          bounds="parent"
+          handle=".theme-card .ant-card-head"
+        >
+          <div className="theme-card-wrapper">
+            <ThemeCard />
+          </div>
+        </Draggable>
       </Layout>
     );
   }

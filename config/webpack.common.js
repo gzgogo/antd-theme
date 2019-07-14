@@ -50,6 +50,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
+      src: PATHS.src,
       stylesheet: path.resolve(PATHS.src, 'stylesheet'),
       image: path.resolve(PATHS.src, 'asset/image'),
       layout: path.resolve(PATHS.src, 'layout'),
@@ -57,7 +58,8 @@ module.exports = {
       page: path.resolve(PATHS.src, 'page'),
       util: path.resolve(PATHS.src, 'util'),
       constant: path.resolve(PATHS.src, 'constant'),
-      store: path.resolve(PATHS.src, 'store')
+      store: path.resolve(PATHS.src, 'store'),
+      theme: path.resolve(PATHS.src, 'theme')
     }
   },
   plugins: [
