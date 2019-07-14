@@ -73,7 +73,7 @@ class ThemeCard extends Component {
   handleNumberChange = (varname, value) => {
     const { vars } = this.state;
     if (varname) {
-      vars[varname].value = value;
+      vars[varname].value = `${value}${vars[varname].unit}`;
 
       const theme = this.extractTheme(vars);
       window.less

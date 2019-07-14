@@ -51,7 +51,11 @@ class App extends Component {
       wrapperCol: { span: 18 }
     };
     return (
-      <Form className="example-form" colon={false} onSubmit={this.handleSubmit}>
+      <Form
+        className="example-form"
+        colon={false}
+        onSubmit={this.handleSubmit}
+      >
         <FormItem
           {...formItemLayout}
           label="Menu Theme"
