@@ -28,7 +28,7 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 10240,
-              name: path.normalize('assets/[name].[ext]')
+              name: path.normalize('asset/[name].[ext]')
             }
           }
         ]
@@ -40,7 +40,7 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 10240,
-              name: path.normalize('assets/[name].[ext]')
+              name: path.normalize('asset/[name].[ext]')
             }
           }
         ]

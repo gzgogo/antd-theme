@@ -1,7 +1,7 @@
 'use strict';
 
 // Update cache names any time any of the cached files change.
-const ASSET_CACHE_NAME = 'asset-cache-v2';
+const ASSET_CACHE_NAME = 'asset-cache-v3';
 const DATA_CACHE_NAME = 'data-cache-v1';
 
 // Add list of files to cache here.
@@ -15,7 +15,7 @@ const FILES_TO_CACHE = [
   '/main.8252d8c61f50a9c82065.css',
   '/vendor.8455524c.js',
   '/favicon.png',
-  '/theme.png',
+  '/assets/theme.png'
 ];
 
 self.addEventListener('install', (evt) => {
