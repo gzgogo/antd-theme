@@ -6,7 +6,7 @@
   在线动态设置主题，直接生成less文件 <a href="https://www.antdtheme.com">www.antdtheme.com</a>
 </p>
 
-![](https://github.com/gzgogo/antd-theme/blob/master/screenshot.png)
+![](https://github.com/gzgogo/antd-theme/raw/master/screenshot.png)
 
 
 ## 如何将您的主题添加进预置主题？
