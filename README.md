@@ -3,7 +3,7 @@
 <h1 align="center">Antd Theme</h1>
 
 <p align="center">
-  在线动态设置主题，直接生成less文件 <a href="https://www.antdtheme.com">www.antdtheme.com</a>
+  在线动态设置主题，直接生成less或js文件 <a href="https://www.antdtheme.com">www.antdtheme.com</a>
 </p>
 
 ![](https://github.com/gzgogo/antd-theme/raw/master/screenshot.png)
