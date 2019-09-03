@@ -35,7 +35,7 @@ const vars = [
         name: '@info-color',
         type: 'color',
         value: '#1890ff',
-        desc: '成功色'
+        desc: ''
       },
       {
         name: '@warning-color',
@@ -57,8 +57,8 @@ const vars = [
       },
       {
         name: '@processing-color',
-        type: 'color',
-        value: '#1890ff',
+        type: 'string',
+        value: '@primary-color',
         desc: ''
       },
       {
@@ -172,6 +172,105 @@ const vars = [
     ]
   },
   {
+    name: 'Layout',
+    children: [
+      {
+        name: '@layout-body-background',
+        type: 'color',
+        value: '#f0f2f5',
+        desc: ''
+      },
+      {
+        name: '@layout-header-background',
+        type: 'color',
+        value: '#001529',
+        desc: ''
+      },
+      {
+        name: '@layout-footer-background',
+        type: 'string',
+        value: '@layout-body-background',
+        desc: ''
+      },
+      {
+        name: '@layout-header-height',
+        type: 'number',
+        value: 64,
+        unit: 'px',
+        desc: ''
+      },
+      {
+        name: '@layout-header-padding',
+        type: 'string',
+        value: '0 50px',
+        desc: ''
+      },
+      {
+        name: '@layout-footer-padding',
+        type: 'string',
+        value: '24px 50px',
+        desc: ''
+      },
+      {
+        name: '@layout-footer-padding',
+        type: 'string',
+        value: '@layout-header-background',
+        desc: ''
+      },
+      {
+        name: '@layout-trigger-height',
+        type: 'number',
+        value: 48,
+        unit: 'px',
+        desc: ''
+      },
+      {
+        name: '@layout-trigger-background',
+        type: 'color',
+        value: '#002140',
+        desc: ''
+      },
+      {
+        name: '@layout-trigger-color',
+        type: 'color',
+        value: '#fff',
+        desc: ''
+      },
+      {
+        name: '@layout-zero-trigger-width',
+        type: 'number',
+        value: 36,
+        unit: 'px',
+        desc: ''
+      },
+      {
+        name: '@layout-zero-trigger-height',
+        type: 'number',
+        value: 42,
+        unit: 'px',
+        desc: ''
+      },
+      {
+        name: '@layout-sider-background-light',
+        type: 'color',
+        value: '#fff',
+        desc: ''
+      },
+      {
+        name: '@layout-trigger-background-light',
+        type: 'color',
+        value: '#fff',
+        desc: ''
+      },
+      {
+        name: '@layout-trigger-color-light',
+        type: 'string',
+        value: '@text-color',
+        desc: ''
+      }
+    ]
+  },
+  {
     name: 'Font',
     children: [
       {
@@ -274,6 +373,29 @@ const vars = [
     ]
   },
   {
+    name: 'Disabled states',
+    children: [
+      {
+        name: '@disabled-color',
+        type: 'color',
+        value: 'rgba(0, 0, 0, 0.25)',
+        desc: '失效色'
+      },
+      {
+        name: '@disabled-bg',
+        type: 'string',
+        value: '@background-color-base',
+        desc: ''
+      },
+      {
+        name: '@disabled-color-dark',
+        type: 'color',
+        value: 'rgba(255, 255, 255, 0.35)',
+        desc: ''
+      }
+    ]
+  },
+  {
     name: 'Link',
     children: [
       {
@@ -320,12 +442,6 @@ const vars = [
         desc: ''
       },
       {
-        name: '@outline-color',
-        type: 'string',
-        value: '@primary-color',
-        desc: ''
-      },
-      {
         name: '@background-color-light',
         type: 'color',
         value: '#F9F9F9',
@@ -339,31 +455,23 @@ const vars = [
       }
     ]
   },
-
   {
-    name: 'Disabled states',
+    name: 'item',
     children: [
       {
-        name: '@disabled-color',
-        type: 'color',
-        value: 'rgba(0, 0, 0, 0.25)',
-        desc: '失效色'
-      },
-      {
-        name: '@disabled-bg',
+        name: '@item-active-bg',
         type: 'string',
-        value: '@background-color-base',
-        desc: ''
+        value: '@primary-1',
+        desc: 'The background colors for active and hover states for things like list items or table cells'
       },
       {
-        name: '@disabled-color-dark',
-        type: 'color',
-        value: 'rgba(255, 255, 255, 0.35)',
-        desc: ''
+        name: '@item-hover-bg',
+        type: 'string',
+        value: '@primary-1',
+        desc: 'The background colors for active and hover states for things like list items or table cells'
       }
     ]
   },
-
   {
     name: 'Shadow',
     children: [
@@ -427,30 +535,30 @@ const vars = [
         unit: '',
         desc: ''
       },
-      // {
-      //   name: '@btn-border-radius-base',
-      //   type: 'string',
-      //   value: '@border-radius-base',
-      //   desc: ''
-      // },
-      // {
-      //   name: '@btn-border-radius-sm',
-      //   type: 'string',
-      //   value: '@border-radius-base',
-      //   desc: ''
-      // },
-      // {
-      //   name: '@btn-border-width',
-      //   type: 'string',
-      //   value: '@border-width-base',
-      //   desc: ''
-      // },
-      // {
-      //   name: '@btn-border-style',
-      //   type: 'string',
-      //   value: '@border-style-base',
-      //   desc: ''
-      // },
+      {
+        name: '@btn-border-radius-base',
+        type: 'string',
+        value: '@border-radius-base',
+        desc: ''
+      },
+      {
+        name: '@btn-border-radius-sm',
+        type: 'string',
+        value: '@border-radius-base',
+        desc: ''
+      },
+      {
+        name: '@btn-border-width',
+        type: 'string',
+        value: '@border-width-base',
+        desc: ''
+      },
+      {
+        name: '@btn-border-style',
+        type: 'string',
+        value: '@border-style-base',
+        desc: ''
+      },
       {
         name: '@btn-shadow',
         type: 'string',
@@ -481,25 +589,90 @@ const vars = [
         value: '@primary-color',
         desc: ''
       },
-
-      // @btn-default-color: @text-color;
-      // @btn-default-bg: @component-background;
-      // @btn-default-border: @border-color-base;
-
-      // @btn-danger-color: @error-color;
-      // @btn-danger-bg: @background-color-base;
-      // @btn-danger-border: @border-color-base;
-
-      // @btn-disable-color: @disabled-color;
-      // @btn-disable-bg: @disabled-bg;
-      // @btn-disable-border: @border-color-base;
-
-      // @btn-padding-base: 0 @padding-md - 1px;
-      // @btn-font-size-lg: @font-size-lg;
-      // @btn-font-size-sm: @font-size-base;
-      // @btn-padding-lg: @btn-padding-base;
-      // @btn-padding-sm: 0 @padding-xs - 1px;
-
+      {
+        name: '@btn-default-color',
+        type: 'string',
+        value: '@text-color',
+        desc: ''
+      },
+      {
+        name: '@btn-default-bg',
+        type: 'string',
+        value: '@component-background',
+        desc: ''
+      },
+      {
+        name: '@btn-default-border',
+        type: 'string',
+        value: '@border-color-base',
+        desc: ''
+      },
+      {
+        name: '@btn-danger-color',
+        type: 'string',
+        value: '@error-color',
+        desc: ''
+      },
+      {
+        name: '@btn-danger-bg',
+        type: 'string',
+        value: '@background-color-base',
+        desc: ''
+      },
+      {
+        name: '@btn-danger-border',
+        type: 'string',
+        value: '@border-color-base',
+        desc: ''
+      },
+      {
+        name: '@btn-disable-color',
+        type: 'string',
+        value: '@disabled-color',
+        desc: ''
+      },
+      {
+        name: '@btn-disable-bg',
+        type: 'string',
+        value: '@disabled-bg',
+        desc: ''
+      },
+      {
+        name: '@btn-disable-border',
+        type: 'string',
+        value: '@border-color-base',
+        desc: ''
+      },
+      {
+        name: '@btn-padding-base',
+        type: 'string',
+        value: '0 @padding-md - 1px',
+        desc: ''
+      },
+      {
+        name: '@btn-font-size-lg',
+        type: 'string',
+        value: '@font-size-lg',
+        desc: ''
+      },
+      {
+        name: '@btn-font-size-sm',
+        type: 'string',
+        value: '@font-size-base',
+        desc: ''
+      },
+      {
+        name: '@btn-padding-lg',
+        type: 'string',
+        value: '@btn-padding-base',
+        desc: ''
+      },
+      {
+        name: '@btn-padding-sm',
+        type: 'string',
+        value: '0 @padding-xs - 1px',
+        desc: ''
+      },
       {
         name: '@btn-height-base',
         type: 'number',
@@ -520,13 +693,31 @@ const vars = [
         value: 24,
         unit: 'px',
         desc: ''
+      },
+      {
+        name: '@btn-circle-size',
+        type: 'string',
+        value: '@btn-height-base',
+        desc: ''
+      },
+      {
+        name: '@btn-circle-size-lg',
+        type: 'string',
+        value: '@btn-height-lg',
+        desc: ''
+      },
+      {
+        name: '@btn-circle-size-sm',
+        type: 'string',
+        value: '@btn-height-sm',
+        desc: ''
+      },
+      {
+        name: '@btn-group-border',
+        type: 'string',
+        value: '@primary-5',
+        desc: ''
       }
-
-      // @btn-circle-size: @btn-height-base;
-      // @btn-circle-size-lg: @btn-height-lg;
-      // @btn-circle-size-sm: @btn-height-sm;
-
-      // @btn-group-border: @primary-5;
     ]
   },
   {
@@ -772,105 +963,6 @@ const vars = [
         type: 'number',
         value: 0,
         unit: '',
-        desc: ''
-      }
-    ]
-  },
-  {
-    name: 'Layout',
-    children: [
-      {
-        name: '@layout-body-background',
-        type: 'color',
-        value: '#f0f2f5',
-        desc: ''
-      },
-      {
-        name: '@layout-header-background',
-        type: 'color',
-        value: '#001529',
-        desc: ''
-      },
-      {
-        name: '@layout-footer-background',
-        type: 'string',
-        value: '@layout-body-background',
-        desc: ''
-      },
-      {
-        name: '@layout-header-height',
-        type: 'number',
-        value: 64,
-        unit: 'px',
-        desc: ''
-      },
-      {
-        name: '@layout-header-padding',
-        type: 'string',
-        value: '0 50px',
-        desc: ''
-      },
-      {
-        name: '@layout-footer-padding',
-        type: 'string',
-        value: '24px 50px',
-        desc: ''
-      },
-      {
-        name: '@layout-footer-padding',
-        type: 'string',
-        value: '@layout-header-background',
-        desc: ''
-      },
-      {
-        name: '@layout-trigger-height',
-        type: 'number',
-        value: 48,
-        unit: 'px',
-        desc: ''
-      },
-      {
-        name: '@layout-trigger-background',
-        type: 'color',
-        value: '#002140',
-        desc: ''
-      },
-      {
-        name: '@layout-trigger-color',
-        type: 'color',
-        value: '#fff',
-        desc: ''
-      },
-      {
-        name: '@layout-zero-trigger-width',
-        type: 'number',
-        value: 36,
-        unit: 'px',
-        desc: ''
-      },
-      {
-        name: '@layout-zero-trigger-height',
-        type: 'number',
-        value: 42,
-        unit: 'px',
-        desc: ''
-      },
-      {
-        name: '@layout-sider-background-light',
-        type: 'color',
-        value: '#fff',
-        desc: ''
-      },
-      {
-        name: '@layout-trigger-background-light',
-        type: 'color',
-        value: '#fff',
-        desc: ''
-      },
-      {
-        name: '@layout-trigger-color-light',
-        type: 'string',
-        value: '@text-color',
         desc: ''
       }
     ]
@@ -1334,6 +1426,13 @@ const vars = [
         type: 'string',
         value: '@text-color',
         desc: ''
+      },
+      {
+        name: '@progress-radius',
+        type: 'number',
+        value: 0,
+        unit: 'px',
+        desc: ''
       }
     ]
   },
@@ -1630,6 +1729,12 @@ const vars = [
     name: 'Badge',
     children: [
       {
+        name: '@badge-color',
+        type: 'string',
+        value: '@error-color',
+        desc: ''
+      },
+      {
         name: '@badge-height',
         type: 'number',
         value: 20,
@@ -1916,6 +2021,19 @@ const vars = [
         type: 'string',
         value: '@primary-7',
         desc: ''
+      },
+      {
+        name: '@tabs-card-gutter',
+        type: 'number',
+        value: -1,
+        unit: 'px',
+        desc: ''
+      },
+      {
+        name: '@tabs-card-tab-active-border-top',
+        type: 'string',
+        value: '2px solid @primary-color',
+        desc: ''
       }
     ]
   },
@@ -2164,6 +2282,19 @@ const vars = [
         type: 'string',
         value: '0 @padding-xs',
         desc: ''
+      },
+      {
+        name: '@slider-handle-border-width',
+        type: 'number',
+        value: 1,
+        unit: 'px',
+        desc: ''
+      },
+      {
+        name: '@slider-handle-shadow',
+        type: 'string',
+        value: '1px 1px 4px 0 rgba(0,0,0,.13)',
+        desc: ''
       }
     ]
   },
@@ -2382,22 +2513,83 @@ const vars = [
       }
     ]
   },
-
-  // Alert
-  // ---
-  // @alert-success-border-color: ~`colorPalette('@{success-color}', 3) `;
-  // @alert-success-bg-color: ~`colorPalette('@{success-color}', 1) `;
-  // @alert-success-icon-color: @success-color;
-  // @alert-info-border-color: ~`colorPalette('@{info-color}', 3) `;
-  // @alert-info-bg-color: ~`colorPalette('@{info-color}', 1) `;
-  // @alert-info-icon-color: @info-color;
-  // @alert-warning-border-color: ~`colorPalette('@{warning-color}', 3) `;
-  // @alert-warning-bg-color: ~`colorPalette('@{warning-color}', 1) `;
-  // @alert-warning-icon-color: @warning-color;
-  // @alert-error-border-color: ~`colorPalette('@{error-color}', 3) `;
-  // @alert-error-bg-color: ~`colorPalette('@{error-color}', 1) `;
-  // @alert-error-icon-color: @error-color;
-
+  {
+    name: 'Alert',
+    children: [
+      {
+        name: '@alert-success-border-color',
+        type: 'string',
+        value: "~`colorPalette('@{success-color}', 3) `",
+        desc: ''
+      },
+      {
+        name: '@alert-success-bg-color',
+        type: 'string',
+        value: "~`colorPalette('@{success-color}', 1) `",
+        desc: ''
+      },
+      {
+        name: '@alert-success-icon-color',
+        type: 'string',
+        value: '@success-color',
+        desc: ''
+      },
+      {
+        name: '@alert-info-border-color',
+        type: 'string',
+        value: "~`colorPalette('@{info-color}', 3) `",
+        desc: ''
+      },
+      {
+        name: '@alert-info-bg-color',
+        type: 'string',
+        value: "~`colorPalette('@{info-color}', 1) `",
+        desc: ''
+      },
+      {
+        name: '@alert-info-icon-color',
+        type: 'string',
+        value: '@info-color',
+        desc: ''
+      },
+      {
+        name: '@alert-warning-border-color',
+        type: 'string',
+        value: "~`colorPalette('@{warning-color}', 3) `",
+        desc: ''
+      },
+      {
+        name: '@alert-warning-bg-color',
+        type: 'string',
+        value: "~`colorPalette('@{warning-color}', 1) `",
+        desc: ''
+      },
+      {
+        name: '@alert-warning-icon-color',
+        type: 'string',
+        value: '@warning-color',
+        desc: ''
+      },
+      {
+        name: '@alert-error-border-color',
+        type: 'string',
+        value: "~`colorPalette('@{error-color}', 3) `",
+        desc: ''
+      },
+      {
+        name: '@alert-error-bg-color',
+        type: 'string',
+        value: "~`colorPalette('@{error-color}', 1) `",
+        desc: ''
+      },
+      {
+        name: '@alert-error-icon-color',
+        type: 'string',
+        value: '@error-color',
+        desc: ''
+      },
+    ]
+  },
   {
     name: 'List',
     children: [

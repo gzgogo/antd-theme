@@ -5,20 +5,16 @@ import { Provider } from 'mobx-react';
 import store from 'store';
 import { LocaleProvider } from 'antd';
 import Frame from 'layout/Frame';
-import Home from 'page/Home';
 import zh_CN from 'antd/lib/locale-provider/zh_CN';
 import 'moment/locale/zh-cn';
 
-// import 'antd/dist/antd.css';
 import 'stylesheet/app.less';
 
 const App = () => (
   <Provider {...store}>
     <LocaleProvider locale={zh_CN}>
       <BrowserRouter>
-        <Frame>
-          <Route exact path="/" component={Home} />
-        </Frame>
+        <Route exact path="/" component={Frame} />
       </BrowserRouter>
     </LocaleProvider>
   </Provider>

@@ -12,7 +12,7 @@ import {
   Progress,
   Input
 } from 'antd';
-
+import PreviewWrapper from '../PreviewWrapper';
 import './style.less';
 
 const FormItem = Form.Item;
@@ -20,7 +20,7 @@ const { Option } = Select;
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 
-class App extends Component {
+class ExampleForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
@@ -44,10 +44,11 @@ class App extends Component {
     return e && e.fileList;
   }
 
-  render() {
-    const { getFieldDecorator } = this.props.form;
+  renderForm() {
+    const { size, disabled, form } = this.props;
+    const { getFieldDecorator } = form;
     const formItemLayout = {
-      labelCol: { span: 6 },
+      labelCol: { span: 4 },
       wrapperCol: { span: 18 }
     };
     return (
@@ -72,6 +73,8 @@ class App extends Component {
             ]
           })(
             <Select
+              size={size}
+              disabled={disabled}
               style={{ width: 300 }}
               onChange={this.handleMenuThemeChange}
             >
@@ -96,6 +99,8 @@ class App extends Component {
             ]
           })(
             <Select
+              size={size}
+              disabled={disabled}
               mode="multiple"
               placeholder="Please select favourite colors"
               style={{ width: 300 }}
@@ -110,16 +115,16 @@ class App extends Component {
           {getFieldDecorator('switch', {
             valuePropName: 'checked',
             initialValue: true
-          })(<Switch />)}
+          })(<Switch size={size} disabled={disabled} />)}
         </FormItem>
         <FormItem {...formItemLayout} label="名称">
-          <Input placeholder="Name" style={{ width: 300 }} />
+          <Input size={size} disabled={disabled} placeholder="Name" style={{ width: 300 }} />
         </FormItem>
         <FormItem {...formItemLayout} label="Radio.Group">
           {getFieldDecorator('radio-group', {
             initialValue: 1
           })(
-            <RadioGroup>
+            <RadioGroup size={size} disabled={disabled}>
               <Radio value={1}>A</Radio>
               <Radio value={2}>B</Radio>
               <Radio value={3}>C</Radio>
@@ -131,20 +136,20 @@ class App extends Component {
           {getFieldDecorator('radio-button', {
             initialValue: 'a'
           })(
-            <RadioGroup>
+            <RadioGroup size={size} disabled={disabled}>
               <RadioButton value="a">item 1</RadioButton>
               <RadioButton value="b">item 2</RadioButton>
               <RadioButton value="c">item 3</RadioButton>
             </RadioGroup>
           )}
         </FormItem>
-        <FormItem style={{ marginTop: 30 }} wrapperCol={{ span: 12, offset: 6 }}>
-          <Progress percent={60} />
+        <FormItem style={{ marginTop: 30 }} wrapperCol={{ span: 12, offset: formItemLayout.labelCol.span }}>
+          <Progress percent={60} size={size} disabled={disabled} />
         </FormItem>
         <FormItem {...formItemLayout} label="Date">
           {getFieldDecorator('date', {
             initialValue: moment()
-          })(<DatePicker />)}
+          })(<DatePicker size={size} disabled={disabled} />)}
         </FormItem>
         <FormItem {...formItemLayout} label="Upload">
           {getFieldDecorator('upload', {
@@ -156,7 +161,7 @@ class App extends Component {
               action="/upload.do"
               listType="picture"
             >
-              <Button>
+              <Button size={size} disabled={disabled}>
                 <Icon type="upload" /> Click to upload
               </Button>
 
@@ -164,18 +169,29 @@ class App extends Component {
             </Upload>
           )}
         </FormItem>
-        <FormItem {...formItemLayout} label=" ">
+        {/* <FormItem {...formItemLayout} label=" ">
           服务于企业级产品的设计体系，基于确定和自然的设计价值观上的模块化解决方案，让设计者和开发者专注于更好的用户体验。
-        </FormItem>
-        <FormItem wrapperCol={{ span: 12, offset: 6 }}>
-          <Button type="default" style={{ marginRight: 10 }}>Cancel</Button>
-          <Button type="primary" htmlType="submit">
-                Submit
-          </Button>
+        </FormItem> */}
+        <FormItem wrapperCol={{ span: 12, offset: formItemLayout.labelCol.span }}>
+          <Button size={size} disabled={disabled} style={{ marginRight: 10 }}>Reset</Button>
+          <Button size={size} disabled={disabled} type="default" style={{ marginRight: 10 }}>Cancel</Button>
+          <Button size={size} disabled={disabled} type="primary" htmlType="submit">Submit</Button>
         </FormItem>
       </Form>
     );
   }
+
+  render() {
+    return (
+      <PreviewWrapper id="Form" title="Form">
+        <div className="components">
+          <div className="component-row">
+            {this.renderForm()}
+          </div>
+        </div>
+      </PreviewWrapper>
+    );
+  }
 }
 
-export default Form.create()(App);
+export default Form.create()(ExampleForm);

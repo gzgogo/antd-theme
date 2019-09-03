@@ -23,16 +23,19 @@ class ThemeCard extends Component {
   constructor(props) {
     super(props);
 
+    const { defaultTheme } = props;
+
     const vars = {};
     const cacheTheme = JSON.parse(localStorage.getItem('app-theme'));
+    const theme = defaultTheme && themes[defaultTheme] ? themes[defaultTheme] : cacheTheme;
     try {
       defaultVars.forEach((group) => {
         group.children.forEach((item) => {
           if (item.type === 'number') {
             item.value = `${item.value}${item.unit}`;
           }
-          if (cacheTheme && cacheTheme[item.name]) {
-            item.value = cacheTheme[item.name];
+          if (theme && theme[item.name]) {
+            item.value = theme[item.name];
           }
           vars[item.name] = item;
         });
@@ -170,10 +173,13 @@ class ThemeCard extends Component {
     let content = '';
     const theme = {};
     Object.keys(vars).forEach((key) => {
-      if (vars[key].value !== themes.default[key]) {
-        content += `  '${key}': '${vars[key].value}',\n`;
-        theme[key] = vars[key].value;
-      }
+      // if (vars[key].value !== themes.default[key]) {
+      //   content += `  '${key}': '${vars[key].value}',\n`;
+      //   theme[key] = vars[key].value;
+      // }
+      const { value } = vars[key];
+      content += typeof value === 'string' && value.indexOf("'") !== -1 ? `  '${key}': "${value}",\n` : `  '${key}': '${value}',\n`;
+      theme[key] = vars[key].value;
     });
 
     if (content) {
@@ -257,7 +263,7 @@ class ThemeCard extends Component {
           style={{ width: 80 }}
           size="small"
           min={0}
-          defaultValue={this.state.vars[varName].value}
+          defaultValue={parseInt(this.state.vars[varName].value, 10)}
           formatter={value => `${value}${this.state.vars[varName].unit || ''}`}
           parser={value => value.replace(this.state.vars[varName].unit || '', '')}
           onChange={value => this.handleNumberChange(varName, value)}
@@ -299,6 +305,7 @@ class ThemeCard extends Component {
 
   render() {
     const { keyword, expanded } = this.state;
+    const { defaultTheme } = this.props;
 
     // const hint = (
     //   <div>
@@ -334,7 +341,7 @@ class ThemeCard extends Component {
           </Tooltip>
         </div>
         <Select
-          // defaultValue=""
+          defaultValue={defaultTheme}
           placeholder="选择预置主题"
           size="small"
           style={{ width: 140 }}
@@ -342,7 +349,7 @@ class ThemeCard extends Component {
         >
           {
             Object.keys(themes)
-              .filter(item => item !== 'default')
+              // .filter(item => item !== 'default')
               .map(item => <Option key={item} value={item}>{item}</Option>)
           }
         </Select>
@@ -390,7 +397,7 @@ class ThemeCard extends Component {
 
     return (
       <div className="theme-card">
-        <div
+        {/* <div
           className="toggle"
           onClick={this.handleThemeCardToggle}
         >
@@ -399,7 +406,7 @@ class ThemeCard extends Component {
             src={require('image/theme.png')}
             alt=""
           />
-        </div>
+        </div> */}
         <Card
           className={expanded ? '' : 'hide'}
           title={title}

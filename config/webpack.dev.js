@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const autoprefixer = require('autoprefixer');
-const CopyWebpackPlugin = require("copy-webpack-plugin");
+// const CopyWebpackPlugin = require("copy-webpack-plugin");
 const common = require('./webpack.common');
 const PATHS = require('./PATHS');
 // const OpenBrowserPlugin = require('open-browser-webpack-plugin');
@@ -20,6 +20,7 @@ module.exports = env => {
     hot: true,
     inline: true,
     disableHostCheck: true,
+    // https: true
     // progress: true
   };
 

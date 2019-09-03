@@ -14,7 +14,7 @@
     }
   },
   "rules": {
-    "comma-dangle": ["error", "never"],
+    "comma-dangle": "off",
     "object-curly-spacing": ["error", "always"],
     "no-void": "warn",
     "new-cap": ["warn", { "newIsCap": true, "properties": false }],
