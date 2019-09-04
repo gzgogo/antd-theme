@@ -8,7 +8,8 @@ import {
   Tooltip,
   Collapse,
   Select,
-  Icon
+  Icon,
+  Popconfirm
 } from 'antd';
 import ColorPicker from 'component/ColorPicker';
 import defaultVars from 'src/vars';
@@ -19,14 +20,17 @@ const { Panel } = Collapse;
 const { Option } = Select;
 const { Search } = Input;
 
+const THEME_NAME_KEY = 'theme-name';
+const THEME_VALUE_KEY = 'theme-value';
+
 class ThemeCard extends Component {
   constructor(props) {
     super(props);
 
-    const { defaultTheme } = props;
+    const defaultTheme = props.defaultTheme || localStorage.getItem(THEME_NAME_KEY) || 'default';
 
     const vars = {};
-    const cacheTheme = JSON.parse(localStorage.getItem('app-theme'));
+    const cacheTheme = JSON.parse(localStorage.getItem(THEME_VALUE_KEY));
     const theme = defaultTheme && themes[defaultTheme] ? themes[defaultTheme] : cacheTheme;
     try {
       defaultVars.forEach((group) => {
@@ -43,6 +47,7 @@ class ThemeCard extends Component {
     } finally {
       this.state = {
         vars,
+        selectedTheme: defaultTheme,
         keyword: '',
         expanded: true
       };
@@ -66,7 +71,7 @@ class ThemeCard extends Component {
       .modifyVars(theme)
       .then(() => {
         this.setState({ vars });
-        localStorage.setItem('app-theme', JSON.stringify(theme));
+        localStorage.setItem(THEME_VALUE_KEY, JSON.stringify(theme));
       })
       .catch(() => {
         message.error('Failed to update theme');
@@ -83,7 +88,7 @@ class ThemeCard extends Component {
         .modifyVars(theme)
         .then(() => {
           this.setState({ vars });
-          localStorage.setItem('app-theme', JSON.stringify(theme));
+          localStorage.setItem(THEME_VALUE_KEY, JSON.stringify(theme));
         })
         .catch(() => {
           message.error('Failed to update theme');
@@ -102,7 +107,7 @@ class ThemeCard extends Component {
       .modifyVars(theme)
       .then(() => {
         this.setState({ vars });
-        localStorage.setItem('app-theme', JSON.stringify(theme));
+        localStorage.setItem(THEME_VALUE_KEY, JSON.stringify(theme));
       })
       .catch(() => {
         message.error('Failed to update theme');
@@ -125,8 +130,12 @@ class ThemeCard extends Component {
       window.less
         .modifyVars(theme)
         .then(() => {
-          this.setState({ vars });
-          localStorage.setItem('app-theme', JSON.stringify(theme));
+          this.setState({
+            selectedTheme: value,
+            vars
+          });
+          localStorage.setItem(THEME_NAME_KEY, value);
+          localStorage.setItem(THEME_VALUE_KEY, JSON.stringify(theme));
         })
         .catch((err) => {
           console.log(err);
@@ -142,9 +151,10 @@ class ThemeCard extends Component {
   }
 
   handleResetTheme = () => {
-    localStorage.setItem('app-theme', '{}');
+    const { selectedTheme } = this.state;
 
-    this.handleThemeChange('default');
+    localStorage.setItem(THEME_VALUE_KEY, '{}');
+    this.handleThemeChange(selectedTheme);
   }
 
   handleSaveLess = () => {
@@ -160,7 +170,7 @@ class ThemeCard extends Component {
     });
 
     if (content) {
-      // localStorage.setItem('app-theme', JSON.stringify(theme));
+      // localStorage.setItem(THEME_VALUE_KEY, JSON.stringify(theme));
       this.downloadFile('my-theme.less', content);
     } else {
       message.info('nothing changed');
@@ -185,7 +195,7 @@ class ThemeCard extends Component {
     if (content) {
       content = `export default {\n${content}};\n`;
 
-      // localStorage.setItem('app-theme', JSON.stringify(theme));
+      // localStorage.setItem(THEME_VALUE_KEY, JSON.stringify(theme));
       this.downloadFile('my-theme.js', content);
     } else {
       message.info('nothing changed');
@@ -304,8 +314,7 @@ class ThemeCard extends Component {
   }
 
   render() {
-    const { keyword, expanded } = this.state;
-    const { defaultTheme } = this.props;
+    const { keyword, expanded, selectedTheme } = this.state;
 
     // const hint = (
     //   <div>
@@ -341,7 +350,7 @@ class ThemeCard extends Component {
           </Tooltip>
         </div>
         <Select
-          defaultValue={defaultTheme}
+          value={selectedTheme}
           placeholder="选择预置主题"
           size="small"
           style={{ width: 140 }}
@@ -411,13 +420,21 @@ class ThemeCard extends Component {
           className={expanded ? '' : 'hide'}
           title={title}
           actions={[
-            <Button
-              type="primary"
-              size="small"
-              onClick={this.handleResetTheme}
+            <Popconfirm
+              title="Are you sure reset?"
+              onConfirm={this.handleResetTheme}
+              // onCancel={cancel}
+              okText="Yes"
+              cancelText="No"
             >
-              Reset
-            </Button>,
+              <Button
+                type="primary"
+                size="small"
+                onClick={this.handleResetTheme}
+              >
+                Reset
+              </Button>
+            </Popconfirm>,
             <Button
               type="primary"
               size="small"

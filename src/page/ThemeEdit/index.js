@@ -56,7 +56,7 @@ class ThemeEdit extends Component {
   constructor(props) {
     super(props);
 
-    let defaultTheme = 'default';
+    let defaultTheme;
     const theme = window.location.search.split('=');
     if (theme[1]) {
       [, defaultTheme] = theme;
@@ -151,7 +151,7 @@ class ThemeEdit extends Component {
                     <Breadcrumb.Item overlay={menu}>
                       General
                     </Breadcrumb.Item>
-                    <Breadcrumb.Item>antd v3.23.1</Breadcrumb.Item>
+                    <Breadcrumb.Item>Antd v3.23.1</Breadcrumb.Item>
                   </Breadcrumb>
                 )
               }
