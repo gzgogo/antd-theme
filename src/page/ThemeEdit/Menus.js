@@ -15,7 +15,9 @@ class Menus extends Component {
         defaultOpenKeys={['sub1']}
         style={{ height: '100%', borderRight: 0 }}
       >
-        <SubMenu
+        <Menu.Item key="Color"><a href="#Color">Color</a></Menu.Item>
+        <Menu.Item key="Typography"><a href="#Typography">Typography</a></Menu.Item>
+        {/* <SubMenu
           key="sub1"
           title={
             <span>
@@ -25,7 +27,7 @@ class Menus extends Component {
         >
           <Menu.Item key="Color"><a href="#Color">Color</a></Menu.Item>
           <Menu.Item key="Typography"><a href="#Typography">Typography</a></Menu.Item>
-        </SubMenu>
+        </SubMenu> */}
         <SubMenu
           key="sub2"
           title={

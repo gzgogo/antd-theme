@@ -406,7 +406,7 @@ class ThemeCard extends Component {
 
     return (
       <div className="theme-card">
-        {/* <div
+        <div
           className="toggle"
           onClick={this.handleThemeCardToggle}
         >
@@ -415,7 +415,7 @@ class ThemeCard extends Component {
             src={require('image/theme.png')}
             alt=""
           />
-        </div> */}
+        </div>
         <Card
           className={expanded ? '' : 'hide'}
           title={title}

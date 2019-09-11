@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import Draggable from 'react-draggable';
+import Draggable from 'react-draggable';
 import { Row, Col, Breadcrumb, Menu, Layout, Switch, Radio, Form, BackTop } from 'antd';
 import ThemeCard from 'component/ThemeCard';
 import Menus from './Menus';
@@ -229,17 +229,17 @@ class ThemeEdit extends Component {
             </Content>
           </Layout>
         </Layout>
-        <div className="theme-card-wrapper">
+        {/* <div className="theme-card-wrapper">
           <ThemeCard defaultTheme={this.state.defaultTheme} />
-        </div>
-        {/* <Draggable
+        </div> */}
+        <Draggable
           bounds="parent"
           handle=".theme-card .ant-card-head"
         >
           <div className="theme-card-wrapper">
             <ThemeCard defaultTheme={this.state.defaultTheme} />
           </div>
-        </Draggable> */}
+        </Draggable>
         <BackTop target={() => document.getElementById('preview-content')} />
       </Layout>
     );
