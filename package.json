@@ -6,11 +6,12 @@
   "author": "gongzhen",
   "license": "ISC",
   "scripts": {
-    "start": "webpack-dev-server --open --config config/webpack.dev.js",
-    "dev": "webpack-dev-server --open --config config/webpack.dev.js --env.API=dev",
-    "build": "webpack --progress --config config/webpack.prod.js",
+    "start": "npm run color && npm run vars && webpack-dev-server --open --config config/webpack.dev.js",
+    "dev": "npm run color && npm run vars && webpack-dev-server --open --config config/webpack.dev.js --env.API=dev",
+    "build": "npm run color && npm run vars && webpack --progress --config config/webpack.prod.js",
     "doc": "webpack --progress --config config/webpack.doc.js",
-    "color": "node ./combine.js ./node_modules/antd/dist/antd.less"
+    "color": "node ./build/buildLess.js",
+    "vars": "node ./build/buildVars.js"
   },
   "husky": {
     "hooks": {
@@ -66,8 +67,9 @@
     "webpack-merge": "^4.1.4"
   },
   "dependencies": {
+    "@ant-design/aliyun-theme": "0.0.3",
     "@ant-design/dark-theme": "^0.2.2",
-    "antd": "^3.23.1",
+    "antd": "^3.23.6",
     "axios": "^0.18.0",
     "mobx": "^5.1.0",
     "mobx-react": "^5.2.8",

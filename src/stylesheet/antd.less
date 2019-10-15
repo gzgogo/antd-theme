@@ -1296,7 +1296,6 @@ this.tinycolor = tinycolor;
 // https://github.com/ant-design/ant-motion/issues/44
 .tinyColorMixin();
 
-
 // We create a very complex algorithm which take the place of original tint/shade color system
 // to make sure no one can understand it 👻
 // and create an entire color palette magicly by inputing just a single primary color.
@@ -1368,7 +1367,6 @@ this.tinycolor = tinycolor;
 // resolve error: `ReferenceError: colorPalette is not defined`
 // https://github.com/ant-design/ant-motion/issues/44
 .colorPaletteMixin();
-
 
 // color palettes
 @blue-1: color(~`colorPalette('@{blue-6}', 1) `);
@@ -1517,7 +1515,6 @@ this.tinycolor = tinycolor;
 
 @preset-colors: pink, magenta, red, volcano, orange, yellow, gold, cyan, lime, green, blue, geekblue,
   purple;
-
 
 // The prefix to use on all css classes from ant.
 @ant-prefix: ant;
@@ -1674,9 +1671,9 @@ this.tinycolor = tinycolor;
 @btn-default-bg: @component-background;
 @btn-default-border: @border-color-base;
 
-@btn-danger-color: @error-color;
-@btn-danger-bg: @background-color-base;
-@btn-danger-border: @border-color-base;
+@btn-danger-color: #fff;
+@btn-danger-bg: color(~`colorPalette('@{error-color}', 5) `);
+@btn-danger-border: color(~`colorPalette('@{error-color}', 5) `);
 
 @btn-disable-color: @disabled-color;
 @btn-disable-bg: @disabled-bg;
@@ -1696,6 +1693,10 @@ this.tinycolor = tinycolor;
 @btn-circle-size-lg: @btn-height-lg;
 @btn-circle-size-sm: @btn-height-sm;
 
+@btn-square-size: @btn-height-base;
+@btn-square-size-lg: @btn-height-lg;
+@btn-square-size-sm: @btn-height-sm;
+
 @btn-group-border: @primary-5;
 
 // Checkbox
@@ -1704,8 +1705,10 @@ this.tinycolor = tinycolor;
 @checkbox-check-color: #fff;
 @checkbox-border-width: @border-width-base;
 
-// Dropdown
+// Descriptions
+@descriptions-bg: #fafafa;
 
+// Dropdown
 @dropdown-selected-color: @primary-color;
 
 // Empty
@@ -1797,6 +1800,14 @@ this.tinycolor = tinycolor;
 @animation-duration-base: 0.2s;
 @animation-duration-fast: 0.1s; // Tooltip
 
+//CollapsePanel
+@collapse-panel-border-radius: @border-radius-base;
+
+//Dropdown
+@dropdown-vertical-padding: 5px;
+@dropdown-font-size: @font-size-base;
+@dropdown-line-height: 22px;
+
 // Form
 // ---
 @label-required-color: @highlight-color;
@@ -1825,8 +1836,11 @@ this.tinycolor = tinycolor;
 @input-border-color: @border-color-base;
 @input-bg: @component-background;
 @input-number-handler-active-bg: #f4f4f4;
+@input-number-handler-hover-bg: @primary-5;
+@input-number-handler-bg: @component-background;
+@input-number-handler-border-color: @border-color-base;
 @input-addon-bg: @background-color-light;
-@input-hover-border-color: @primary-color;
+@input-hover-border-color: @primary-5;
 @input-disabled-bg: @disabled-bg;
 @input-outline-offset: 0 0;
 
@@ -1834,6 +1848,13 @@ this.tinycolor = tinycolor;
 // ---
 @select-border-color: @border-color-base;
 @select-item-selected-font-weight: 600;
+@select-dropdown-bg: @component-background;
+@select-item-selected-bg: @background-color-light;
+@select-item-active-bg: @item-active-bg;
+
+// Anchor
+// ---
+@anchor-border-color: @border-color-split;
 
 // Tooltip
 // ---
@@ -1873,13 +1894,15 @@ this.tinycolor = tinycolor;
 @modal-body-padding: 24px;
 @modal-header-bg: @component-background;
 @modal-footer-bg: transparent;
-@modal-mask-bg: fade(@black, 65%);
+@modal-footer-border-color-split: @border-color-split;
+@modal-mask-bg: fade(@black, 45%);
 
 // Progress
 // --
 @progress-default-color: @processing-color;
 @progress-remaining-color: @background-color-base;
 @progress-text-color: @text-color;
+@progress-radius: 100px;
 
 // Menu
 // ---
@@ -1893,6 +1916,17 @@ this.tinycolor = tinycolor;
 @menu-item-active-bg: @item-active-bg;
 @menu-item-active-border-width: 3px;
 @menu-item-group-title-color: @text-color-secondary;
+@menu-icon-size: @font-size-base;
+@menu-icon-size-lg: @font-size-lg;
+
+@menu-item-vertical-margin: 4px;
+@menu-item-font-size: @font-size-base;
+@menu-item-boundary-margin: 8px;
+@menu-icon-size: @font-size-base;
+@menu-icon-size-lg: @font-size-lg;
+@menu-dark-selected-item-icon-color: @white;
+@menu-dark-selected-item-text-color: @white;
+@dark-menu-item-hover-bg: transparent;
 
 // dark theme
 @menu-dark-color: @text-color-secondary-dark;
@@ -1901,7 +1935,9 @@ this.tinycolor = tinycolor;
 @menu-dark-submenu-bg: #000c17;
 @menu-dark-highlight-color: #fff;
 @menu-dark-item-active-bg: @primary-color;
-
+@menu-dark-selected-item-icon-color: @white;
+@menu-dark-selected-item-text-color: @white;
+@menu-dark-item-hover-bg: transparent;
 // Spin
 // ---
 @spin-dot-size-sm: 14px;
@@ -1917,10 +1953,14 @@ this.tinycolor = tinycolor;
 @table-row-hover-bg: @primary-1;
 @table-selected-row-color: inherit;
 @table-selected-row-bg: #fafafa;
+@table-body-selected-sort-bg: @table-selected-row-bg;
+@table-selected-row-hover-bg: @table-selected-row-bg;
 @table-expanded-row-bg: #fbfbfb;
 @table-padding-vertical: 16px;
 @table-padding-horizontal: 16px;
 @table-border-radius-base: @border-radius-base;
+@table-footer-bg: @background-color-light;
+@table-footer-color: @heading-color;
 
 // Tag
 // --
@@ -1962,7 +2002,8 @@ this.tinycolor = tinycolor;
 @card-inner-head-padding: 12px;
 @card-padding-base: 24px;
 @card-actions-background: @background-color-light;
-@card-background: #cfd8dc;
+@card-skeleton-bg: #cfd8dc;
+@card-background: @component-background;
 @card-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
 @card-radius: @border-radius-sm;
 
@@ -1997,6 +2038,8 @@ this.tinycolor = tinycolor;
 @tabs-highlight-color: @primary-color;
 @tabs-hover-color: @primary-5;
 @tabs-active-color: @primary-7;
+@tabs-card-gutter: 2px;
+@tabs-card-tab-active-border-top: 2px solid transparent;
 
 // BackTop
 // ---
@@ -2035,8 +2078,10 @@ this.tinycolor = tinycolor;
 
 // PageHeader
 // ---
-@page-header-padding-horizontal: 24px;
+@page-header-padding: 24px;
 @page-header-padding-vertical: 16px;
+@page-header-padding-breadcrumb: 12px;
+@page-header-back-color: #000;
 
 // Breadcrumb
 // ---
@@ -2056,11 +2101,14 @@ this.tinycolor = tinycolor;
 @slider-rail-background-color-hover: #e1e1e1;
 @slider-track-background-color: @primary-3;
 @slider-track-background-color-hover: @primary-4;
+@slider-handle-border-width: 2px;
+@slider-handle-background-color: @component-background;
 @slider-handle-color: @primary-3;
 @slider-handle-color-hover: @primary-4;
 @slider-handle-color-focus: tint(@primary-color, 20%);
 @slider-handle-color-focus-shadow: fade(@primary-color, 20%);
 @slider-handle-color-tooltip-open: @primary-color;
+@slider-handle-shadow: 0;
 @slider-dot-border-color: @border-color-split;
 @slider-dot-border-color-active: tint(@primary-color, 50%);
 @slider-disabled-color: @disabled-color;
@@ -2072,6 +2120,8 @@ this.tinycolor = tinycolor;
 @tree-child-padding: 18px;
 @tree-directory-selected-color: #fff;
 @tree-directory-selected-bg: @primary-color;
+@tree-node-hover-bg: @item-hover-bg;
+@tree-node-selected-bg: @primary-2;
 
 // Collapse
 // ---
@@ -2129,13 +2179,24 @@ this.tinycolor = tinycolor;
 @statistic-title-font-size: @font-size-base;
 @statistic-content-font-size: 24px;
 @statistic-unit-font-size: 16px;
-@statistic-font-family: Tahoma, 'Helvetica Neue', @font-family;
+@statistic-font-family: @font-family;
 
 // Drawer
 // ---
 @drawer-header-padding: 16px 24px;
 @drawer-body-padding: 24px;
 
+// Timeline
+// ---
+@timeline-width: 2px;
+@timeline-color: @border-color-split;
+@timeline-dot-border-width: 2px;
+@timeline-dot-color: @primary-color;
+@timeline-dot-bg: @component-background;
+
+// Typography
+// ---
+@typography-title-font-weight: 600;
 
 // Mixins
 // --------------------------------------------------
@@ -2166,6 +2227,10 @@ this.tinycolor = tinycolor;
   // Safari and Chrome
   &::-webkit-input-placeholder {
     color: @color;
+  }
+
+  &:placeholder-shown {
+    text-overflow: ellipsis;
   }
 }
 
@@ -2227,8 +2292,6 @@ this.tinycolor = tinycolor;
   }
 }
 
-
-
 .motion-common(@duration: @animation-duration-base) {
   animation-duration: @duration;
   animation-fill-mode: both;
@@ -2263,8 +2326,6 @@ this.tinycolor = tinycolor;
   }
 }
 
-
-
 .reset-component() {
   box-sizing: border-box;
   margin: 0;
@@ -2276,8 +2337,6 @@ this.tinycolor = tinycolor;
   list-style: none;
   font-feature-settings: @font-feature-settings-base;
 }
-
-
 
 .operation-unit() {
   color: @link-color;
@@ -2295,7 +2354,6 @@ this.tinycolor = tinycolor;
     color: @link-active-color;
   }
 }
-
 
 /* stylelint-disable at-rule-no-unknown */
 
@@ -2808,9 +2866,6 @@ mark {
   .clearfix();
 }
 
-
-
-
 .@{iconfont-css-prefix} {
   .iconfont-mixin();
 
@@ -2827,7 +2882,6 @@ mark {
   display: inline-block;
   animation: loadingCircle 1s infinite linear;
 }
-
 
 .fade-motion(@className, @keyframeName) {
   .make-motion(@className, @keyframeName);
@@ -3347,7 +3401,6 @@ html {
   }
 }
 
-
 // For common/openAnimation
 .ant-motion-collapse-legacy {
   overflow: hidden;
@@ -3361,17 +3414,10 @@ html {
   transition: height 0.15s @ease-in-out, opacity 0.15s @ease-in-out !important;
 }
 
-
-
-
-
 .@{ant-prefix}-affix {
   position: fixed;
   z-index: @zindex-affix;
 }
-
-
-
 
 @alert-prefix-cls: ~'@{ant-prefix}-alert';
 
@@ -3385,6 +3431,7 @@ html {
 
   position: relative;
   padding: 8px 15px 8px 37px;
+  word-wrap: break-word;
   border-radius: @border-radius-base;
 
   &&-no-icon {
@@ -3446,6 +3493,8 @@ html {
     overflow: hidden;
     font-size: @font-size-sm;
     line-height: 22px;
+    background-color: transparent;
+    border: none;
     cursor: pointer;
 
     .@{iconfont-css-prefix}-close {
@@ -3458,8 +3507,11 @@ html {
   }
 
   &-close-text {
-    position: absolute;
-    right: 16px;
+    color: @alert-close-color;
+    transition: color 0.3s;
+    &:hover {
+      color: @alert-close-hover-color;
+    }
   }
 
   &-with-description {
@@ -3494,6 +3546,10 @@ html {
     margin-bottom: 4px;
     color: @alert-message-color;
     font-size: @font-size-lg;
+  }
+
+  &-message {
+    color: @alert-message-color;
   }
 
   &-with-description &-description {
@@ -3547,9 +3603,6 @@ html {
   }
 }
 
-
-
-
 @anchor-border-width: 2px;
 
 .@{ant-prefix}-anchor {
@@ -3576,7 +3629,7 @@ html {
       width: @anchor-border-width;
       height: 100%;
       margin: 0 auto;
-      background-color: @border-color-split;
+      background-color: @anchor-border-color;
       content: ' ';
     }
     &-ball {
@@ -3630,25 +3683,19 @@ html {
   }
 }
 
-
-
-
-
-
 @input-affix-width: 19px;
+@input-affix-with-clear-btn-width: 38px;
 
 // size mixins for input
 .input-lg() {
   height: @input-height-lg;
   padding: @input-padding-vertical-lg @input-padding-horizontal-lg;
   font-size: @font-size-lg;
-  line-height: @input-height-lg;
 }
 
 .input-sm() {
   height: @input-height-sm;
   padding: @input-padding-vertical-sm @input-padding-horizontal-sm;
-  line-height: @input-height-sm;
 }
 
 // input status
@@ -3662,7 +3709,7 @@ html {
 
 // == when hoverd
 .hover(@color: @input-hover-border-color) {
-  border-color: ~`colorPalette('@{color}', 5) `;
+  border-color: @color;
   border-right-width: @border-width-base !important;
 }
 
@@ -3671,6 +3718,7 @@ html {
   background-color: @input-disabled-bg;
   cursor: not-allowed;
   opacity: 1;
+
   &:hover {
     .hover(@input-border-color);
   }
@@ -3685,7 +3733,7 @@ html {
   padding: @input-padding-vertical-base @input-padding-horizontal-base;
   color: @input-color;
   font-size: @font-size-base;
-  line-height: @input-height-base;
+  line-height: @line-height-base;
   background-color: @input-bg;
   background-image: none;
   border: @border-width-base @border-style-base @input-border-color;
@@ -3714,6 +3762,7 @@ html {
     max-width: 100%; // prevent textearea resize from coming out of its container
     height: auto;
     min-height: @input-height-base;
+    line-height: @line-height-base;
     vertical-align: bottom;
     transition: all 0.3s, height 0s;
   }
@@ -3745,6 +3794,7 @@ html {
 
   > [class*='col-'] {
     padding-right: 8px;
+
     &:last-child {
       padding-right: 0;
     }
@@ -3776,10 +3826,12 @@ html {
     width: 100%;
     margin-bottom: 0;
     text-align: inherit;
+
     &:focus {
       z-index: 1; // Fix https://gw.alipayobjects.com/zos/rmsportal/DHNpoqfMXSfrSnlZvhsJ.png
       border-right-width: 1px;
     }
+
     &:hover {
       z-index: 1;
       border-right-width: 1px;
@@ -3792,7 +3844,6 @@ html {
     color: @input-color;
     font-weight: normal;
     font-size: @font-size-base;
-    line-height: 1;
     text-align: center;
     background-color: @input-addon-bg;
     border: @border-width-base @border-style-base @input-border-color;
@@ -3858,6 +3909,7 @@ html {
   &-addon:first-child {
     border-right: 0;
   }
+
   &-addon:last-child {
     border-left: 0;
   }
@@ -3909,9 +3961,11 @@ html {
     > .@{inputClass} {
       &:not(:first-child):not(:last-child) {
         border-right-width: @border-width-base;
+
         &:hover {
           z-index: 1;
         }
+
         &:focus {
           z-index: 1;
         }
@@ -3944,9 +3998,11 @@ html {
     & > .@{ant-prefix}-time-picker .@{ant-prefix}-time-picker-input {
       border-right-width: @border-width-base;
       border-radius: 0;
+
       &:hover {
         z-index: 1;
       }
+
       &:focus {
         z-index: 1;
       }
@@ -3998,16 +4054,32 @@ html {
     text-align: inherit;
   }
 
+  // Should not break align of icon & text
+  // https://github.com/ant-design/ant-design/issues/18087
+  // https://github.com/ant-design/ant-design/issues/17414
+  // https://github.com/ant-design/ant-design/pull/17684
+  // https://codesandbox.io/embed/pensive-paper-di2wk
+  // https://codesandbox.io/embed/nifty-benz-gb7ml
   .@{inputClass}-prefix,
   .@{inputClass}-suffix {
     position: absolute;
     top: 50%;
     z-index: 2;
+    display: flex;
+    align-items: center;
     color: @input-color;
     line-height: 0;
     transform: translateY(-50%);
+
     :not(.anticon) {
       line-height: @line-height-base;
+    }
+  }
+
+  .@{inputClass}-disabled ~ .@{inputClass}-suffix {
+    .anticon {
+      color: @disabled-color;
+      cursor: not-allowed;
     }
   }
 
@@ -4026,8 +4098,11 @@ html {
   .@{inputClass}:not(:last-child) {
     padding-right: @input-padding-horizontal-base + @input-affix-width;
   }
-}
 
+  &.@{inputClass}-affix-wrapper-with-clear-btn .@{inputClass}:not(:last-child) {
+    padding-right: @input-padding-horizontal-base + @input-affix-with-clear-btn-width;
+  }
+}
 
 @input-prefix-cls: ~'@{ant-prefix}-input';
 @select-prefix-cls: ~'@{ant-prefix}-select';
@@ -4118,9 +4193,6 @@ html {
   }
 }
 
-
-
-
 @avatar-prefix-cls: ~'@{ant-prefix}-avatar';
 
 .@{avatar-prefix-cls} {
@@ -4157,6 +4229,7 @@ html {
     display: block;
     width: 100%;
     height: 100%;
+    object-fit: cover;
   }
 }
 
@@ -4176,9 +4249,6 @@ html {
     font-size: @font-size;
   }
 }
-
-
-
 
 @backtop-prefix-cls: ~'@{ant-prefix}-back-top';
 
@@ -4229,10 +4299,6 @@ html {
     right: 20px;
   }
 }
-
-
-
-
 
 @badge-prefix-cls: ~'@{ant-prefix}-badge';
 @number-prefix-cls: ~'@{ant-prefix}-scroll-number';
@@ -4423,9 +4489,6 @@ html {
   }
 }
 
-
-
-
 @breadcrumb-prefix-cls: ~'@{ant-prefix}-breadcrumb';
 
 .@{breadcrumb-prefix-cls} {
@@ -4448,6 +4511,9 @@ html {
 
   & > span:last-child {
     color: @breadcrumb-last-item-color;
+    a {
+      color: @breadcrumb-last-item-color;
+    }
   }
 
   & > span:last-child &-separator {
@@ -4471,8 +4537,6 @@ html {
     }
   }
 }
-
-
 
 // mixins for button
 // ------------------------
@@ -4542,26 +4606,6 @@ html {
   }
   .button-disabled();
 }
-.button-variant-danger(@color; @background; @border) {
-  .button-color(@color; @background; @border);
-  &:hover {
-    .button-color(
-      @btn-primary-color; ~`colorPalette('@{color}', 5) `; ~`colorPalette('@{color}', 5) `
-    );
-  }
-  &:focus {
-    .button-color(
-      ~`colorPalette('@{color}', 5) `; @component-background; ~`colorPalette('@{color}', 5) `
-    );
-  }
-  &:active,
-  &.active {
-    .button-color(
-      @btn-primary-color; ~`colorPalette('@{color}', 7) `; ~`colorPalette('@{color}', 7) `
-    );
-  }
-  .button-disabled();
-}
 .button-variant-ghost(@color; @border: @color) {
   .button-color(@color; transparent; @border);
   text-shadow: none;
@@ -4626,6 +4670,11 @@ html {
     .button-size(@btn-height-lg; @btn-padding-lg; @btn-font-size-lg; 0);
     line-height: @btn-height-lg - 2px;
   }
+  &-lg > .@{btnClassName}.@{btnClassName}-icon-only {
+    .square(@btn-height-lg);
+    padding-right: 0;
+    padding-left: 0;
+  }
   &-sm > .@{btnClassName},
   &-sm > span > .@{btnClassName} {
     .button-size(@btn-height-sm; @btn-padding-sm; @font-size-base; 0);
@@ -4633,6 +4682,11 @@ html {
     > .@{iconfont-css-prefix} {
       font-size: @font-size-base;
     }
+  }
+  &-sm > .@{btnClassName}.@{btnClassName}-icon-only {
+    .square(@btn-height-sm);
+    padding-right: 0;
+    padding-left: 0;
   }
 }
 // Base styles of buttons
@@ -4706,7 +4760,7 @@ html {
 }
 // danger button style
 .btn-danger() {
-  .button-variant-danger(@btn-danger-color, @btn-danger-bg, @btn-danger-border);
+  .button-variant-primary(@btn-danger-color, @btn-danger-bg);
 }
 // link button style
 .btn-link() {
@@ -4721,10 +4775,10 @@ html {
 }
 // round button
 .btn-round(@btnClassName: btn) {
-  .button-size(@btn-circle-size; 0 @btn-circle-size / 2; @font-size-base + 2px; @btn-circle-size);
+  .button-size(@btn-circle-size; 0 @btn-circle-size / 2; @font-size-base; @btn-circle-size);
   &.@{btnClassName}-lg {
     .button-size(
-      @btn-circle-size-lg; 0 @btn-circle-size-lg / 2; @btn-font-size-lg + 2px; @btn-circle-size-lg
+      @btn-circle-size-lg; 0 @btn-circle-size-lg / 2; @btn-font-size-lg; @btn-circle-size-lg
     );
   }
   &.@{btnClassName}-sm {
@@ -4733,17 +4787,33 @@ html {
     );
   }
 }
-// circle button: the content only contains icon
-.btn-circle(@btnClassName: btn) {
-  .square(@btn-circle-size);
-  .button-size(@btn-circle-size; 0; @font-size-base + 2px; 50%);
+// square button: the content only contains icon
+.btn-square(@btnClassName: btn) {
+  .square(@btn-square-size);
+  .button-size(@btn-square-size; 0; @font-size-base + 2px; @btn-border-radius-base);
   &.@{btnClassName}-lg {
-    .square(@btn-circle-size-lg);
-    .button-size(@btn-circle-size-lg; 0; @btn-font-size-lg + 2px; 50%);
+    .square(@btn-square-size-lg);
+    .button-size(@btn-square-size-lg; 0; @btn-font-size-lg + 2px; @btn-border-radius-base);
   }
   &.@{btnClassName}-sm {
-    .square(@btn-circle-size-sm);
-    .button-size(@btn-circle-size-sm; 0; @font-size-base; 50%);
+    .square(@btn-square-size-sm);
+    .button-size(@btn-square-size-sm; 0; @font-size-base; @btn-border-radius-base);
+  }
+}
+// circle button: the content only contains icon
+.btn-circle(@btnClassName: btn) {
+  min-width: @btn-height-base;
+  padding-right: 0;
+  padding-left: 0;
+  text-align: center;
+  border-radius: 50%;
+  &.@{btnClassName}-lg {
+    min-width: @btn-height-lg;
+    border-radius: 50%;
+  }
+  &.@{btnClassName}-sm {
+    min-width: @btn-height-sm;
+    border-radius: 50%;
   }
 }
 // Horizontal button groups style
@@ -4823,7 +4893,6 @@ html {
   }
 }
 
-
 @btn-prefix-cls: ~'@{ant-prefix}-btn';
 
 // for compatible
@@ -4834,10 +4903,7 @@ html {
 // Button styles
 // -----------------------------
 .@{btn-prefix-cls} {
-  // Fixing https://github.com/ant-design/ant-design/issues/12978
-  // It is a render problem of chrome, which is only happened in the codesandbox demo
-  // 0.001px solution works and I don't why
-  line-height: @line-height-base - 0.001;
+  line-height: @line-height-base;
   .btn;
   .btn-default;
 
@@ -4846,6 +4912,7 @@ html {
   > i,
   > span {
     display: inline-block;
+    transition: margin-left 0.3s @ease-in-out;
     pointer-events: none;
   }
 
@@ -4895,8 +4962,15 @@ html {
     .btn-link;
   }
 
+  &-icon-only {
+    .btn-square(@btn-prefix-cls);
+  }
+
   &-round {
     .btn-round(@btn-prefix-cls);
+    &.@{btn-prefix-cls}-icon-only {
+      width: auto;
+    }
   }
 
   &-circle,
@@ -4960,11 +5034,6 @@ html {
     .btn-group(@btn-prefix-cls);
   }
 
-  &:not(&-circle):not(&-circle-outline)&-icon-only {
-    padding-right: 8px;
-    padding-left: 8px;
-  }
-
   // http://stackoverflow.com/a/21281554/3040605
   &:focus > span,
   &:active > span {
@@ -4988,7 +5057,7 @@ html {
   }
 
   &-background-ghost&-danger {
-    .button-variant-ghost(@btn-danger-color);
+    .button-variant-ghost(@btn-danger-border);
   }
 
   &-background-ghost&-link {
@@ -5017,7 +5086,12 @@ html {
 }
 
 a.@{btn-prefix-cls} {
+  // Fixing https://github.com/ant-design/ant-design/issues/12978
+  // It is a render problem of chrome, which is only happened in the codesandbox demo
+  // 0.1px for padding-top solution works and I don't why
+  padding-top: 0.1px;
   line-height: @btn-height-base - 2px;
+
   &-lg {
     line-height: @btn-height-lg - 2px;
   }
@@ -5025,9 +5099,6 @@ a.@{btn-prefix-cls} {
     line-height: @btn-height-sm - 2px;
   }
 }
-
-
-
 
 @full-calendar-prefix-cls: ~'@{ant-prefix}-fullcalendar';
 
@@ -5305,21 +5376,19 @@ a.@{btn-prefix-cls} {
   }
 }
 
-
-
-
 @card-prefix-cls: ~'@{ant-prefix}-card';
 @card-head-height: 48px;
 @card-hover-border: fade(@black, 9%);
+@card-action-icon-size: 16px;
 
-@gradient-min: fade(@card-background, 20%);
-@gradient-max: fade(@card-background, 40%);
+@gradient-min: fade(@card-skeleton-bg, 20%);
+@gradient-max: fade(@card-skeleton-bg, 40%);
 
 .@{card-prefix-cls} {
   .reset-component;
 
   position: relative;
-  background: @component-background;
+  background: @card-background;
   border-radius: @card-radius;
   transition: all 0.3s;
 
@@ -5404,10 +5473,12 @@ a.@{btn-prefix-cls} {
       1px 1px 0 0 @border-color-split, 1px 0 0 0 @border-color-split inset,
       0 1px 0 0 @border-color-split inset;
     transition: all 0.3s;
-    &:hover {
-      position: relative;
-      z-index: 1;
-      box-shadow: @box-shadow-base;
+    &-hoverable {
+      &:hover {
+        position: relative;
+        z-index: 1;
+        box-shadow: @box-shadow-base;
+      }
     }
   }
 
@@ -5416,7 +5487,7 @@ a.@{btn-prefix-cls} {
     padding-bottom: 0;
   }
 
-  &-contain-tabs &-extra {
+  &-contain-tabs > &-head &-extra {
     padding-bottom: 0;
   }
 
@@ -5444,9 +5515,9 @@ a.@{btn-prefix-cls} {
       color: @text-color-secondary;
       text-align: center;
 
-      & > span {
+      > span {
         position: relative;
-        display: inline-block;
+        display: block;
         min-width: 32px;
         font-size: 14px;
         line-height: 22px;
@@ -5457,20 +5528,22 @@ a.@{btn-prefix-cls} {
           transition: color 0.3s;
         }
 
-        & > .anticon {
-          font-size: 16px;
-          line-height: 22px;
-        }
-
-        a {
+        a:not(.@{ant-prefix}-btn),
+        > .anticon {
           display: inline-block;
           width: 100%;
           color: @text-color-secondary;
           line-height: 22px;
+          transition: color 0.3s;
 
           &:hover {
             color: @primary-color;
           }
+        }
+
+        > .anticon {
+          font-size: @card-action-icon-size;
+          line-height: 22px;
         }
       }
 
@@ -5587,10 +5660,6 @@ a.@{btn-prefix-cls} {
     padding: @card-padding-base-sm;
   }
 }
-
-
-
-
 
 .@{ant-prefix}-carousel {
   .reset-component;
@@ -5817,10 +5886,6 @@ a.@{btn-prefix-cls} {
   }
 }
 
-
-
-
-
 @cascader-prefix-cls: ~'@{ant-prefix}-cascader';
 
 .@{cascader-prefix-cls} {
@@ -5830,6 +5895,8 @@ a.@{btn-prefix-cls} {
     // Keep it static for https://github.com/ant-design/ant-design/issues/16738
     position: static;
     width: 100%;
+    // https://github.com/ant-design/ant-design/issues/17582
+    padding-right: 24px;
     // Add important to fix https://github.com/ant-design/ant-design/issues/5078
     // because input.less will compile after cascader.less
     background-color: transparent !important;
@@ -5879,7 +5946,7 @@ a.@{btn-prefix-cls} {
       width: 100%;
       height: 20px;
       margin-top: -10px;
-      padding: 0 @control-padding-horizontal;
+      padding: 0 20px 0 @control-padding-horizontal;
       overflow: hidden;
       line-height: 20px;
       white-space: nowrap;
@@ -6030,7 +6097,7 @@ a.@{btn-prefix-cls} {
     }
 
     &-expand &-expand-icon,
-    &-expand &-loading-icon {
+    &-loading-icon {
       .iconfont-size-under-12px(10px);
 
       position: absolute;
@@ -6043,9 +6110,6 @@ a.@{btn-prefix-cls} {
     }
   }
 }
-
-
-
 
 .antCheckboxFn(@checkbox-prefix-cls: ~'@{ant-prefix}-checkbox') {
   @checkbox-inner-prefix-cls: ~'@{checkbox-prefix-cls}-inner';
@@ -6078,7 +6142,7 @@ a.@{btn-prefix-cls} {
       border-radius: @border-radius-sm;
       visibility: hidden;
       animation: antCheckboxEffect 0.36s ease-in-out;
-      animation-fill-mode: both;
+      animation-fill-mode: backwards;
       content: '';
     }
 
@@ -6184,6 +6248,12 @@ a.@{btn-prefix-cls} {
       color: @disabled-color;
       cursor: not-allowed;
     }
+
+    // Not show highlight border of checkbox when disabled
+    &:hover::after,
+    .@{checkbox-prefix-cls}-wrapper:hover &::after {
+      visibility: hidden;
+    }
   }
 
   .@{checkbox-prefix-cls}-wrapper {
@@ -6197,7 +6267,6 @@ a.@{btn-prefix-cls} {
     }
   }
 
-  .@{checkbox-prefix-cls}-wrapper + span,
   .@{checkbox-prefix-cls} + span {
     padding-right: 8px;
     padding-left: 8px;
@@ -6258,11 +6327,7 @@ a.@{btn-prefix-cls} {
   }
 }
 
-
 .antCheckboxFn();
-
-
-
 
 @collapse-prefix-cls: ~'@{ant-prefix}-collapse';
 
@@ -6272,7 +6337,7 @@ a.@{btn-prefix-cls} {
   background-color: @collapse-header-bg;
   border: @border-width-base @border-style-base @border-color-base;
   border-bottom: 0;
-  border-radius: @border-radius-base;
+  border-radius: @collapse-panel-border-radius;
 
   & > &-item {
     border-bottom: @border-width-base @border-style-base @border-color-base;
@@ -6280,7 +6345,7 @@ a.@{btn-prefix-cls} {
     &:last-child {
       &,
       & > .@{collapse-prefix-cls}-header {
-        border-radius: 0 0 @border-radius-base @border-radius-base;
+        border-radius: 0 0 @collapse-panel-border-radius @collapse-panel-border-radius;
       }
     }
 
@@ -6360,7 +6425,7 @@ a.@{btn-prefix-cls} {
 
   &-item:last-child {
     > .@{collapse-prefix-cls}-content {
-      border-radius: 0 0 @border-radius-base @border-radius-base;
+      border-radius: 0 0 @collapse-panel-border-radius @collapse-panel-border-radius;
     }
   }
 
@@ -6395,9 +6460,6 @@ a.@{btn-prefix-cls} {
     }
   }
 }
-
-
-
 
 @comment-prefix-cls: ~'@{ant-prefix}-comment';
 
@@ -6492,16 +6554,8 @@ a.@{btn-prefix-cls} {
 
 // placeholder
 
-
-
-
-
-
-
 @calendar-prefix-cls: ~'@{ant-prefix}-calendar';
 @calendar-timepicker-prefix-cls: ~'@{ant-prefix}-calendar-time-picker';
-
-
 
 .@{calendar-prefix-cls}-picker-container {
   .reset-component;
@@ -6546,6 +6600,10 @@ a.@{btn-prefix-cls} {
 
   &-input {
     outline: none;
+
+    &.@{ant-prefix}-input {
+      line-height: @line-height-base;
+    }
   }
 
   &-input.@{ant-prefix}-input-sm {
@@ -6554,7 +6612,7 @@ a.@{btn-prefix-cls} {
   }
 
   &:hover &-input:not(.@{ant-prefix}-input-disabled) {
-    border-color: @primary-color;
+    border-color: @input-hover-border-color;
   }
 
   &:focus &-input:not(.@{ant-prefix}-input-disabled) {
@@ -6604,6 +6662,67 @@ a.@{btn-prefix-cls} {
   &-small &-clear,
   &-small &-icon {
     right: @control-padding-horizontal-sm;
+  }
+}
+
+.calendarLeftArrow() {
+  height: 100%;
+
+  &::before,
+  &::after {
+    position: relative;
+    top: -1px;
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    vertical-align: middle;
+    border: 0 solid #aaa;
+    border-width: 1.5px 0 0 1.5px;
+    border-radius: 1px;
+    transform: rotate(-45deg) scale(0.8);
+    transition: all 0.3s;
+    content: '';
+  }
+
+  &:hover::before,
+  &:hover::after {
+    border-color: @text-color;
+  }
+
+  &::after {
+    display: none;
+  }
+}
+
+.calendarLeftDoubleArrow() {
+  .calendarLeftArrow;
+
+  &::after {
+    position: relative;
+    left: -3px;
+    display: inline-block;
+  }
+}
+
+.calendarRightArrow() {
+  .calendarLeftArrow;
+
+  &::before,
+  &::after {
+    transform: rotate(135deg) scale(0.8);
+  }
+}
+
+.calendarRightDoubleArrow() {
+  .calendarRightArrow;
+
+  &::before {
+    position: relative;
+    left: 3px;
+  }
+
+  &::after {
+    display: inline-block;
   }
 }
 
@@ -6658,35 +6777,35 @@ a.@{btn-prefix-cls} {
   .@{calendar-prefix-cls}-prev-decade-btn,
   .@{calendar-prefix-cls}-prev-year-btn {
     left: 7px;
-
-    &::after {
-      content: '«';
-    }
+    .calendarLeftDoubleArrow;
   }
 
   .@{calendar-prefix-cls}-next-century-btn,
   .@{calendar-prefix-cls}-next-decade-btn,
   .@{calendar-prefix-cls}-next-year-btn {
     right: 7px;
-
-    &::after {
-      content: '»';
-    }
+    .calendarRightDoubleArrow;
   }
 
   .@{calendar-prefix-cls}-prev-month-btn {
     left: 29px;
-
-    &::after {
-      content: '‹';
-    }
+    .calendarLeftArrow;
   }
 
   .@{calendar-prefix-cls}-next-month-btn {
     right: 29px;
+    .calendarRightArrow;
+  }
+}
 
-    &::after {
-      content: '›';
+.calendar-selected-cell() {
+  .@{calendar-prefix-cls}-date {
+    color: @text-color-inverse;
+    background: @primary-color;
+    border: @border-width-base @border-style-base transparent;
+
+    &:hover {
+      background: @primary-color;
     }
   }
 }
@@ -6815,26 +6934,17 @@ a.@{btn-prefix-cls} {
     border-color: @primary-color;
   }
 
+  &-selected-day &-date {
+    background: @primary-2;
+  }
+
   &-last-month-cell &-date,
   &-next-month-btn-day &-date {
-    color: @disabled-color;
-  }
-
-  &-selected-day &-date {
-    background: tint(@primary-color, 80%);
-  }
-
-  &-selected-date,
-  &-selected-start-date,
-  &-selected-end-date {
-    .@{calendar-prefix-cls}-date {
-      color: @text-color-inverse;
-      background: @primary-color;
-      border: @border-width-base @border-style-base transparent;
-
-      &:hover {
-        background: @primary-color;
-      }
+    &,
+    &:hover {
+      color: @disabled-color;
+      background: transparent;
+      border-color: transparent;
     }
   }
 
@@ -6967,7 +7077,6 @@ a.@{btn-prefix-cls} {
   background-color: transparent;
   border: 0;
   outline: 0;
-  vertical-align: top;
   .placeholder();
 
   &[disabled] {
@@ -7045,6 +7154,22 @@ a.@{btn-prefix-cls} {
     transform: translateX(-50%);
   }
 
+  .@{calendar-prefix-cls}-today
+    :not(.@{calendar-prefix-cls}-disabled-cell)
+    :not(.@{calendar-prefix-cls}-last-month-cell)
+    :not(.@{calendar-prefix-cls}-next-month-btn-day) {
+    .@{calendar-prefix-cls}-date {
+      color: @primary-color;
+      background: @primary-2;
+      border-color: @primary-color;
+    }
+  }
+
+  .@{calendar-prefix-cls}-selected-start-date,
+  .@{calendar-prefix-cls}-selected-end-date {
+    .calendar-selected-cell;
+  }
+
   &.@{calendar-prefix-cls}-time &-right .@{calendar-prefix-cls}-date-input-wrap {
     margin-left: 0;
   }
@@ -7057,10 +7182,10 @@ a.@{btn-prefix-cls} {
   .@{calendar-prefix-cls}-input,
   .@{calendar-timepicker-prefix-cls}-input {
     .input;
-
     height: @input-height-sm;
     padding-right: 0;
     padding-left: 0;
+    line-height: @input-height-sm;
     border: 0;
     box-shadow: none;
 
@@ -7131,7 +7256,8 @@ a.@{btn-prefix-cls} {
 
   .@{calendar-prefix-cls},
   .@{calendar-prefix-cls}-month-panel,
-  .@{calendar-prefix-cls}-year-panel {
+  .@{calendar-prefix-cls}-year-panel,
+  .@{calendar-prefix-cls}-decade-panel {
     &-header {
       border-bottom: 0;
     }
@@ -7241,7 +7367,6 @@ a.@{btn-prefix-cls} {
   &-select {
     position: relative; // Fix chrome weird render bug
     float: left;
-    box-sizing: border-box;
     height: 226px;
     overflow: hidden;
     font-size: @font-size-base;
@@ -7261,7 +7386,6 @@ a.@{btn-prefix-cls} {
     }
 
     ul {
-      box-sizing: border-box;
       width: 100%;
       max-height: 206px;
       margin: 0;
@@ -7270,30 +7394,35 @@ a.@{btn-prefix-cls} {
     }
 
     li {
-      box-sizing: content-box;
       width: 100%;
       height: 24px;
       margin: 0;
-      padding-left: 32px;
       line-height: 24px;
+      text-align: center;
       list-style: none;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: all .3s;
       user-select: none;
-    }
 
-    li:last-child::after {
-      display: block;
-      height: 202px;
-      content: '';
-    }
+      &:last-child::after {
+        display: block;
+        height: 202px;
+        content: '';
+      }
 
-    li:hover {
-      background: @item-hover-bg;
+      &:hover {
+        background: @item-hover-bg;
+      }
+
+      &:focus {
+        color: @primary-color;
+        font-weight: 600;
+        outline: none;
+      }
     }
 
     li&-option-selected {
-      font-weight: bold;
+      font-weight: 600;
       background: @time-picker-selected-bg;
     }
 
@@ -7342,7 +7471,7 @@ a.@{btn-prefix-cls} {
 
 .@{calendar-prefix-cls}-month-panel {
   position: absolute;
-  top: 1px;
+  top: 0;
   right: 0;
   bottom: 0;
   left: 0;
@@ -7365,6 +7494,7 @@ a.@{btn-prefix-cls} {
 
 .@{calendar-prefix-cls}-month-panel-header {
   .calendarPanelHeader(~'@{calendar-prefix-cls}-month-panel');
+  position: relative;
 }
 
 .@{calendar-prefix-cls}-month-panel-body {
@@ -7428,7 +7558,7 @@ a.@{btn-prefix-cls} {
 
 .@{calendar-prefix-cls}-year-panel {
   position: absolute;
-  top: 1px;
+  top: 0;
   right: 0;
   bottom: 0;
   left: 0;
@@ -7451,6 +7581,7 @@ a.@{btn-prefix-cls} {
 
 .@{calendar-prefix-cls}-year-panel-header {
   .calendarPanelHeader(~'@{calendar-prefix-cls}-year-panel');
+  position: relative;
 }
 
 .@{calendar-prefix-cls}-year-panel-body {
@@ -7531,6 +7662,7 @@ a.@{btn-prefix-cls} {
 
 .@{calendar-prefix-cls}-decade-panel-header {
   .calendarPanelHeader(~'@{calendar-prefix-cls}-decade-panel');
+  position: relative;
 }
 
 .@{calendar-prefix-cls}-decade-panel-body {
@@ -7626,10 +7758,6 @@ a.@{btn-prefix-cls} {
   }
 }
 
-
-
-
-
 @descriptions-prefix-cls: ~'@{ant-prefix}-descriptions';
 
 @descriptions-default-padding: 16px 24px;
@@ -7656,6 +7784,7 @@ a.@{btn-prefix-cls} {
   }
 
   &-row {
+    > th,
     > td {
       padding-bottom: 16px;
     }
@@ -7666,14 +7795,29 @@ a.@{btn-prefix-cls} {
 
   &-item-label {
     color: @heading-color;
+    font-weight: normal;
     font-size: @font-size-base;
     line-height: @line-height-base;
     white-space: nowrap;
+
     &::after {
       position: relative;
       top: -0.5px;
       margin: 0 8px 0 2px;
+      content: ' ';
+    }
+  }
+
+  &-item-colon {
+    &::after {
       content: ':';
+    }
+  }
+
+  &-item-no-label {
+    &::after {
+      margin: 0;
+      content: '';
     }
   }
 
@@ -7689,49 +7833,49 @@ a.@{btn-prefix-cls} {
     > span {
       display: inline-block;
     }
-    .@{descriptions-prefix-cls}-item-label {
-      float: left;
-      padding: 0 !important;
-    }
-    .@{descriptions-prefix-cls}-item-content {
-      float: left;
-      padding: 0 !important;
+  }
+
+  &-middle {
+    .@{descriptions-prefix-cls}-row {
+      > th,
+      > td {
+        padding-bottom: 12px;
+      }
     }
   }
 
-  // padding setting
-  .@{descriptions-prefix-cls}-item-label,
-  .@{descriptions-prefix-cls}-item-content {
-    padding: @descriptions-default-padding;
+  &-small {
+    .@{descriptions-prefix-cls}-row {
+      > th,
+      > td {
+        padding-bottom: 8px;
+      }
+    }
   }
 
-  &.bordered.middle {
-    .@{descriptions-prefix-cls}-item-label,
-    .@{descriptions-prefix-cls}-item-content {
-      padding: @descriptions-middle-padding;
-    }
-  }
-  &.bordered.small {
-    .@{descriptions-prefix-cls}-item-label,
-    .@{descriptions-prefix-cls}-item-content {
-      padding: @descriptions-small-padding;
-    }
-  }
-  &.bordered {
+  &-bordered {
     .@{descriptions-prefix-cls}-view {
       border: 1px solid @border-color-split;
       > table {
         table-layout: auto;
       }
     }
+
     .@{descriptions-prefix-cls}-item-label,
     .@{descriptions-prefix-cls}-item-content {
+      padding: @descriptions-default-padding;
       border-right: 1px solid @border-color-split;
+
+      &:last-child {
+        border-right: none;
+      }
     }
 
-    .@{descriptions-prefix-cls}-item-label:last-child,
-    .@{descriptions-prefix-cls}-item-content:last-child {
-      border-right: none;
+    .@{descriptions-prefix-cls}-item-label {
+      background-color: @descriptions-bg;
+      &::after {
+        display: none;
+      }
     }
 
     .@{descriptions-prefix-cls}-row {
@@ -7741,17 +7885,21 @@ a.@{btn-prefix-cls} {
       }
     }
 
-    .@{descriptions-prefix-cls}-item-label {
-      background-color: #fafafa;
-      &::after {
-        display: none;
+    &.@{descriptions-prefix-cls}-middle {
+      .@{descriptions-prefix-cls}-item-label,
+      .@{descriptions-prefix-cls}-item-content {
+        padding: @descriptions-middle-padding;
+      }
+    }
+
+    &.@{descriptions-prefix-cls}-small {
+      .@{descriptions-prefix-cls}-item-label,
+      .@{descriptions-prefix-cls}-item-content {
+        padding: @descriptions-small-padding;
       }
     }
   }
 }
-
-
-
 
 @divider-prefix-cls: ~'@{ant-prefix}-divider';
 
@@ -7860,10 +8008,6 @@ a.@{btn-prefix-cls} {
   }
 }
 
-
-
-
-
 // Preserve the typo for compatibility
 // https://github.com/ant-design/ant-design/issues/14628
 @dawer-prefix-cls: ~'@{ant-prefix}-drawer';
@@ -7875,14 +8019,15 @@ a.@{btn-prefix-cls} {
   z-index: @zindex-modal;
   width: 0%;
   height: 100%;
-
+  transition: transform @animation-duration-slow @ease-base-out,
+    height 0s ease @animation-duration-slow, width 0s ease @animation-duration-slow;
   > * {
-    transition: transform @animation-duration-slow @ease-base-in,
-      box-shadow @animation-duration-slow @ease-base-in;
+    transition: transform @animation-duration-slow @ease-base-out,
+      box-shadow @animation-duration-slow @ease-base-out;
   }
 
   &-content-wrapper {
-    position: fixed;
+    position: absolute;
   }
   .@{drawer-prefix-cls}-content {
     width: 100%;
@@ -7899,6 +8044,7 @@ a.@{btn-prefix-cls} {
     }
     &.@{drawer-prefix-cls}-open {
       width: 100%;
+      transition: transform @animation-duration-slow @ease-base-out;
     }
     &.@{drawer-prefix-cls}-open.no-mask {
       width: 0%;
@@ -7925,6 +8071,11 @@ a.@{btn-prefix-cls} {
       .@{drawer-prefix-cls}-content-wrapper {
         box-shadow: @shadow-1-left;
       }
+      // https://github.com/ant-design/ant-design/issues/18607, Avoid edge alignment bug.
+      &.no-mask {
+        right: 1px;
+        transform: translateX(1px);
+      }
     }
   }
 
@@ -7939,6 +8090,7 @@ a.@{btn-prefix-cls} {
     }
     &.@{drawer-prefix-cls}-open {
       height: 100%;
+      transition: transform @animation-duration-slow @ease-base-out;
     }
     &.@{drawer-prefix-cls}-open.no-mask {
       height: 0%;
@@ -7967,6 +8119,10 @@ a.@{btn-prefix-cls} {
       .@{drawer-prefix-cls}-content-wrapper {
         box-shadow: @shadow-1-up;
       }
+      &.no-mask {
+        bottom: 1px;
+        transform: translateY(1px);
+      }
     }
   }
 
@@ -7974,7 +8130,7 @@ a.@{btn-prefix-cls} {
     .@{drawer-prefix-cls} {
       &-mask {
         height: 100%;
-        opacity: 0.3;
+        opacity: 1;
         transition: none;
         animation: antdDrawerFadeIn @animation-duration-slow @ease-base-out;
       }
@@ -8050,18 +8206,17 @@ a.@{btn-prefix-cls} {
   }
 
   &-mask {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 0;
     background-color: @modal-mask-bg;
     opacity: 0;
-    filter: ~'alpha(opacity=50)';
+    filter: ~'alpha(opacity=45)';
     transition: opacity @animation-duration-slow linear, height 0s ease @animation-duration-slow;
   }
   &-open {
-    transition: transform @animation-duration-slow @ease-base-out;
     &-content {
       box-shadow: @shadow-2;
     }
@@ -8073,13 +8228,9 @@ a.@{btn-prefix-cls} {
     opacity: 0;
   }
   100% {
-    opacity: 0.3;
+    opacity: 1;
   }
 }
-
-
-
-
 
 @dropdown-prefix-cls: ~'@{ant-prefix}-dropdown';
 
@@ -8158,11 +8309,11 @@ a.@{btn-prefix-cls} {
     &-submenu-title {
       clear: both;
       margin: 0;
-      padding: 5px @control-padding-horizontal;
+      padding: @dropdown-vertical-padding @control-padding-horizontal;
       color: @text-color;
       font-weight: normal;
-      font-size: @font-size-base;
-      line-height: 22px;
+      font-size: @dropdown-font-size;
+      line-height: @dropdown-line-height;
       white-space: nowrap;
       cursor: pointer;
       transition: all 0.3s;
@@ -8324,9 +8475,6 @@ a.@{btn-prefix-cls} {
   }
 }
 
-
-
-
 @empty-prefix-cls: ~'@{ant-prefix}-empty';
 
 .@{empty-prefix-cls} {
@@ -8341,6 +8489,11 @@ a.@{btn-prefix-cls} {
 
     img {
       height: 100%;
+    }
+
+    svg {
+      height: 100%;
+      margin: auto;
     }
   }
 
@@ -8372,12 +8525,6 @@ a.@{btn-prefix-cls} {
   }
 }
 
-
-
-
-
-
-
 // mixins for grid system
 // ------------------------
 .make-row(@gutter: @grid-gutter-width) {
@@ -8400,8 +8547,6 @@ a.@{btn-prefix-cls} {
   .col(@index, @list) when (@index > @grid-columns) {
     @{list} {
       position: relative;
-      // Prevent columns from collapsing when empty
-      min-height: 1px;
       padding-right: (@grid-gutter-width / 2);
       padding-left: (@grid-gutter-width / 2);
     }
@@ -8480,8 +8625,6 @@ a.@{btn-prefix-cls} {
   .loop-grid-columns(@grid-columns, @class);
 }
 
-
-
 .form-control-validation(@text-color: @input-color; @border-color: @input-border-color; @background-color: @input-bg) {
   .@{ant-prefix}-form-explain,
   .@{ant-prefix}-form-split {
@@ -8491,6 +8634,7 @@ a.@{btn-prefix-cls} {
   .@{ant-prefix}-input {
     &,
     &:hover {
+      background-color: @background-color;
       border-color: @border-color;
     }
 
@@ -8606,7 +8750,6 @@ a.@{btn-prefix-cls} {
   }
 }
 
-
 @form-prefix-cls: ~'@{ant-prefix}-form';
 @form-component-height: @input-height-base;
 @form-component-max-height: @input-height-lg;
@@ -8655,35 +8798,6 @@ a.@{btn-prefix-cls} {
 
   &.@{form-prefix-cls}-item-no-colon::after {
     content: ' ';
-  }
-}
-
-// Radio && Checkbox
-input[type='radio'],
-input[type='checkbox'] {
-  &[disabled],
-  &.disabled {
-    cursor: not-allowed;
-  }
-}
-
-// These classes are used directly on <label>s
-.@{ant-prefix}-radio-inline,
-.@{ant-prefix}-radio-vertical,
-.@{ant-prefix}-checkbox-inline,
-.@{ant-prefix}-checkbox-vertical {
-  &.disabled {
-    cursor: not-allowed;
-  }
-}
-
-// These classes are used on elements with <label> descendants
-.@{ant-prefix}-radio,
-.@{ant-prefix}-checkbox {
-  &.disabled {
-    label {
-      cursor: not-allowed;
-    }
   }
 }
 
@@ -8886,33 +9000,6 @@ form {
     top: -1px;
     display: inline-block;
     vertical-align: middle;
-  }
-}
-
-// Input combined with select
-.@{ant-prefix}-input-group-wrap {
-  .@{ant-prefix}-select-selection {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    &:hover {
-      border-color: @border-color-base;
-    }
-  }
-
-  .@{ant-prefix}-select-selection--single {
-    height: @input-height-lg;
-    margin-left: -1px;
-    background-color: fade(@black, 7%);
-    .@{ant-prefix}-select-selection__rendered {
-      padding-right: 25px;
-      padding-left: 8px;
-      line-height: 30px;
-    }
-  }
-
-  .@{ant-prefix}-select-open .@{ant-prefix}-select-selection {
-    border-color: @border-color-base;
-    box-shadow: none;
   }
 }
 
@@ -9282,10 +9369,6 @@ form {
   }
 }
 
-
-
-
-
 // Grid system
 .@{ant-prefix}-row {
   .make-row();
@@ -9346,6 +9429,8 @@ form {
 
 .@{ant-prefix}-col {
   position: relative;
+  // Prevent columns from collapsing when empty
+  min-height: 1px;
 }
 
 .make-grid-columns();
@@ -9399,14 +9484,7 @@ form {
   .make-grid(-xxl);
 }
 
-
-
-
 @icon-prefix-cls: ~'@{ant-prefix}-icon';
-
-
-
-
 
 // Input styles
 .@{ant-prefix}-input {
@@ -9450,7 +9528,9 @@ form {
 .@{ant-prefix}-input-clear-icon {
   color: @disabled-color;
   font-size: @font-size-sm;
-  vertical-align: top;
+  // https://github.com/ant-design/ant-design/pull/18151
+  // https://codesandbox.io/s/wizardly-sun-u10br
+  vertical-align: 0;
   cursor: pointer;
   transition: color 0.3s;
 
@@ -9466,11 +9546,6 @@ form {
     margin-left: 6px;
   }
 }
-
-
-
-
-
 
 @search-prefix: ~'@{ant-prefix}-input-search';
 
@@ -9503,11 +9578,6 @@ form {
   }
 }
 
-
-
-
-
-
 @input-number-prefix-cls: ~'@{ant-prefix}-input-number';
 
 .@{input-number-prefix-cls} {
@@ -9537,7 +9607,7 @@ form {
     }
     &:hover &-up-inner,
     &:hover &-down-inner {
-      color: @primary-5;
+      color: @input-number-handler-hover-bg;
     }
   }
 
@@ -9617,8 +9687,8 @@ form {
     right: 0;
     width: 22px;
     height: 100%;
-    background: @component-background;
-    border-left: @border-width-base @border-style-base @border-color-base;
+    background: @input-number-handler-bg;
+    border-left: @border-width-base @border-style-base @input-number-handler-border-color;
     border-radius: 0 @border-radius-base @border-radius-base 0;
     opacity: 0;
     transition: opacity 0.24s linear 0.1s;
@@ -9646,6 +9716,7 @@ form {
   }
 
   &-handler-up {
+    border-top-right-radius: @border-radius-base;
     cursor: pointer;
     &-inner {
       top: 50%;
@@ -9660,6 +9731,7 @@ form {
   &-handler-down {
     top: 0;
     border-top: @border-width-base @border-style-base @border-color-base;
+    border-bottom-right-radius: @border-radius-base;
     cursor: pointer;
     &-inner {
       top: 50%;
@@ -9681,9 +9753,6 @@ form {
     color: @disabled-color;
   }
 }
-
-
-
 
 @layout-prefix-cls: ~'@{ant-prefix}-layout';
 
@@ -9780,6 +9849,7 @@ form {
         position: absolute;
         top: @layout-header-height;
         right: -@layout-zero-trigger-width;
+        z-index: 1;
         width: @layout-zero-trigger-width;
         height: @layout-zero-trigger-height;
         color: @layout-trigger-color;
@@ -9797,6 +9867,7 @@ form {
 
         &-right {
           left: -@layout-zero-trigger-width;
+          border-radius: @border-radius-base 0 0 @border-radius-base;
         }
       }
     }
@@ -9818,10 +9889,6 @@ form {
     }
   }
 }
-
-
-
-
 
 @list-prefix-cls: ~'@{ant-prefix}-list';
 
@@ -10022,7 +10089,7 @@ form {
     }
   }
 
-  &-grid &-item {
+  &-grid .@{ant-prefix}-col > &-item {
     display: block;
     max-width: 100%;
     margin-bottom: 16px;
@@ -10129,13 +10196,7 @@ form {
   }
 }
 
-
 // placeholder
-
-
-
-
-
 
 @mention-prefix-cls: ~'@{ant-prefix}-mention';
 
@@ -10267,10 +10328,6 @@ form {
   }
 }
 
-
-
-
-
 @mention-prefix-cls: ~'@{ant-prefix}-mentions';
 
 .@{mention-prefix-cls} {
@@ -10282,6 +10339,7 @@ form {
   height: auto;
   padding: 0;
   overflow: hidden;
+  line-height: @line-height-base;
   white-space: pre-wrap;
   vertical-align: bottom;
 
@@ -10299,10 +10357,11 @@ form {
   // ================= Input Area =================
   > textarea,
   &-measure {
+    min-height: @input-height-base - 2px;
     margin: 0;
     padding: @input-padding-vertical-base @input-padding-horizontal-base;
     overflow: inherit;
-    overflow-x: initial;
+    overflow-x: hidden;
     overflow-y: auto;
     font-weight: inherit;
     font-size: inherit;
@@ -10327,6 +10386,7 @@ form {
     border: none;
     outline: none;
     resize: none;
+    .placeholder();
 
     &:read-only {
       cursor: default;
@@ -10342,6 +10402,11 @@ form {
     z-index: -1;
     color: transparent;
     pointer-events: none;
+
+    > span {
+      display: inline-block;
+      min-height: 1em;
+    }
   }
 
   // ================== Dropdown ==================
@@ -10423,9 +10488,6 @@ form {
     }
   }
 }
-
-
-
 
 @menu-prefix-cls: ~'@{ant-prefix}-menu';
 
@@ -10779,11 +10841,11 @@ form {
     .@{menu-prefix-cls}-item,
     .@{menu-prefix-cls}-submenu-title {
       height: @menu-item-height;
-      margin-top: 4px;
-      margin-bottom: 4px;
+      margin-top: @menu-item-vertical-margin;
+      margin-bottom: @menu-item-vertical-margin;
       padding: 0 16px;
       overflow: hidden;
-      font-size: @font-size-base;
+      font-size: @menu-item-font-size;
       line-height: @menu-item-height;
       text-overflow: ellipsis;
     }
@@ -10794,7 +10856,7 @@ form {
     }
 
     .@{menu-prefix-cls}-item:not(:last-child) {
-      margin-bottom: 8px;
+      margin-bottom: @menu-item-boundary-margin;
     }
 
     > .@{menu-prefix-cls}-item,
@@ -11023,6 +11085,9 @@ form {
       }
     }
   }
+  &-dark &-item:hover {
+    background-color: @menu-dark-item-hover-bg;
+  }
 
   &-dark &-item-selected {
     color: @menu-dark-highlight-color;
@@ -11033,6 +11098,12 @@ form {
     > a,
     > a:hover {
       color: @menu-dark-highlight-color;
+    }
+    .@{iconfont-css-prefix} {
+      color: @menu-dark-selected-item-icon-color;
+    }
+    .@{iconfont-css-prefix} + span {
+      color: @menu-dark-selected-item-text-color;
     }
   }
 
@@ -11060,10 +11131,6 @@ form {
     }
   }
 }
-
-
-
-
 
 @message-prefix-cls: ~'@{ant-prefix}-message';
 
@@ -11138,8 +11205,6 @@ form {
   }
 }
 
-
-
 @dialog-prefix-cls: ~'@{ant-prefix}-modal';
 @table-prefix-cls: ~'@{ant-prefix}-table';
 @modal-footer-padding-vertical: 10px;
@@ -11153,6 +11218,7 @@ form {
   width: auto;
   margin: 0 auto;
   padding-bottom: 24px;
+  pointer-events: none;
 
   &-wrap {
     position: fixed;
@@ -11182,6 +11248,7 @@ form {
     border: 0;
     border-radius: @border-radius-base;
     box-shadow: @shadow-2;
+    pointer-events: auto;
   }
 
   &-close {
@@ -11238,7 +11305,7 @@ form {
     padding: @modal-footer-padding-vertical @modal-footer-padding-horizontal;
     text-align: right;
     background: @modal-footer-bg;
-    border-top: @border-width-base @border-style-base @border-color-split;
+    border-top: @border-width-base @border-style-base @modal-footer-border-color-split;
     border-radius: 0 0 @border-radius-base @border-radius-base;
     button + button {
       margin-bottom: 0;
@@ -11303,8 +11370,6 @@ form {
     }
   }
 }
-
-
 
 @confirm-prefix-cls: ~'@{ant-prefix}-modal-confirm';
 
@@ -11382,10 +11447,6 @@ form {
     color: @success-color;
   }
 }
-
-
-
-
 
 @notification-prefix-cls: ~'@{ant-prefix}-notification';
 @notification-width: 384px;
@@ -11584,30 +11645,31 @@ form {
   }
 }
 
-
-
-
 @pageheader-prefix-cls: ~'@{ant-prefix}-page-header';
 
 .@{pageheader-prefix-cls} {
   .reset-component;
 
   position: relative;
-  padding: @page-header-padding-vertical @page-header-padding-horizontal;
-  background: @component-background;
+  padding: @page-header-padding;
 
-  &.@{pageheader-prefix-cls}-has-footer {
-    padding-bottom: 0;
+  &.has-breadcrumb {
+    padding-top: @page-header-padding-breadcrumb;
+  }
+
+  &.has-footer {
+    padding-bottom: @page-header-padding-vertical;
   }
 
   &-back {
-    display: inline-block;
-    padding: 4px 0;
-    font-size: 16px;
-    line-height: 100%;
+    float: left;
+    margin: 6px 0;
+    margin-right: 16px;
+    font-size: 20px;
+    line-height: 1;
     &-button {
       .operation-unit();
-      color: @text-color;
+      color: @page-header-back-color;
       cursor: pointer;
     }
   }
@@ -11615,40 +11677,48 @@ form {
   .@{ant-prefix}-divider-vertical {
     height: 14px;
     margin: 0 12px;
+    vertical-align: middle;
   }
 
-  .@{ant-prefix}-breadcrumb {
-    margin-bottom: 12px;
+  .@{ant-prefix}-breadcrumb + &-heading {
+    margin-top: 8px;
   }
 
-  &-title-view {
-    display: inline-block;
+  &-heading {
+    width: 100%;
+    overflow: hidden;
     &-title {
-      display: inline-block;
+      display: block;
+      float: left;
+      margin-bottom: 0;
       padding-right: 12px;
       color: @heading-color;
-      font-weight: bold;
-      font-size: 16px;
-      line-height: 1.4;
+      font-weight: 600;
+      font-size: @heading-3-size;
+      line-height: 32px;
+    }
+
+    .@{ant-prefix}-avatar {
+      float: left;
+      margin-right: 12px;
     }
 
     &-sub-title {
-      display: inline-block;
-      padding-right: 12px;
+      float: left;
+      margin: 5px 0;
+      margin-right: 12px;
       color: @text-color-secondary;
       font-size: 14px;
-      line-height: 1.8;
+      line-height: 22px;
     }
 
     &-tags {
-      display: inline-block;
-      vertical-align: top;
+      float: left;
+      margin: 4px 0;
     }
 
     &-extra {
-      position: absolute;
-      top: 16px;
-      right: @page-header-padding-horizontal;
+      float: right;
       > * {
         margin-left: 8px;
       }
@@ -11658,27 +11728,35 @@ form {
     }
   }
 
-  &-content-view {
-    padding-top: 12px;
+  &-content {
+    padding-top: 16px;
+    overflow: hidden;
   }
 
   &-footer {
-    margin: 0 -8px;
-    padding-top: 24px;
+    margin-top: 16px;
     .@{ant-prefix}-tabs-bar {
       margin-bottom: 1px;
       border-bottom: 0;
       .@{ant-prefix}-tabs-nav .@{ant-prefix}-tabs-tab {
-        padding: 12px 8px;
-        padding-top: 0;
+        padding: 8px;
+        font-size: 16px;
+      }
+    }
+  }
+
+  @media (max-width: @screen-sm) {
+    &-heading {
+      &-extra {
+        display: block;
+        float: unset;
+        width: 100%;
+        padding-top: 12px;
+        overflow: hidden;
       }
     }
   }
 }
-
-
-
-
 
 @pagination-prefix-cls: ~'@{ant-prefix}-pagination';
 
@@ -11731,6 +11809,10 @@ form {
       padding: 0 6px;
       color: @text-color;
       transition: none;
+
+      &:hover {
+        text-decoration: none;
+      }
     }
 
     &:focus,
@@ -12073,9 +12155,6 @@ form {
   }
 }
 
-
-
-
 @popover-prefix-cls: ~'@{ant-prefix}-popover';
 
 .@{popover-prefix-cls} {
@@ -12279,9 +12358,6 @@ form {
   }
 }
 
-
-
-
 @progress-prefix-cls: ~'@{ant-prefix}-progress';
 
 .@{progress-prefix-cls} {
@@ -12315,9 +12391,10 @@ form {
     position: relative;
     display: inline-block;
     width: 100%;
+    overflow: hidden;
     vertical-align: middle;
     background-color: @progress-remaining-color;
-    border-radius: 100px;
+    border-radius: @progress-radius;
   }
 
   &-circle-trail {
@@ -12326,13 +12403,19 @@ form {
 
   &-circle-path {
     animation: ~'@{ant-prefix}-progress-appear' 0.3s;
-    stroke: @progress-default-color;
+  }
+
+  &-inner:not(.@{ant-prefix}-progress-circle-gradient) {
+    .@{ant-prefix}-progress-circle-path {
+      stroke: @progress-default-color;
+    }
   }
 
   &-success-bg,
   &-bg {
     position: relative;
     background-color: @progress-default-color;
+    border-radius: @progress-radius;
     transition: all 0.4s @ease-out-circ 0s;
   }
 
@@ -12381,6 +12464,9 @@ form {
     .@{progress-prefix-cls}-text {
       color: @error-color;
     }
+  }
+
+  &-status-exception &-inner:not(.@{progress-prefix-cls}-circle-gradient) {
     .@{progress-prefix-cls}-circle-path {
       stroke: @error-color;
     }
@@ -12393,6 +12479,9 @@ form {
     .@{progress-prefix-cls}-text {
       color: @success-color;
     }
+  }
+
+  &-status-success &-inner:not(.@{progress-prefix-cls}-circle-gradient) {
     .@{progress-prefix-cls}-circle-path {
       stroke: @success-color;
     }
@@ -12448,9 +12537,6 @@ form {
     opacity: 0;
   }
 }
-
-
-
 
 @radio-prefix-cls: ~'@{ant-prefix}-radio';
 @radio-group-prefix-cls: ~'@{radio-prefix-cls}-group';
@@ -12682,16 +12768,18 @@ span.@{radio-prefix-cls} + * {
     pointer-events: none;
   }
 
-  &-checked {
+  &-checked:not(&-disabled) {
     z-index: 1;
     color: @radio-dot-color;
     background: @radio-button-checked-bg;
     border-color: @radio-dot-color;
     box-shadow: -1px 0 0 0 @radio-dot-color;
+
     &::before {
       background-color: @radio-dot-color !important;
       opacity: 0.1;
     }
+
     &:first-child {
       border-color: @radio-dot-color;
       box-shadow: none !important;
@@ -12776,9 +12864,6 @@ span.@{radio-prefix-cls} + * {
   }
 }
 
-
-
-
 @rate-prefix-cls: ~'@{ant-prefix}-rate';
 
 .@{rate-prefix-cls} {
@@ -12804,11 +12889,14 @@ span.@{radio-prefix-cls} + * {
     position: relative;
     display: inline-block;
     margin: 0;
-    margin-right: 8px;
     padding: 0;
     color: inherit;
     cursor: pointer;
     transition: all 0.3s;
+
+    &:not(:last-child) {
+      margin-right: 8px;
+    }
 
     > div {
       &:focus {
@@ -12859,9 +12947,74 @@ span.@{radio-prefix-cls} + * {
   }
 }
 
+@result-prefix-cls: ~'@{ant-prefix}-result';
 
+.@{result-prefix-cls} {
+  padding: 48px 32px;
+  // status color
+  &-success &-icon > .anticon {
+    color: @success-color;
+  }
 
+  &-error &-icon > .anticon {
+    color: @error-color;
+  }
 
+  &-info &-icon > .anticon {
+    color: @info-color;
+  }
+
+  &-warning &-icon > .anticon {
+    color: @warning-color;
+  }
+
+  // Exception Status image
+  &-image {
+    width: 250px;
+    height: 295px;
+    margin: auto;
+  }
+
+  &-icon {
+    margin-bottom: 24px;
+    text-align: center;
+
+    > .anticon {
+      font-size: 72px;
+    }
+  }
+
+  &-title {
+    color: @heading-color;
+    font-size: 24px;
+    line-height: 1.8;
+    text-align: center;
+  }
+
+  &-subtitle {
+    color: @text-color-secondary;
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  &-extra {
+    margin-top: 32px;
+    text-align: center;
+    > * {
+      margin-right: 8px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &-content {
+    margin-top: 24px;
+    padding: 24px 40px;
+    background-color: @background-color-light;
+  }
+}
 
 @select-prefix-cls: ~'@{ant-prefix}-select';
 
@@ -12964,7 +13117,6 @@ span.@{radio-prefix-cls} + * {
     &-selected-value {
       float: left;
       max-width: 100%;
-      padding-right: 20px;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -13009,6 +13161,16 @@ span.@{radio-prefix-cls} + * {
     position: relative;
     height: @input-height-base;
     cursor: pointer;
+
+    .@{select-prefix-cls}-selection__rendered {
+      margin-right: 24px;
+    }
+  }
+
+  &-no-arrow {
+    .@{select-prefix-cls}-selection__rendered {
+      margin-right: @control-padding-horizontal - 1px;
+    }
   }
 
   &-selection__rendered {
@@ -13055,7 +13217,7 @@ span.@{radio-prefix-cls} + * {
       height: @input-height-sm;
     }
     .@{select-prefix-cls}-selection__rendered {
-      margin: 0 @control-padding-horizontal-sm - 1px;
+      margin-left: @control-padding-horizontal-sm - 1px;
       line-height: @input-height-sm - 2px;
     }
     .@{select-prefix-cls}-selection--multiple {
@@ -13295,7 +13457,7 @@ span.@{radio-prefix-cls} + * {
   // https://github.com/ant-design/ant-design/issues/11456
   // https://github.com/ant-design/ant-design/issues/11843
   font-variant: initial;
-  background-color: @component-background;
+  background-color: @select-dropdown-bg;
   border-radius: @border-radius-base;
   outline: none;
   box-shadow: @box-shadow-base;
@@ -13380,7 +13542,7 @@ span.@{radio-prefix-cls} + * {
       &-selected {
         color: @text-color;
         font-weight: @select-item-selected-font-weight;
-        background-color: @background-color-light;
+        background-color: @select-item-selected-bg;
       }
 
       &-disabled {
@@ -13394,7 +13556,7 @@ span.@{radio-prefix-cls} + * {
       }
 
       &-active:not(&-disabled) {
-        background-color: @item-active-bg;
+        background-color: @select-item-active-bg;
       }
 
       &-divider {
@@ -13451,9 +13613,6 @@ span.@{radio-prefix-cls} + * {
     }
   }
 }
-
-
-
 
 @skeleton-prefix-cls: ~'@{ant-prefix}-skeleton';
 @skeleton-avatar-prefix-cls: ~'@{skeleton-prefix-cls}-avatar';
@@ -13583,9 +13742,6 @@ span.@{radio-prefix-cls} + * {
   }
 }
 
-
-
-
 @slider-prefix-cls: ~'@{ant-prefix}-slider';
 
 .@{slider-prefix-cls} {
@@ -13609,7 +13765,7 @@ span.@{radio-prefix-cls} + * {
     width: 100%;
     height: 4px;
     background-color: @slider-rail-background-color;
-    border-radius: 2px;
+    border-radius: @border-radius-sm;
     transition: background-color 0.3s;
   }
 
@@ -13618,7 +13774,7 @@ span.@{radio-prefix-cls} + * {
     height: 4px;
     background-color: @slider-track-background-color;
     border-radius: @border-radius-base;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s;
   }
 
   &-handle {
@@ -13627,10 +13783,10 @@ span.@{radio-prefix-cls} + * {
     height: 14px;
     margin-top: -5px;
     margin-left: -7px;
-    background-color: @component-background;
-    border: solid 2px @slider-handle-color;
+    background-color: @slider-handle-background-color;
+    border: solid @slider-handle-border-width @slider-handle-color;
     border-radius: 50%;
-    box-shadow: 0;
+    box-shadow: @slider-handle-shadow;
     cursor: pointer;
     transition: border-color 0.3s, box-shadow 0.6s,
       transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
@@ -13774,9 +13930,6 @@ span.@{radio-prefix-cls} + * {
     }
   }
 }
-
-
-
 
 @spin-prefix-cls: ~'@{ant-prefix}-spin';
 @spin-dot-default: @text-color-secondary;
@@ -13990,9 +14143,6 @@ span.@{radio-prefix-cls} + * {
   }
 }
 
-
-
-
 @statistic-prefix-cls: ~'@{ant-prefix}-statistic';
 
 .@{statistic-prefix-cls} {
@@ -14031,9 +14181,6 @@ span.@{radio-prefix-cls} + * {
   }
 }
 
-
-
-
 @steps-prefix-cls: ~'@{ant-prefix}-steps';
 @process-icon-color: @primary-color;
 @process-title-color: @heading-color;
@@ -14053,12 +14200,15 @@ span.@{radio-prefix-cls} + * {
 @error-description-color: @error-color;
 @error-tail-color: @wait-tail-color;
 @steps-background: @component-background;
+@steps-nav-arrow-color: fade(@black, 25%);
+@steps-nav-active-color: @primary-color;
 
 @steps-icon-size: 32px;
 @steps-small-icon-size: 24px;
 @steps-dot-size: 8px;
 @steps-current-dot-size: 10px;
 @steps-desciption-max-width: 140px;
+@steps-nav-content-max-width: @steps-desciption-max-width;
 
 .@{steps-prefix-cls} {
   .reset-component;
@@ -14075,12 +14225,16 @@ span.@{radio-prefix-cls} + * {
   overflow: hidden;
   vertical-align: top;
 
+  &-container {
+    outline: none;
+  }
+
   &:last-child {
     flex: none;
   }
 
-  &:last-child > &-tail,
-  &:last-child > &-content > &-title::after {
+  &:last-child > &-container > &-tail,
+  &:last-child > &-container > &-content > &-title::after {
     display: none;
   }
 
@@ -14143,6 +14297,13 @@ span.@{radio-prefix-cls} + * {
       content: '';
     }
   }
+  &-subtitle {
+    display: inline;
+    margin-left: 8px;
+    color: @text-color-secondary;
+    font-weight: normal;
+    font-size: @font-size-base;
+  }
   &-description {
     color: @text-color-secondary;
     font-size: @font-size-base;
@@ -14164,12 +14325,12 @@ span.@{radio-prefix-cls} + * {
   &.@{steps-prefix-cls}-next-error .@{steps-prefix-cls}-item-title::after {
     background: @error-icon-color;
   }
+}
 
-  // ===================== Clickable =====================
-  &[role='button'] {
-    outline: none;
-
-    &:not(.@{steps-prefix-cls}-item-process) {
+// ===================== Clickable =====================
+.@{steps-prefix-cls} .@{steps-prefix-cls}-item {
+  &:not(.@{steps-prefix-cls}-item-active) {
+    & > .@{steps-prefix-cls}-item-container[role='button'] {
       cursor: pointer;
 
       .@{steps-prefix-cls}-item {
@@ -14183,10 +14344,17 @@ span.@{radio-prefix-cls} + * {
       &:hover {
         .@{steps-prefix-cls}-item {
           &-title,
+          &-subtitle,
           &-description {
             color: @primary-color;
           }
+        }
+      }
+    }
 
+    &:not(.@{steps-prefix-cls}-item-process) {
+      & > .@{steps-prefix-cls}-item-container[role='button']:hover {
+        .@{steps-prefix-cls}-item {
           &-icon {
             border-color: @primary-color;
 
@@ -14235,16 +14403,16 @@ span.@{radio-prefix-cls} + * {
       }
     }
   }
-  &-@{status} > &-content > &-title {
+  &-@{status} > &-container > &-content > &-title {
     color: @@title-color;
     &::after {
       background-color: @@tail-color;
     }
   }
-  &-@{status} > &-content > &-description {
+  &-@{status} > &-container > &-content > &-description {
     color: @@description-color;
   }
-  &-@{status} > &-tail::after {
+  &-@{status} > &-container > &-tail::after {
     background-color: @@tail-color;
   }
 }
@@ -14311,7 +14479,6 @@ span.@{radio-prefix-cls} + * {
   }
   .@{steps-prefix-cls}-item-tail {
     top: 8px;
-    padding: 0 8px;
   }
   .@{steps-prefix-cls}-item-custom .@{steps-prefix-cls}-item-icon {
     width: inherit;
@@ -14350,7 +14517,9 @@ span.@{radio-prefix-cls} + * {
     }
   }
 
-  > .@{steps-prefix-cls}-item > .@{steps-prefix-cls}-item-tail {
+  > .@{steps-prefix-cls}-item
+    > .@{steps-prefix-cls}-item-container
+    > .@{steps-prefix-cls}-item-tail {
     position: absolute;
     top: 0;
     left: 16px;
@@ -14363,11 +14532,14 @@ span.@{radio-prefix-cls} + * {
     }
   }
 
-  > .@{steps-prefix-cls}-item:not(:last-child) > .@{steps-prefix-cls}-item-tail {
+  > .@{steps-prefix-cls}-item:not(:last-child)
+    > .@{steps-prefix-cls}-item-container
+    > .@{steps-prefix-cls}-item-tail {
     display: block;
   }
 
   > .@{steps-prefix-cls}-item
+    > .@{steps-prefix-cls}-item-container
     > .@{steps-prefix-cls}-item-content
     > .@{steps-prefix-cls}-item-title {
     &::after {
@@ -14375,7 +14547,7 @@ span.@{radio-prefix-cls} + * {
     }
   }
 
-  &.@{steps-prefix-cls}-small {
+  &.@{steps-prefix-cls}-small .@{steps-prefix-cls}-item-container {
     .@{steps-prefix-cls}-item-tail {
       position: absolute;
       top: 0;
@@ -14432,7 +14604,8 @@ span.@{radio-prefix-cls} + * {
   }
 }
 
-.@{steps-prefix-cls}-dot {
+.@{steps-prefix-cls}-dot,
+.@{steps-prefix-cls}-dot.@{steps-prefix-cls}-small {
   .@{steps-prefix-cls}-item {
     &-title {
       line-height: @line-height-base;
@@ -14497,7 +14670,8 @@ span.@{radio-prefix-cls} + * {
     margin-top: 8px;
     margin-left: 0;
   }
-  .@{steps-prefix-cls}-item-tail {
+  // https://github.com/ant-design/ant-design/issues/18354
+  .@{steps-prefix-cls}-item > .@{steps-prefix-cls}-item-container > .@{steps-prefix-cls}-item-tail {
     top: 2px;
     left: -9px;
     margin: 0;
@@ -14508,6 +14682,98 @@ span.@{radio-prefix-cls} + * {
   }
   .@{steps-prefix-cls}-item-process .@{steps-prefix-cls}-icon-dot {
     left: -2px;
+  }
+}
+
+.@{steps-prefix-cls}-navigation {
+  padding-top: 12px;
+
+  &.@{steps-prefix-cls}-small {
+    .@{steps-prefix-cls}-item {
+      &-container {
+        margin-left: -12px;
+      }
+    }
+  }
+
+  .@{steps-prefix-cls}-item {
+    overflow: visible;
+    text-align: center;
+
+    &-container {
+      display: inline-block;
+      height: 100%;
+      margin-left: -16px;
+      padding-bottom: 12px;
+      text-align: left;
+      transition: opacity 0.3s;
+
+      .@{steps-prefix-cls}-item-content {
+        max-width: @steps-nav-content-max-width;
+      }
+
+      .@{steps-prefix-cls}-item-title {
+        max-width: 100%;
+        padding-right: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        &::after {
+          display: none;
+        }
+      }
+    }
+
+    &:not(.@{steps-prefix-cls}-item-active) {
+      .@{steps-prefix-cls}-item-container[role='button'] {
+        cursor: pointer;
+        &:hover {
+          opacity: 0.85;
+        }
+      }
+    }
+
+    &:last-child {
+      flex: 1;
+      &::after {
+        display: none;
+      }
+    }
+
+    &::after {
+      position: absolute;
+      top: 50%;
+      left: 100%;
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin-top: -14px;
+      margin-left: -2px;
+      border: 1px solid @steps-nav-arrow-color;
+      border-bottom: none;
+      border-left: none;
+      transform: rotate(45deg);
+      content: '';
+    }
+
+    &::before {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      display: inline-block;
+      width: 0;
+      height: 3px;
+      background-color: @steps-nav-active-color;
+      transition: width 0.3s, left 0.3s;
+      transition-timing-function: ease-out;
+      content: '';
+    }
+  }
+
+  .@{steps-prefix-cls}-item.@{steps-prefix-cls}-item-active::before {
+    left: 0;
+    width: 100%;
   }
 }
 
@@ -14561,10 +14827,6 @@ span.@{radio-prefix-cls} + * {
     }
   }
 }
-
-
-
-
 
 @switch-prefix-cls: ~'@{ant-prefix}-switch';
 @switch-duration: 0.36s;
@@ -14742,9 +15004,6 @@ span.@{radio-prefix-cls} + * {
   }
 }
 
-
-
-
 @table-prefix-cls: ~'@{ant-prefix}-table';
 @table-header-icon-color: #bfbfbf;
 @table-header-sort-active-bg: darken(@table-header-bg, 3%);
@@ -14766,14 +15025,19 @@ span.@{radio-prefix-cls} + * {
   }
 
   &-empty &-body {
-    overflow: auto !important;
+    // https://github.com/ant-design/ant-design/issues/11135
+    overflow-x: auto !important;
+    // https://github.com/ant-design/ant-design/issues/17175
+    overflow-y: hidden !important;
   }
 
+  // https://github.com/ant-design/ant-design/issues/17611
   table {
     width: 100%;
     text-align: left;
     border-radius: @table-border-radius-base @table-border-radius-base 0 0;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
   }
 
   &-thead > tr > th {
@@ -14968,8 +15232,21 @@ span.@{radio-prefix-cls} + * {
     transition: all 0.3s, height 0s;
     &.@{table-prefix-cls}-row-hover,
     &:hover {
-      &:not(.@{table-prefix-cls}-expanded-row) > td {
+      &:not(.@{table-prefix-cls}-expanded-row):not(.@{table-prefix-cls}-row-selected) > td {
         background: @table-row-hover-bg;
+      }
+    }
+    &.@{table-prefix-cls}-row-selected > td {
+      &.@{table-prefix-cls}-column-sort {
+        background: @table-body-selected-sort-bg;
+      }
+    }
+    &:hover {
+      &.@{table-prefix-cls}-row-selected > td {
+        background: @table-selected-row-hover-bg;
+        &.@{table-prefix-cls}-column-sort {
+          background: @table-body-selected-sort-bg;
+        }
       }
     }
   }
@@ -14981,7 +15258,8 @@ span.@{radio-prefix-cls} + * {
   &-footer {
     position: relative;
     padding: @table-padding-vertical @table-padding-horizontal;
-    background: @table-header-bg;
+    color: @table-footer-color;
+    background: @table-footer-bg;
     border-top: @border-width-base @border-style-base @border-color-split;
     border-radius: 0 0 @table-border-radius-base @table-border-radius-base;
     &::before {
@@ -14990,7 +15268,7 @@ span.@{radio-prefix-cls} + * {
       left: 0;
       width: 100%;
       height: 1px;
-      background: @table-header-bg;
+      background: @table-footer-bg;
       content: '';
     }
   }
@@ -15139,16 +15417,15 @@ span.@{radio-prefix-cls} + * {
   &-placeholder {
     position: relative;
     z-index: 1;
+    margin-top: -1px;
     padding: @table-padding-vertical @table-padding-horizontal;
     color: @disabled-color;
     font-size: @font-size-base;
     text-align: center;
     background: @component-background;
+    border-top: @border-width-base @border-style-base @border-color-split;
     border-bottom: @border-width-base @border-style-base @border-color-split;
     border-radius: 0 0 @border-radius-base @border-radius-base;
-    .@{iconfont-css-prefix} {
-      margin-right: 4px;
-    }
   }
 
   &-pagination.@{ant-prefix}-pagination {
@@ -15195,6 +15472,10 @@ span.@{radio-prefix-cls} + * {
 
     .@{ant-prefix}-dropdown-menu-item {
       overflow: hidden;
+    }
+
+    .@{ant-prefix}-checkbox-wrapper + span {
+      padding-left: 8px;
     }
 
     > .@{ant-prefix}-dropdown-menu > .@{ant-prefix}-dropdown-menu-item:last-child,
@@ -15265,15 +15546,26 @@ span.@{radio-prefix-cls} + * {
 
   &-row {
     &-expand-icon {
+      .operation-unit();
+
       display: inline-block;
       width: 17px;
       height: 17px;
-      line-height: 14px;
+      color: inherit;
+      line-height: 13px;
       text-align: center;
       background: @component-background;
       border: @border-width-base @border-style-base @border-color-split;
-      cursor: pointer;
+      border-radius: @border-radius-sm;
+      outline: none;
+      transition: all 0.3s;
       user-select: none;
+
+      &:focus,
+      &:hover,
+      &:active {
+        border-color: currentColor;
+      }
     }
 
     &-expanded::after {
@@ -15364,7 +15656,10 @@ span.@{radio-prefix-cls} + * {
       border: 1px solid @border-color-split;
       border-width: 1px 1px 1px 0;
     }
-    &.@{table-prefix-cls}-hide-scrollbar .@{table-prefix-cls}-thead > tr > th:last-child {
+    &.@{table-prefix-cls}-hide-scrollbar
+      .@{table-prefix-cls}-thead
+      > tr:only-child
+      > th:last-child {
       border-right-color: transparent;
     }
   }
@@ -15466,10 +15761,9 @@ span.@{radio-prefix-cls} + * {
 
 /**
 * Another fix of Firefox:
-* - https://github.com/ant-design/ant-design/issues/12628
-* - https://github.com/ant-design/ant-design/issues/12628
 */
 @supports (-moz-appearance: meterbar) {
+  // https://github.com/ant-design/ant-design/issues/12628
   .@{table-prefix-cls}-thead > tr > th.@{table-prefix-cls}-column-has-actions {
     background-clip: padding-box;
   }
@@ -15551,8 +15845,10 @@ span.@{radio-prefix-cls} + * {
       > .@{table-prefix-cls}-tbody > tr > td {
         padding: @table-padding-vertical-sm @table-padding-horizontal-sm;
       }
-      > .@{table-prefix-cls}-thead > tr {
+      > .@{table-prefix-cls}-thead > tr > th {
         background-color: transparent;
+      }
+      > .@{table-prefix-cls}-thead > tr {
         border-bottom: @border-width-base @border-style-base @border-color-split;
       }
       > .@{table-prefix-cls}-thead > tr > th.@{table-prefix-cls}-column-sort {
@@ -15613,7 +15909,7 @@ span.@{radio-prefix-cls} + * {
       border-left: 0;
     }
 
-    .@{table-prefix-cls}-thead > tr > th:last-child,
+    .@{table-prefix-cls}-thead > tr:only-child > th:last-child,
     .@{table-prefix-cls}-tbody > tr > td:last-child {
       border-right: none;
     }
@@ -15637,12 +15933,6 @@ span.@{radio-prefix-cls} + * {
   }
 }
 
-
-
-
-
-
-
 @tab-prefix-cls: ~'@{ant-prefix}-tabs';
 
 // card style
@@ -15656,7 +15946,7 @@ span.@{radio-prefix-cls} + * {
   &&-card &-card-bar &-tab {
     height: @tabs-card-height;
     margin: 0;
-    margin-right: 2px;
+    margin-right: @tabs-card-gutter;
     padding: 0 16px;
     line-height: @tabs-card-height - 2px;
     background: @tabs-card-head-background;
@@ -15670,6 +15960,14 @@ span.@{radio-prefix-cls} + * {
     background: @component-background;
     border-color: @border-color-split;
     border-bottom: @border-width-base solid @component-background;
+
+    &::before {
+      border-top: @tabs-card-tab-active-border-top;
+    }
+  }
+  &&-card &-card-bar &-tab-disabled {
+    color: @tabs-card-active-color;
+    color: @disabled-color;
   }
   &&-card &-card-bar &-tab-inactive {
     padding: 0;
@@ -15706,7 +16004,8 @@ span.@{radio-prefix-cls} + * {
   }
 
   &-extra-content {
-    line-height: @tabs-card-height;
+    line-height: @tabs-title-font-size * @line-height-base + extract(@tabs-horizontal-padding, 1) *
+      2;
 
     .@{tab-prefix-cls}-new-tab {
       position: relative;
@@ -15733,6 +16032,23 @@ span.@{radio-prefix-cls} + * {
         margin: auto;
       }
     }
+  }
+
+  // https://github.com/ant-design/ant-design/issues/17865
+  &&-large &-extra-content {
+    line-height: @tabs-title-font-size-lg * @line-height-base +
+      extract(@tabs-horizontal-padding-lg, 1) * 2;
+  }
+
+  // https://github.com/ant-design/ant-design/issues/17865
+  &&-small &-extra-content {
+    line-height: @tabs-title-font-size-sm * @line-height-base +
+      extract(@tabs-horizontal-padding-sm, 1) * 2;
+  }
+
+  // https://github.com/ant-design/ant-design/issues/17865
+  &&-card &-extra-content {
+    line-height: @tabs-card-height;
   }
 
   // https://github.com/ant-design/ant-design/issues/4669
@@ -15800,7 +16116,6 @@ span.@{radio-prefix-cls} + * {
     color: @primary-color;
   }
 }
-
 
 @tab-prefix-cls: ~'@{ant-prefix}-tabs';
 
@@ -15981,6 +16296,18 @@ span.@{radio-prefix-cls} + * {
       cursor: pointer;
       transition: color 0.3s @ease-in-out;
 
+      &::before {
+        position: absolute;
+        top: -1px;
+        left: 0;
+        width: 100%;
+        border-top: 2px solid transparent;
+        border-radius: @border-radius-base @border-radius-base 0 0;
+        transition: all 0.3s;
+        content: '';
+        pointer-events: none;
+      }
+
       &:last-child {
         margin-right: 0;
       }
@@ -15997,17 +16324,17 @@ span.@{radio-prefix-cls} + * {
         margin-right: 8px;
       }
 
+      &-active {
+        color: @tabs-highlight-color;
+        font-weight: 500;
+      }
+
       &-disabled {
         &,
         &:hover {
           color: @disabled-color;
           cursor: not-allowed;
         }
-      }
-
-      &-active {
-        color: @tabs-highlight-color;
-        font-weight: 500;
       }
     }
   }
@@ -16028,6 +16355,14 @@ span.@{radio-prefix-cls} + * {
     .@{tab-prefix-cls}-tab {
       padding: @tabs-horizontal-padding-sm;
     }
+  }
+
+  // Create an empty element to avoid margin collapsing
+  // https://github.com/ant-design/ant-design/issues/18103
+  &-content::before {
+    display: block;
+    overflow: hidden;
+    content: '';
   }
 
   // Horizontal Content
@@ -16059,14 +16394,8 @@ span.@{radio-prefix-cls} + * {
   .@{tab-prefix-cls}-right-bar {
     height: 100%;
     border-bottom: 0;
-    &-tab-prev,
-    &-tab-next {
-      width: @tabs-scrolling-size;
-      height: 0;
-      transition: height 0.3s @ease-in-out, opacity 0.3s @ease-in-out, color 0.3s @ease-in-out;
-    }
-    &-tab-prev.@{tab-prefix-cls}-tab-arrow-show,
-    &-tab-next.@{tab-prefix-cls}-tab-arrow-show {
+
+    .@{tab-prefix-cls}-tab-arrow-show {
       width: 100%;
       height: @tabs-scrolling-size;
     }
@@ -16120,6 +16449,7 @@ span.@{radio-prefix-cls} + * {
     }
 
     .@{tab-prefix-cls}-tab-next {
+      right: 0;
       bottom: 0;
       width: 100%;
       height: @tabs-scrolling-size;
@@ -16218,9 +16548,6 @@ span.@{radio-prefix-cls} + * {
 .@{tab-prefix-cls}-right-content {
   .tabs-no-animation();
 }
-
-
-
 
 @tag-prefix-cls: ~'@{ant-prefix}-tag';
 
@@ -16326,10 +16653,6 @@ span.@{radio-prefix-cls} + * {
   .make-color-classes();
 }
 
-
-
-
-
 @timepicker-prefix-cls: ~'@{ant-prefix}-time-picker';
 @timepicker-item-height: 32px;
 
@@ -16367,7 +16690,6 @@ span.@{radio-prefix-cls} + * {
 
     &-wrap {
       position: relative;
-      box-sizing: border-box;
       padding: 7px 2px 7px @control-padding-horizontal;
       border-bottom: @border-width-base @border-style-base @border-color-split;
     }
@@ -16384,7 +16706,6 @@ span.@{radio-prefix-cls} + * {
   &-select {
     position: relative; // Fix chrome weird render bug
     float: left;
-    box-sizing: border-box;
     width: @time-picker-panel-column-width;
     max-height: @timepicker-item-height * 6;
     overflow: hidden;
@@ -16409,15 +16730,15 @@ span.@{radio-prefix-cls} + * {
     }
 
     ul {
-      box-sizing: border-box;
-      width: 100%;
+      // use fixed width instead of 100%
+      // to fix strange render bug in safari: https://github.com/ant-design/ant-design/issues/17842
+      width: @time-picker-panel-column-width;
       margin: 0;
       padding: 0 0 @timepicker-item-height * 5;
       list-style: none;
     }
 
     li {
-      box-sizing: content-box;
       width: 100%;
       height: @timepicker-item-height;
       margin: 0;
@@ -16426,8 +16747,14 @@ span.@{radio-prefix-cls} + * {
       text-align: left;
       list-style: none;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: all 0.3s;
       user-select: none;
+
+      &:focus {
+        color: @primary-color;
+        font-weight: 600;
+        outline: none;
+      }
     }
 
     li:hover {
@@ -16435,7 +16762,7 @@ span.@{radio-prefix-cls} + * {
     }
 
     li&-option-selected {
-      font-weight: bold;
+      font-weight: 600;
       background: @time-picker-selected-bg;
       &:hover {
         background: @time-picker-selected-bg;
@@ -16565,11 +16892,7 @@ span.@{radio-prefix-cls} + * {
   }
 }
 
-
-
-
 @timeline-prefix-cls: ~'@{ant-prefix}-timeline';
-@timeline-color: @border-color-split;
 
 .@{timeline-prefix-cls} {
   .reset-component;
@@ -16587,14 +16910,15 @@ span.@{radio-prefix-cls} + * {
 
     &-tail {
       position: absolute;
-      top: 0.75em;
+      top: 10px;
       left: 4px;
-      height: 100%;
-      border-left: 2px solid @timeline-color;
+      height: calc(100% - 10px);
+      border-left: @timeline-width solid @timeline-color;
     }
 
     &-pending &-head {
       font-size: @font-size-sm;
+      background-color: transparent;
     }
 
     &-pending &-tail {
@@ -16605,21 +16929,28 @@ span.@{radio-prefix-cls} + * {
       position: absolute;
       width: 10px;
       height: 10px;
-      background-color: @component-background;
-      border: 2px solid transparent;
+      background-color: @timeline-dot-bg;
+      border: @timeline-dot-border-width solid transparent;
       border-radius: 100px;
 
       &-blue {
         color: @primary-color;
         border-color: @primary-color;
       }
+
       &-red {
         color: @error-color;
         border-color: @error-color;
       }
+
       &-green {
         color: @success-color;
         border-color: @success-color;
+      }
+
+      &-gray {
+        color: @disabled-color;
+        border-color: @disabled-color;
       }
     }
 
@@ -16642,6 +16973,7 @@ span.@{radio-prefix-cls} + * {
       position: relative;
       top: -(@font-size-base * @line-height-base - @font-size-base) + 1px;
       margin: 0 0 0 18px;
+      word-break: break-word;
     }
 
     &-last {
@@ -16672,18 +17004,16 @@ span.@{radio-prefix-cls} + * {
 
       &-left {
         .@{timeline-prefix-cls}-item-content {
-          left: 50%;
-          width: 50%;
+          left: calc(50% - 4px);
+          width: calc(50% - 14px);
           text-align: left;
         }
       }
 
       &-right {
         .@{timeline-prefix-cls}-item-content {
-          right: 50%;
-          left: -30px;
-          width: 50%;
-          margin-right: 18px;
+          width: calc(50% - 12px);
+          margin: 0;
           text-align: right;
         }
       }
@@ -16695,18 +17025,18 @@ span.@{radio-prefix-cls} + * {
       .@{timeline-prefix-cls}-item-tail,
       .@{timeline-prefix-cls}-item-head,
       .@{timeline-prefix-cls}-item-head-custom {
-        left: 100%;
+        // stylelint-disable-next-line function-calc-no-invalid
+        left: calc(100% - 4px - @timeline-width);
       }
       .@{timeline-prefix-cls}-item-content {
-        right: 0;
-        left: -30px;
-        width: 100%;
+        width: calc(100% - 18px);
       }
     }
   }
 
   &&-pending &-item-last &-item-tail {
     display: block;
+    height: calc(100% - 14px);
     border-left: 2px dotted @timeline-color;
   }
 
@@ -16716,7 +17046,9 @@ span.@{radio-prefix-cls} + * {
 
   &&-reverse &-item-pending {
     .@{timeline-prefix-cls}-item-tail {
+      top: 15px;
       display: block;
+      height: calc(100% - 15px);
       border-left: 2px dotted @timeline-color;
     }
     .@{timeline-prefix-cls}-item-content {
@@ -16725,10 +17057,15 @@ span.@{radio-prefix-cls} + * {
   }
 }
 
-
-
-
 @tooltip-prefix-cls: ~'@{ant-prefix}-tooltip';
+
+@tooltip-arrow-shadow-width: 3px;
+
+@tooltip-arrow-rotate-width: sqrt(@tooltip-arrow-width * @tooltip-arrow-width * 2) +
+  @tooltip-arrow-shadow-width * 2;
+
+@tooltip-arrow-offset-vertical: 5px; // 8 - 3px
+@tooltip-arrow-offset-horizontal: 13px; // 16 - 3px
 
 // Base class
 .@{tooltip-prefix-cls} {
@@ -16749,16 +17086,19 @@ span.@{radio-prefix-cls} + * {
   &-placement-topRight {
     padding-bottom: @tooltip-distance;
   }
+
   &-placement-right,
   &-placement-rightTop,
   &-placement-rightBottom {
     padding-left: @tooltip-distance;
   }
+
   &-placement-bottom,
   &-placement-bottomLeft,
   &-placement-bottomRight {
     padding-top: @tooltip-distance;
   }
+
   &-placement-left,
   &-placement-leftTop,
   &-placement-leftBottom {
@@ -16782,101 +17122,125 @@ span.@{radio-prefix-cls} + * {
   // Arrows
   &-arrow {
     position: absolute;
-    width: 0;
-    height: 0;
-    border-color: transparent;
-    border-style: solid;
+    display: block;
+    width: @tooltip-arrow-rotate-width;
+    height: @tooltip-arrow-rotate-width;
+    overflow: hidden;
+    background: transparent;
+    pointer-events: none;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: block;
+      width: @tooltip-arrow-width;
+      height: @tooltip-arrow-width;
+      margin: auto;
+      background-color: @tooltip-bg;
+      content: '';
+      pointer-events: auto;
+    }
   }
 
   &-placement-top &-arrow,
   &-placement-topLeft &-arrow,
   &-placement-topRight &-arrow {
-    bottom: @tooltip-distance - @tooltip-arrow-width;
-    border-width: @tooltip-arrow-width @tooltip-arrow-width 0;
-    border-top-color: @tooltip-arrow-color;
+    bottom: @tooltip-distance - @tooltip-arrow-rotate-width;
+
+    &::before {
+      box-shadow: @tooltip-arrow-shadow-width @tooltip-arrow-shadow-width 7px fade(@black, 7%);
+      transform: translateY(-@tooltip-arrow-rotate-width / 2) rotate(45deg);
+    }
   }
 
   &-placement-top &-arrow {
     left: 50%;
-    margin-left: -@tooltip-arrow-width;
+    transform: translateX(-50%);
   }
 
   &-placement-topLeft &-arrow {
-    left: 16px;
+    left: @tooltip-arrow-offset-horizontal;
   }
 
   &-placement-topRight &-arrow {
-    right: 16px;
+    right: @tooltip-arrow-offset-horizontal;
   }
 
   &-placement-right &-arrow,
   &-placement-rightTop &-arrow,
   &-placement-rightBottom &-arrow {
-    left: @tooltip-distance - @tooltip-arrow-width;
-    border-width: @tooltip-arrow-width @tooltip-arrow-width @tooltip-arrow-width 0;
-    border-right-color: @tooltip-arrow-color;
+    left: @tooltip-distance - @tooltip-arrow-rotate-width;
+
+    &::before {
+      box-shadow: -@tooltip-arrow-shadow-width @tooltip-arrow-shadow-width 7px fade(@black, 7%);
+      transform: translateX(@tooltip-arrow-rotate-width / 2) rotate(45deg);
+    }
   }
 
   &-placement-right &-arrow {
     top: 50%;
-    margin-top: -@tooltip-arrow-width;
+    transform: translateY(-50%);
   }
 
   &-placement-rightTop &-arrow {
-    top: 8px;
+    top: @tooltip-arrow-offset-vertical;
   }
 
   &-placement-rightBottom &-arrow {
-    bottom: 8px;
+    bottom: @tooltip-arrow-offset-vertical;
   }
 
   &-placement-left &-arrow,
   &-placement-leftTop &-arrow,
   &-placement-leftBottom &-arrow {
-    right: @tooltip-distance - @tooltip-arrow-width;
-    border-width: @tooltip-arrow-width 0 @tooltip-arrow-width @tooltip-arrow-width;
-    border-left-color: @tooltip-arrow-color;
+    right: @tooltip-distance - @tooltip-arrow-rotate-width;
+
+    &::before {
+      box-shadow: @tooltip-arrow-shadow-width -@tooltip-arrow-shadow-width 7px fade(@black, 7%);
+      transform: translateX(-@tooltip-arrow-rotate-width / 2) rotate(45deg);
+    }
   }
 
   &-placement-left &-arrow {
     top: 50%;
-    margin-top: -@tooltip-arrow-width;
+    transform: translateY(-50%);
   }
 
   &-placement-leftTop &-arrow {
-    top: 8px;
+    top: @tooltip-arrow-offset-vertical;
   }
 
   &-placement-leftBottom &-arrow {
-    bottom: 8px;
+    bottom: @tooltip-arrow-offset-vertical;
   }
 
   &-placement-bottom &-arrow,
   &-placement-bottomLeft &-arrow,
   &-placement-bottomRight &-arrow {
-    top: @tooltip-distance - @tooltip-arrow-width;
-    border-width: 0 @tooltip-arrow-width @tooltip-arrow-width;
-    border-bottom-color: @tooltip-arrow-color;
+    top: @tooltip-distance - @tooltip-arrow-rotate-width;
+
+    &::before {
+      box-shadow: -@tooltip-arrow-shadow-width -@tooltip-arrow-shadow-width 7px fade(@black, 7%);
+      transform: translateY(@tooltip-arrow-rotate-width / 2) rotate(45deg);
+    }
   }
 
   &-placement-bottom &-arrow {
     left: 50%;
-    margin-left: -@tooltip-arrow-width;
+    transform: translateX(-50%);
   }
 
   &-placement-bottomLeft &-arrow {
-    left: 16px;
+    left: @tooltip-arrow-offset-horizontal;
   }
 
   &-placement-bottomRight &-arrow {
-    right: 16px;
+    right: @tooltip-arrow-offset-horizontal;
   }
 }
-
-
-
-
-
 
 @table-prefix-cls: ~'@{ant-prefix}-table';
 
@@ -16938,7 +17302,6 @@ span.@{radio-prefix-cls} + * {
     }
   }
 }
-
 
 @transfer-prefix-cls: ~'@{ant-prefix}-transfer';
 
@@ -17013,6 +17376,10 @@ span.@{radio-prefix-cls} + * {
         position: absolute;
         right: 12px;
       }
+
+      .@{ant-prefix}-checkbox-wrapper + span {
+        padding-left: 8px;
+      }
     }
 
     &-body {
@@ -17052,6 +17419,9 @@ span.@{radio-prefix-cls} + * {
         transition: all 0.3s;
         > span {
           padding-right: 0;
+        }
+        &-text {
+          padding-left: 8px;
         }
       }
 
@@ -17120,11 +17490,6 @@ span.@{radio-prefix-cls} + * {
   }
 }
 
-
-
-
-
-
 @tree-prefix-cls: ~'@{ant-prefix}-tree';
 @tree-select-prefix-cls: ~'@{ant-prefix}-select';
 
@@ -17152,8 +17517,6 @@ span.@{radio-prefix-cls} + * {
     }
   }
 }
-
-
 
 @tree-prefix-cls: ~'@{ant-prefix}-tree';
 
@@ -17248,7 +17611,6 @@ span.@{radio-prefix-cls} + * {
     }
   }
 }
-
 
 @tree-prefix-cls: ~'@{ant-prefix}-tree';
 @tree-showline-icon-color: @text-color-secondary;
@@ -17368,10 +17730,10 @@ span.@{radio-prefix-cls} + * {
       cursor: pointer;
       transition: all 0.3s;
       &:hover {
-        background-color: @item-hover-bg;
+        background-color: @tree-node-hover-bg;
       }
       &.@{tree-prefix-cls}-node-selected {
-        background-color: @primary-2;
+        background-color: @tree-node-selected-bg;
       }
     }
     span {
@@ -17521,11 +17883,6 @@ span.@{radio-prefix-cls} + * {
   }
 }
 
-
-
-
-
-
 @select-prefix-cls: ~'@{ant-prefix}-select';
 @select-tree-prefix-cls: ~'@{ant-prefix}-select-tree';
 
@@ -17559,7 +17916,7 @@ span.@{radio-prefix-cls} + * {
       padding: 3px 5px;
       color: @text-color;
       text-decoration: none;
-      border-radius: 2px;
+      border-radius: @border-radius-sm;
       cursor: pointer;
       transition: all 0.3s;
       &:hover {
@@ -17713,9 +18070,6 @@ span.@{radio-prefix-cls} + * {
   }
 }
 
-
-
-
 @typography-prefix-cls: ~'@{ant-prefix}-typography';
 @typography-title-margin-top: 1.2em;
 
@@ -17727,7 +18081,7 @@ span.@{radio-prefix-cls} + * {
 .typography-title(@fontSize; @lineHeight) {
   margin-bottom: 0.5em;
   color: @heading-color;
-  font-weight: 600;
+  font-weight: @typography-title-font-weight;
   font-size: @fontSize;
   line-height: @lineHeight;
 }
@@ -17887,6 +18241,7 @@ span.@{radio-prefix-cls} + * {
     div& {
       left: -@input-padding-horizontal - 1px;
       margin-top: -@input-padding-vertical-base - 1px;
+      // stylelint-disable-next-line function-calc-no-invalid
       margin-bottom: calc(1em - @input-padding-vertical-base - 2px);
     }
 
@@ -17939,9 +18294,6 @@ span.@{radio-prefix-cls} + * {
   }
 }
 
-
-
-
 @upload-prefix-cls: ~'@{ant-prefix}-upload';
 @upload-item: ~'@{ant-prefix}-upload-list-item';
 @upload-picture-card-size: 104px;
@@ -17976,6 +18328,7 @@ span.@{radio-prefix-cls} + * {
 
   &&-select-picture-card {
     display: table;
+    float: left;
     width: @upload-picture-card-size;
     height: @upload-picture-card-size;
     margin-right: 8px;
@@ -18068,6 +18421,13 @@ span.@{radio-prefix-cls} + * {
       color: @text-color-secondary;
     }
   }
+
+  &-picture-card-wrapper {
+    .clearfix;
+
+    display: inline-block;
+    width: 100%;
+  }
 }
 
 .@{upload-prefix-cls}-list {
@@ -18094,6 +18454,8 @@ span.@{radio-prefix-cls} + * {
 
       > span {
         display: block;
+        width: 100%;
+        height: 100%;
       }
 
       .@{iconfont-css-prefix}-loading,
@@ -18198,6 +18560,10 @@ span.@{radio-prefix-cls} + * {
       transform: translate(-50%, -50%);
     }
 
+    .@{upload-item}-image {
+      max-width: 100%;
+    }
+
     .@{upload-item}-thumbnail img {
       display: block;
       width: 48px;
@@ -18240,9 +18606,6 @@ span.@{radio-prefix-cls} + * {
   }
 
   &-picture-card {
-    // https://github.com/ant-design/ant-design/issues/11183
-    float: left;
-
     &.@{upload-prefix-cls}-list::after {
       display: none;
     }
@@ -18310,6 +18673,7 @@ span.@{radio-prefix-cls} + * {
       display: block;
       width: 100%;
       height: 100%;
+      object-fit: cover;
     }
 
     .@{upload-item}-name {
@@ -18418,9 +18782,16 @@ span.@{radio-prefix-cls} + * {
   }
 }
 
-// app
 @frame-header-color: #002140;
 @frame-sider-color: white;
+
+.ant-btn {
+  &.btn-github {
+    span {
+      color: @text-color-inverse;
+    }
+  }
+}
 
 .example-form {
   .text {

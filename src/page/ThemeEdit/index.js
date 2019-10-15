@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Draggable from 'react-draggable';
-import { Row, Col, Breadcrumb, Menu, Layout, Switch, Radio, Form, BackTop } from 'antd';
+import { Row, Col, Breadcrumb, Menu, Layout, Switch, Radio, Form, BackTop, Button } from 'antd';
 import ThemeCard from 'component/ThemeCard';
 import Menus from './Menus';
 import {
@@ -84,6 +84,8 @@ class ThemeEdit extends Component {
   render() {
     const { size, disabled, darkMenu, showBreadcrumb } = this.state;
 
+    const antdVersion = `antd v${require('antd/package.json').version}`;
+
     const menu = (
       <Menu>
         <Menu.Item>
@@ -126,6 +128,15 @@ class ThemeEdit extends Component {
                 <Menu.Item key="2">nav 2</Menu.Item>
                 <Menu.Item key="3">nav 3</Menu.Item>
               </Menu>
+              <Button
+                type="link"
+                className="btn-github"
+                href="https://github.com/gzgogo/antd-theme"
+                target="_blank"
+              >
+                <img src={require('../../asset/image/github.svg')} alt="github" />
+                <span>View On Github</span>
+              </Button>
             </Col>
             {/* <div className="header-actions">
               <a href="" id="btn-install">install</a>
@@ -151,7 +162,7 @@ class ThemeEdit extends Component {
                     <Breadcrumb.Item overlay={menu}>
                       General
                     </Breadcrumb.Item>
-                    <Breadcrumb.Item>Antd v3.23.1</Breadcrumb.Item>
+                    <Breadcrumb.Item>{antdVersion}</Breadcrumb.Item>
                   </Breadcrumb>
                 )
               }

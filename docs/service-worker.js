@@ -1,7 +1,7 @@
 'use strict';
 
 // Update cache names any time any of the cached files change.
-const ASSET_CACHE_NAME = 'asset-cache-v3';
+const ASSET_CACHE_NAME = 'asset-cache-v1';
 const DATA_CACHE_NAME = 'data-cache-v1';
 
 // Add list of files to cache here.
@@ -11,11 +11,10 @@ const FILES_TO_CACHE = [
   '/antd.less',
   '/less.min.js',
   '/install.js',
-  '/main.3136f064.js',
-  '/main.8252d8c61f50a9c82065.css',
-  '/vendor.8455524c.js',
-  '/favicon.png',
-  '/assets/theme.png'
+  '/main.3e0a6d71.js',
+  '/main.a43601ae11fb6457e673.css',
+  '/vendor.a015c1d9.js',
+  '/favicon.png'
 ];
 
 self.addEventListener('install', (evt) => {

@@ -12,9 +12,10 @@ import {
   Popconfirm
 } from 'antd';
 import ColorPicker from 'component/ColorPicker';
-import defaultVars from 'src/vars';
 import themes from 'theme';
 import './style.less';
+
+const defaultVars = require('../../vars.json');
 
 const { Panel } = Collapse;
 const { Option } = Select;
@@ -31,17 +32,25 @@ class ThemeCard extends Component {
 
     const vars = {};
     const cacheTheme = JSON.parse(localStorage.getItem(THEME_VALUE_KEY));
-    const theme = defaultTheme && themes[defaultTheme] ? themes[defaultTheme] : cacheTheme;
+    // const theme = defaultTheme && themes[defaultTheme] ? themes[defaultTheme] : cacheTheme;
+    // const theme = !cacheTheme && defaultTheme] ? themes[defaultTheme] : cacheTheme;
+    let theme = cacheTheme;
+    if (!theme && defaultTheme) {
+      theme = themes[defaultTheme];
+    }
     try {
       defaultVars.forEach((group) => {
         group.children.forEach((item) => {
-          if (item.type === 'number') {
-            item.value = `${item.value}${item.unit}`;
-          }
+          let { value } = item;
           if (theme && theme[item.name]) {
-            item.value = theme[item.name];
+            value = theme[item.name];
+          } else if (item.type === 'number') {
+            value = `${item.value}${item.unit}`;
           }
-          vars[item.name] = item;
+          vars[item.name] = {
+            ...item,
+            value
+          };
         });
       });
     } finally {

@@ -13,14 +13,15 @@ module.exports = {
           loader: "babel-loader"
         }
       },
-      {
-        test: /\.json$/,
-        use: [
-          {
-            loader: 'json-loader'
-          }
-        ]
-      },
+      // {
+      //   test: /\.json$/,
+      //   type: 'javascript/auto',
+      //   use: [
+      //     {
+      //       loader: 'json-loader'
+      //     }
+      //   ]
+      // },
       {
         test: /\.(png|gif|jpg)$/,
         use: [
