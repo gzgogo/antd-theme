@@ -140,7 +140,8 @@
   margin-right: 8px;
 }
 .ant-btn.btn-github span {
-  vertical-align: middle;
+  display: inline-block;
+  vertical-align: bottom;
 }
 .field-row {
   display: -webkit-box;
@@ -24212,6 +24213,7 @@ div.ant-typography-edit-content {
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors,string-no-newline */
 .ant-btn.btn-github span {
   color: #fff;
+  border-bottom: 1px solid #fff;
 }
 .example-form .text.secondary-text {
   color: rgba(0, 0, 0, 0.45);

@@ -6,6 +6,11 @@ import ThemeEdit from 'page/ThemeEdit';
 import './style.less';
 
 class Frame extends Component {
+  componentDidMount() {
+    const loader = document.getElementById('loader');
+    loader.style.display = 'none';
+  }
+
   render() {
     const { match } = this.props;
     console.log('match: %o', match);

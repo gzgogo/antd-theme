@@ -321,7 +321,7 @@ const vars = [
     ]
   },
   {
-    name: '圆角',
+    name: 'Radius',
     children: [
       {
         name: '@border-radius-base',
