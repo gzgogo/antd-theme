@@ -376,8 +376,8 @@ class ThemeCard extends Component {
           <Tooltip
             title={
               <div>
-                如何将您的主题添加进预置主题请参考&nbsp;
-                <a href="https://github.com/gzgogo/antd-theme" target="_blank">GitHub</a>
+                How to add your theme to preview？&nbsp;
+                <a href="https://github.com/gzgogo/antd-theme" rel="noopener noreferrer" target="_blank">GitHub</a>
               </div>
             }
           >
