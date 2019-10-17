@@ -15,7 +15,7 @@ const App = () => (
   <Provider {...store}>
     <ConfigProvider locale={zhCN}>
       <BrowserRouter>
-        <Route exact path="/" component={Frame} />
+        <Route component={Frame} />
       </BrowserRouter>
     </ConfigProvider>
   </Provider>

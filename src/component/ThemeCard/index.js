@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import JSZip from 'jszip';
 import {
   Card,
   message,
-  Button,
+  // Button,
   InputNumber,
   Input,
   Tooltip,
@@ -167,17 +168,7 @@ class ThemeCard extends Component {
   }
 
   handleSaveLess = () => {
-    const { vars } = this.state;
-
-    let content = '';
-    const theme = {};
-    Object.keys(vars).forEach((key) => {
-      if (vars[key].value !== themes.default[key]) {
-        content += `${key}: ${vars[key].value};\n`;
-        theme[key] = vars[key].value;
-      }
-    });
-
+    const content = this.buildLessCode();
     if (content) {
       // localStorage.setItem(THEME_VALUE_KEY, JSON.stringify(theme));
       this.downloadFile('my-theme.less', content);
@@ -187,6 +178,43 @@ class ThemeCard extends Component {
   }
 
   handleSaveJs = () => {
+    const content = this.buildJsCode();
+    if (content) {
+      // localStorage.setItem(THEME_VALUE_KEY, JSON.stringify(theme));
+      this.downloadFile('my-theme.js', content);
+    } else {
+      message.info('nothing changed');
+    }
+  }
+
+  handleSave = () => {
+    const jsCode = this.buildJsCode();
+    const lessCode = this.buildLessCode();
+
+    if (jsCode && lessCode) {
+      const zip = new JSZip();
+      const theme = zip.folder('antd-my-theme');
+
+      theme.file('index.less', lessCode);
+      theme.file('index.js', jsCode);
+
+      zip.generateAsync({
+        type: 'blob'
+      }).then((result) => {
+        this.downloadFile('antd-my-theme.zip', result);
+      });
+    } else {
+      message.info('nothing changed');
+    }
+  }
+
+  handleThemeCardToggle = () => {
+    this.setState({
+      expanded: !this.state.expanded
+    });
+  }
+
+  buildJsCode = () => {
     const { vars } = this.state;
 
     let content = '';
@@ -203,29 +231,33 @@ class ThemeCard extends Component {
 
     if (content) {
       content = `export default {\n${content}};\n`;
-
-      // localStorage.setItem(THEME_VALUE_KEY, JSON.stringify(theme));
-      this.downloadFile('my-theme.js', content);
-    } else {
-      message.info('nothing changed');
     }
+
+    return content;
   }
 
-  handleThemeCardToggle = () => {
-    this.setState({
-      expanded: !this.state.expanded
+  buildLessCode = () => {
+    const { vars } = this.state;
+
+    let content = '';
+    const theme = {};
+    Object.keys(vars).forEach((key) => {
+      if (vars[key].value !== themes.default[key]) {
+        content += `${key}: ${vars[key].value};\n`;
+        theme[key] = vars[key].value;
+      }
     });
+
+    return content;
   }
 
   downloadFile = (fileName, content) => {
     const aLink = document.createElement('a');
-    const blob = new Blob([content]);
-    // const evt = document.createEvent('HTMLEvents');
-    // evt.initEvent('click', false, false); // initEvent 不加后两个参数在FF下会报错, 感谢 Barret Lee 的反馈
+    // const blob = new Blob([content]);
     aLink.download = fileName;
-    aLink.href = URL.createObjectURL(blob);
+    // aLink.href = URL.createObjectURL(blob);
+    aLink.href = URL.createObjectURL(content);
     aLink.click();
-    // aLink.dispatchEvent(evt);
   }
 
   extractTheme = (vars) => {
@@ -436,28 +468,39 @@ class ThemeCard extends Component {
               okText="Yes"
               cancelText="No"
             >
-              <Button
+              {/* <Button
                 type="primary"
                 size="small"
                 onClick={this.handleResetTheme}
               >
                 Reset
-              </Button>
+              </Button> */}
+              <div>Reset</div>
             </Popconfirm>,
-            <Button
-              type="primary"
-              size="small"
-              onClick={this.handleSaveLess}
-            >
-              Save less
-            </Button>,
-            <Button
-              type="primary"
-              size="small"
-              onClick={this.handleSaveJs}
-            >
-              Save js
-            </Button>
+            // <Button
+            //   type="primary"
+            //   size="small"
+            //   onClick={this.handleSaveLess}
+            // >
+            //   Save less
+            // </Button>,
+            // <Button
+            //   type="primary"
+            //   size="small"
+            //   onClick={this.handleSaveJs}
+            // >
+            //   Save js
+            // </Button>,
+            // <Button
+            //   type="primary"
+            //   size="small"
+            //   onClick={this.handleSave}
+            // >
+            //   Save
+            // </Button>
+            <div onClick={this.handleSave}>
+              Save
+            </div>
           ]}
         >
           <Search

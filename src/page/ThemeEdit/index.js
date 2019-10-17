@@ -62,8 +62,6 @@ class ThemeEdit extends Component {
       [, defaultTheme] = theme;
     }
 
-    console.log('dafaultTheme: %s', theme[1]);
-
     this.state = {
       defaultTheme,
       size: 'default',
@@ -132,6 +130,7 @@ class ThemeEdit extends Component {
                 type="link"
                 className="btn-github"
                 href="https://github.com/gzgogo/antd-theme"
+                rel="noopener noreferrer"
                 target="_blank"
               >
                 <img src={require('../../asset/image/github.svg')} alt="github" />

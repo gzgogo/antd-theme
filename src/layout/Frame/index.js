@@ -13,7 +13,6 @@ class Frame extends Component {
 
   render() {
     const { match } = this.props;
-    console.log('match: %o', match);
 
     return (
       <Layout style={{ height: '100%' }}>
