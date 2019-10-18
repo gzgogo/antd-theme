@@ -12,11 +12,12 @@ class Frame extends Component {
   }
 
   render() {
-    const { match } = this.props;
+    // const { match } = this.props;
 
     return (
       <Layout style={{ height: '100%' }}>
-        <Route exact path={`${match.url}/`} component={ThemeEdit} />
+        {/* <Route exact path={`${match.url}/`} component={ThemeEdit} /> */}
+        <Route path="/:theme?" component={ThemeEdit} />
       </Layout>
     );
   }

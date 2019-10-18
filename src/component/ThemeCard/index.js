@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import JSZip from 'jszip';
 import {
   Card,
@@ -22,45 +23,39 @@ const { Panel } = Collapse;
 const { Option } = Select;
 const { Search } = Input;
 
-const THEME_NAME_KEY = 'theme-name';
-const THEME_VALUE_KEY = 'theme-value';
-
+@withRouter
 class ThemeCard extends Component {
   constructor(props) {
     super(props);
 
-    const defaultTheme = props.defaultTheme || localStorage.getItem(THEME_NAME_KEY) || 'default';
+    const themeName = props.theme && themes[props.theme] ? props.theme : 'default';
+    const vars = this.getThemeVars(themeName);
 
-    const vars = {};
-    const cacheTheme = JSON.parse(localStorage.getItem(THEME_VALUE_KEY));
-    // const theme = defaultTheme && themes[defaultTheme] ? themes[defaultTheme] : cacheTheme;
-    // const theme = !cacheTheme && defaultTheme] ? themes[defaultTheme] : cacheTheme;
-    let theme = cacheTheme;
-    if (!theme && defaultTheme) {
-      theme = themes[defaultTheme];
-    }
-    try {
-      defaultVars.forEach((group) => {
-        group.children.forEach((item) => {
-          let { value } = item;
-          if (theme && theme[item.name]) {
-            value = theme[item.name];
-          } else if (item.type === 'number') {
-            value = `${item.value}${item.unit}`;
-          }
-          vars[item.name] = {
-            ...item,
-            value
-          };
-        });
+    this.state = {
+      vars,
+      selectedTheme: themeName,
+      keyword: '',
+      expanded: true
+    };
+
+    window.less
+      .modifyVars(this.extractTheme(vars))
+      .then(() => { })
+      .catch(() => {
+        message.error('Failed to update theme');
       });
-    } finally {
-      this.state = {
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const nextTheme = nextProps.theme;
+    if (nextTheme && themes[nextTheme] && nextTheme !== this.state.selectedTheme) {
+      const vars = this.getThemeVars(nextTheme);
+
+      this.setState({
         vars,
-        selectedTheme: defaultTheme,
-        keyword: '',
-        expanded: true
-      };
+        selectedTheme: nextTheme
+      });
+
       window.less
         .modifyVars(this.extractTheme(vars))
         .then(() => { })
@@ -70,203 +65,31 @@ class ThemeCard extends Component {
     }
   }
 
-  handleColorChange = (varname, color) => {
-    const { vars } = this.state;
-    if (varname) {
-      vars[varname].value = color;
-    }
+  getThemeVars(themeName) {
+    const vars = {};
+    const cacheTheme = JSON.parse(localStorage.getItem(themeName));
+    const theme = {
+      ...themes[themeName],
+      ...cacheTheme
+    };
 
-    const theme = this.extractTheme(vars);
-    window.less
-      .modifyVars(theme)
-      .then(() => {
-        this.setState({ vars });
-        localStorage.setItem(THEME_VALUE_KEY, JSON.stringify(theme));
-      })
-      .catch(() => {
-        message.error('Failed to update theme');
-      });
-  }
-
-  handleNumberChange = (varname, value) => {
-    const { vars } = this.state;
-    if (varname) {
-      vars[varname].value = `${value}${vars[varname].unit}`;
-
-      const theme = this.extractTheme(vars);
-      window.less
-        .modifyVars(theme)
-        .then(() => {
-          this.setState({ vars });
-          localStorage.setItem(THEME_VALUE_KEY, JSON.stringify(theme));
-        })
-        .catch(() => {
-          message.error('Failed to update theme');
-        });
-    }
-  }
-
-  handleStringChange = (varname, value) => {
-    const { vars } = this.state;
-    if (varname) {
-      vars[varname].value = value;
-    }
-
-    const theme = this.extractTheme(vars);
-    window.less
-      .modifyVars(theme)
-      .then(() => {
-        this.setState({ vars });
-        localStorage.setItem(THEME_VALUE_KEY, JSON.stringify(theme));
-      })
-      .catch(() => {
-        message.error('Failed to update theme');
-      });
-  }
-
-  handleThemeChange = (value) => {
-    const { vars } = this.state;
-
-    const theme = themes[value];
-    if (theme) {
-      Object.keys(theme).forEach((key) => {
-        if (vars[key]) {
-          vars[key].value = theme[key];
+    defaultVars.forEach((group) => {
+      group.children.forEach((item) => {
+        let { value } = item;
+        if (item.name in theme) { // 在theme的值结尾都带单位
+          value = theme[item.name];
+        } else if (item.type === 'number') {
+          value = `${value}${item.unit}`;
         }
+
+        vars[item.name] = {
+          ...item,
+          value
+        };
       });
-
-      console.log(theme);
-
-      window.less
-        .modifyVars(theme)
-        .then(() => {
-          this.setState({
-            selectedTheme: value,
-            vars
-          });
-          localStorage.setItem(THEME_NAME_KEY, value);
-          localStorage.setItem(THEME_VALUE_KEY, JSON.stringify(theme));
-        })
-        .catch((err) => {
-          console.log(err);
-          message.error('Failed to update theme');
-        });
-    }
-  }
-
-  handleSearch = (e) => {
-    this.setState({
-      keyword: e.target.value
-    });
-  }
-
-  handleResetTheme = () => {
-    const { selectedTheme } = this.state;
-
-    localStorage.setItem(THEME_VALUE_KEY, '{}');
-    this.handleThemeChange(selectedTheme);
-  }
-
-  handleSaveLess = () => {
-    const content = this.buildLessCode();
-    if (content) {
-      // localStorage.setItem(THEME_VALUE_KEY, JSON.stringify(theme));
-      this.downloadFile('my-theme.less', content);
-    } else {
-      message.info('nothing changed');
-    }
-  }
-
-  handleSaveJs = () => {
-    const content = this.buildJsCode();
-    if (content) {
-      // localStorage.setItem(THEME_VALUE_KEY, JSON.stringify(theme));
-      this.downloadFile('my-theme.js', content);
-    } else {
-      message.info('nothing changed');
-    }
-  }
-
-  handleSave = () => {
-    const jsCode = this.buildJsCode();
-    const lessCode = this.buildLessCode();
-
-    if (jsCode && lessCode) {
-      const zip = new JSZip();
-      const theme = zip.folder('antd-my-theme');
-
-      theme.file('index.less', lessCode);
-      theme.file('index.js', jsCode);
-
-      zip.generateAsync({
-        type: 'blob'
-      }).then((result) => {
-        this.downloadFile('antd-my-theme.zip', result);
-      });
-    } else {
-      message.info('nothing changed');
-    }
-  }
-
-  handleThemeCardToggle = () => {
-    this.setState({
-      expanded: !this.state.expanded
-    });
-  }
-
-  buildJsCode = () => {
-    const { vars } = this.state;
-
-    let content = '';
-    const theme = {};
-    Object.keys(vars).forEach((key) => {
-      // if (vars[key].value !== themes.default[key]) {
-      //   content += `  '${key}': '${vars[key].value}',\n`;
-      //   theme[key] = vars[key].value;
-      // }
-      const { value } = vars[key];
-      content += typeof value === 'string' && value.indexOf("'") !== -1 ? `  '${key}': "${value}",\n` : `  '${key}': '${value}',\n`;
-      theme[key] = vars[key].value;
     });
 
-    if (content) {
-      content = `export default {\n${content}};\n`;
-    }
-
-    return content;
-  }
-
-  buildLessCode = () => {
-    const { vars } = this.state;
-
-    let content = '';
-    const theme = {};
-    Object.keys(vars).forEach((key) => {
-      if (vars[key].value !== themes.default[key]) {
-        content += `${key}: ${vars[key].value};\n`;
-        theme[key] = vars[key].value;
-      }
-    });
-
-    return content;
-  }
-
-  downloadFile = (fileName, content) => {
-    const aLink = document.createElement('a');
-    // const blob = new Blob([content]);
-    aLink.download = fileName;
-    // aLink.href = URL.createObjectURL(blob);
-    aLink.href = URL.createObjectURL(content);
-    aLink.click();
-  }
-
-  extractTheme = (vars) => {
-    const theme = {};
-    Object.keys(vars).forEach((key) => {
-      theme[key] = vars[key].value;
-    });
-
-    return theme;
+    return vars;
   }
 
   getColorField = varName => (
@@ -352,6 +175,205 @@ class ThemeCard extends Component {
       default:
         break;
     }
+  }
+
+  buildJsCode = () => {
+    const { vars } = this.state;
+
+    let content = '';
+    const theme = {};
+    Object.keys(vars).forEach((key) => {
+      // if (vars[key].value !== themes.default[key]) {
+      //   content += `  '${key}': '${vars[key].value}',\n`;
+      //   theme[key] = vars[key].value;
+      // }
+      const { value } = vars[key];
+      content += typeof value === 'string' && value.indexOf("'") !== -1 ? `  '${key}': "${value}",\n` : `  '${key}': '${value}',\n`;
+      theme[key] = vars[key].value;
+    });
+
+    if (content) {
+      content = `export default {\n${content}};\n`;
+    }
+
+    return content;
+  }
+
+  buildLessCode = () => {
+    const { vars } = this.state;
+
+    let content = '';
+    const theme = {};
+    Object.keys(vars).forEach((key) => {
+      if (vars[key].value !== themes.default[key]) {
+        content += `${key}: ${vars[key].value};\n`;
+        theme[key] = vars[key].value;
+      }
+    });
+
+    return content;
+  }
+
+  downloadFile = (fileName, content) => {
+    const aLink = document.createElement('a');
+    // const blob = new Blob([content]);
+    aLink.download = fileName;
+    // aLink.href = URL.createObjectURL(blob);
+    aLink.href = URL.createObjectURL(content);
+    aLink.click();
+  }
+
+  extractTheme = (vars) => {
+    const theme = {};
+    Object.keys(vars).forEach((key) => {
+      theme[key] = vars[key].value;
+    });
+
+    return theme;
+  }
+
+  handleColorChange = (varname, color) => {
+    const { vars, selectedTheme } = this.state;
+    if (varname) {
+      vars[varname].value = color;
+    }
+
+    const theme = this.extractTheme(vars);
+    window.less
+      .modifyVars(theme)
+      .then(() => {
+        this.setState({ vars });
+        localStorage.setItem(selectedTheme, JSON.stringify(theme));
+      })
+      .catch(() => {
+        message.error('Failed to update theme');
+      });
+  }
+
+  handleNumberChange = (varname, value) => {
+    const { vars, selectedTheme } = this.state;
+    if (varname) {
+      vars[varname].value = `${value}${vars[varname].unit}`;
+
+      const theme = this.extractTheme(vars);
+      window.less
+        .modifyVars(theme)
+        .then(() => {
+          this.setState({ vars });
+          localStorage.setItem(selectedTheme, JSON.stringify(theme));
+        })
+        .catch(() => {
+          message.error('Failed to update theme');
+        });
+    }
+  }
+
+  handleStringChange = (varname, value) => {
+    const { vars, selectedTheme } = this.state;
+    if (varname) {
+      vars[varname].value = value;
+    }
+
+    const theme = this.extractTheme(vars);
+    window.less
+      .modifyVars(theme)
+      .then(() => {
+        this.setState({ vars });
+        localStorage.setItem(selectedTheme, JSON.stringify(theme));
+      })
+      .catch(() => {
+        message.error('Failed to update theme');
+      });
+  }
+
+  handleThemeChange = (value) => {
+    const { history } = this.props;
+    history.push(`/${value}`);
+    // const { vars } = this.state;
+
+    // const theme = themes[value];
+    // if (theme) {
+    //   Object.keys(theme).forEach((key) => {
+    //     if (vars[key]) {
+    //       vars[key].value = theme[key];
+    //     }
+    //   });
+
+    //   console.log(theme);
+
+    //   window.less
+    //     .modifyVars(theme)
+    //     .then(() => {
+    //       this.setState({
+    //         selectedTheme: value,
+    //         vars
+    //       });
+    //       localStorage.setItem(THEME_NAME_KEY, value);
+    //       localStorage.setItem(THEME_VALUE_KEY, JSON.stringify(theme));
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //       message.error('Failed to update theme');
+    //     });
+    // }
+  }
+
+  handleSearch = (e) => {
+    this.setState({
+      keyword: e.target.value
+    });
+  }
+
+  handleResetTheme = () => {
+    const { selectedTheme } = this.state;
+
+    localStorage.setItem(selectedTheme, '{}');
+    this.handleThemeChange(selectedTheme);
+  }
+
+  handleSaveLess = () => {
+    const content = this.buildLessCode();
+    if (content) {
+      this.downloadFile('my-theme.less', content);
+    } else {
+      message.info('nothing changed');
+    }
+  }
+
+  handleSaveJs = () => {
+    const content = this.buildJsCode();
+    if (content) {
+      this.downloadFile('my-theme.js', content);
+    } else {
+      message.info('nothing changed');
+    }
+  }
+
+  handleSave = () => {
+    const jsCode = this.buildJsCode();
+    const lessCode = this.buildLessCode();
+
+    if (jsCode && lessCode) {
+      const zip = new JSZip();
+      const theme = zip.folder('antd-my-theme');
+
+      theme.file('index.less', lessCode);
+      theme.file('index.js', jsCode);
+
+      zip.generateAsync({
+        type: 'blob'
+      }).then((result) => {
+        this.downloadFile('antd-my-theme.zip', result);
+      });
+    } else {
+      message.info('nothing changed');
+    }
+  }
+
+  handleThemeCardToggle = () => {
+    this.setState({
+      expanded: !this.state.expanded
+    });
   }
 
   render() {

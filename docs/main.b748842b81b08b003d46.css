@@ -173,6 +173,9 @@
 .theme-edit .preview {
   max-width: 1600px;
 }
+.theme-edit .preview .abnormal-hint {
+  margin-bottom: 20px;
+}
 .theme-edit .options {
   margin-top: 10px;
   margin-bottom: 20px;

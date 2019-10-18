@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Draggable from 'react-draggable';
-import { Row, Col, Breadcrumb, Menu, Layout, Switch, Radio, Form, BackTop, Button } from 'antd';
+import { Row, Col, Breadcrumb, Menu, Layout, Switch, Radio, Form, BackTop, Button, Alert } from 'antd';
 import ThemeCard from 'component/ThemeCard';
 import Menus from './Menus';
 import {
@@ -56,14 +56,14 @@ class ThemeEdit extends Component {
   constructor(props) {
     super(props);
 
-    let defaultTheme;
-    const theme = window.location.search.split('=');
-    if (theme[1]) {
-      [, defaultTheme] = theme;
-    }
+    // let defaultTheme;
+    // const theme = window.location.search.split('=');
+    // if (theme[1]) {
+    //   [, defaultTheme] = theme;
+    // }
 
     this.state = {
-      defaultTheme,
+      // defaultTheme,
       size: 'default',
       disabled: false,
       darkMenu: false,
@@ -80,6 +80,7 @@ class ThemeEdit extends Component {
   };
 
   render() {
+    const { theme } = this.props.match.params;
     const { size, disabled, darkMenu, showBreadcrumb } = this.state;
 
     const antdVersion = `antd v${require('antd/package.json').version}`;
@@ -153,16 +154,19 @@ class ThemeEdit extends Component {
               flexDirection: 'column'
             }}
           >
+
             <div className="preview-header">
               {
                 showBreadcrumb && (
-                  <Breadcrumb style={{ margin: '16px 0' }}>
-                    <Breadcrumb.Item>Ant Design</Breadcrumb.Item>
-                    <Breadcrumb.Item overlay={menu}>
-                      General
-                    </Breadcrumb.Item>
-                    <Breadcrumb.Item>{antdVersion}</Breadcrumb.Item>
-                  </Breadcrumb>
+                  <div className="breadcrumb-header">
+                    <Breadcrumb style={{ margin: '16px 0' }}>
+                      <Breadcrumb.Item>Ant Design</Breadcrumb.Item>
+                      <Breadcrumb.Item overlay={menu}>
+                        General
+                      </Breadcrumb.Item>
+                      <Breadcrumb.Item>{antdVersion}</Breadcrumb.Item>
+                    </Breadcrumb>
+                  </div>
                 )
               }
               <div className="options">
@@ -194,6 +198,9 @@ class ThemeEdit extends Component {
               }}
             >
               <div className="preview">
+                <div className="abnormal-hint">
+                  <Alert message="If the display is abnormal, please clear the storage and refresh" type="info" closable />
+                </div>
                 <ColorPreview />
                 <TypographyPreview />
                 <ButtonPreview disabled={disabled} size={size} />
@@ -247,7 +254,7 @@ class ThemeEdit extends Component {
           handle=".theme-card .ant-card-head"
         >
           <div className="theme-card-wrapper">
-            <ThemeCard defaultTheme={this.state.defaultTheme} />
+            <ThemeCard theme={theme} />
           </div>
         </Draggable>
         <BackTop target={() => document.getElementById('preview-content')} />
