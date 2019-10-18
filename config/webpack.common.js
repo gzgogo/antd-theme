@@ -77,6 +77,10 @@ module.exports = {
       {
         from: path.resolve(PATHS.src, 'asset/js/less.min.js'),
         to: PATHS.dist,
+      },
+      {
+        from: path.resolve(PATHS.src, 'template/404.html'),
+        to: path.resolve(PATHS.dist, '404.html')
       }
     ]),
   ]
