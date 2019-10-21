@@ -8,7 +8,8 @@
   "scripts": {
     "start": "npm run color && npm run vars && webpack-dev-server --open --config config/webpack.dev.js",
     "dev": "npm run color && npm run vars && webpack-dev-server --open --config config/webpack.dev.js --env.API=dev",
-    "build": "npm run color && npm run vars && webpack --progress --config config/webpack.prod.js",
+    "build": "npm run color && npm run vars && webpack --progress --config config/webpack.prod.js && npm run cname",
+    "cname": "echo www.antdtheme.com > dist/CNAME",
     "doc": "webpack --progress --config config/webpack.doc.js",
     "color": "node ./build/buildLess.js",
     "vars": "node ./build/buildVars.js"
@@ -67,7 +68,7 @@
     "webpack-merge": "^4.1.4"
   },
   "dependencies": {
-    "@ant-design/aliyun-theme": "0.0.3",
+    "@ant-design/aliyun-theme": "0.0.4",
     "@ant-design/dark-theme": "^0.2.2",
     "antd": "^3.23.6",
     "axios": "^0.18.0",

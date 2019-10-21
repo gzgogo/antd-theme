@@ -52,7 +52,7 @@
           align-items: center;
 }
 .component-preview {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 .component-preview .title {
   margin-bottom: 10px;
@@ -24292,9 +24292,11 @@ div.ant-typography-edit-content {
 }
 .component-preview .colors .color-row .color-item.body-background {
   background: #fff;
+  border: 1px solid #d9d9d9;
 }
 .component-preview .colors .color-row .color-item.component-background {
   background: #fff;
+  border: 1px solid #d9d9d9;
 }
 .component-preview .colors .color-row .color-item.layout-header-background {
   background: #001529;
@@ -24354,15 +24356,19 @@ div.ant-typography-edit-content {
 }
 .component-preview .colors .color-row .color-item.text-color-inverse {
   background: #fff;
+  border: 1px solid #d9d9d9;
 }
 .component-preview .colors .color-row .color-item.heading-color-dark {
   background: #ffffff;
+  border: 1px solid #d9d9d9;
 }
 .component-preview .colors .color-row .color-item.text-color-dark {
   background: rgba(255, 255, 255, 0.85);
+  border: 1px solid #d9d9d9;
 }
 .component-preview .colors .color-row .color-item.text-color-secondary-dark {
   background: rgba(255, 255, 255, 0.65);
+  border: 1px solid #d9d9d9;
 }
 .component-preview .ant-carousel .slick-slide {
   background: #1890ff;

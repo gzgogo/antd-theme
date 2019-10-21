@@ -212,7 +212,7 @@ const vars = [
         desc: ''
       },
       {
-        name: '@layout-footer-padding',
+        name: '@layout-sider-background',
         type: 'string',
         value: '@layout-header-background',
         desc: ''

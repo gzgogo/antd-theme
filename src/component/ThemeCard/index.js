@@ -327,8 +327,20 @@ class ThemeCard extends Component {
   handleResetTheme = () => {
     const { selectedTheme } = this.state;
 
-    localStorage.setItem(selectedTheme, '{}');
-    this.handleThemeChange(selectedTheme);
+    localStorage.setItem(selectedTheme, '{}'); // 一定要先清空，然后再调用getThemeVars
+
+    const vars = this.getThemeVars(selectedTheme);
+
+    this.setState({
+      vars
+    });
+
+    window.less
+      .modifyVars(this.extractTheme(vars))
+      .then(() => { })
+      .catch(() => {
+        message.error('Failed to update theme');
+      });
   }
 
   handleSaveLess = () => {

@@ -212,9 +212,9 @@
         "desc": ""
       },
       {
-        "name": "@layout-footer-padding",
+        "name": "@layout-sider-background",
         "type": "string",
-        "value": "24px 50px",
+        "value": "@layout-header-background",
         "desc": ""
       },
       {
