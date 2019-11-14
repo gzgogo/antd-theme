@@ -24,6 +24,15 @@ const PaginationPreview = ({ size, disabled }) => (
       <div className="component-row">
         <Pagination size={size} disabled={disabled} simple defaultCurrent={2} total={50} />
       </div>
+      <div className="component-row">
+        <Pagination size="small" total={50} />
+      </div>
+      <div className="component-row">
+        <Pagination size="small" total={50} showSizeChanger showQuickJumper />
+      </div>
+      <div className="component-row">
+        <Pagination size="small" total={50} />
+      </div>
     </div>
   </PreviewWrapper>
 );

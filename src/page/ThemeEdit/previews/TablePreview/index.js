@@ -11,13 +11,59 @@ const columns = [
     dataIndex: 'name',
     key: 'name',
     width: 150,
-    render: text => <a>{text}</a>
+    render: text => <a>{text}</a>,
+    // filterMultiple: false,
+    filters: [
+      {
+        text: 'Joe',
+        value: 'Joe',
+      },
+      {
+        text: 'Jim',
+        value: 'Jim',
+      },
+      {
+        text: 'Submenu',
+        value: 'Submenu',
+        children: [
+          {
+            text: 'Green',
+            value: 'Green',
+          },
+          {
+            text: 'Black',
+            value: 'Black',
+          },
+        ],
+      },
+    ],
+    onFilter: (value, record) => record.name.indexOf(value) >= 0,
+    sorter: (a, b) => {
+      if (a === b) {
+        return 0;
+      } else if (a > b) {
+        return -1;
+      } else {
+        return 1;
+      }
+    }
   },
   {
     title: 'Age',
     dataIndex: 'age',
     key: 'age',
-    width: 70
+    width: 70,
+    render: text => <a>{text}</a>,
+    onFilter: (value, record) => record.age.indexOf(value) >= 0,
+    sorter: (a, b) => {
+      if (a === b) {
+        return 0;
+      } else if (a > b) {
+        return -1;
+      } else {
+        return 1;
+      }
+    }
   },
   // {
   //   title: 'Address',

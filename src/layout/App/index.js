@@ -9,7 +9,8 @@ import Frame from 'layout/Frame';
 import zhCN from 'antd/es/locale/zh_CN';
 import 'moment/locale/zh-cn';
 
-import 'stylesheet/app.less';
+// import 'stylesheet/app.less';
+import 'stylesheet/theme.less';
 
 const App = () => (
   <Provider {...store}>

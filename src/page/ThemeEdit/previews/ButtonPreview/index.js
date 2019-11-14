@@ -31,13 +31,13 @@ const ButtonPreview = ({ size, disabled }) => (
           <Button ghost size={size} disabled={disabled}>Default</Button>
         </div>
         <div className="component-col">
-          <Button type="dashed" ghost size={size} disabled={disabled}>Dashed</Button>
+          <Button ghost type="dashed" size={size} disabled={disabled}>Dashed</Button>
         </div>
         <div className="component-col">
-          <Button type="danger" ghost size={size} disabled={disabled}>Danger</Button>
+          <Button ghost type="danger" size={size} disabled={disabled}>Danger</Button>
         </div>
         <div className="component-col">
-          <Button type="link" ghost size={size} disabled={disabled}>Link</Button>
+          <Button ghost type="link" size={size} disabled={disabled}>Link</Button>
         </div>
       </div>
       <div className="component-row">

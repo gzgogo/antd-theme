@@ -183,17 +183,24 @@ class ThemeCard extends Component {
     let content = '';
     const theme = {};
     Object.keys(vars).forEach((key) => {
-      // if (vars[key].value !== themes.default[key]) {
-      //   content += `  '${key}': '${vars[key].value}',\n`;
-      //   theme[key] = vars[key].value;
-      // }
-      const { value } = vars[key];
-      content += typeof value === 'string' && value.indexOf("'") !== -1 ? `  '${key}': "${value}",\n` : `  '${key}': '${value}',\n`;
-      theme[key] = vars[key].value;
+      // 只保存有修改的变量
+      if (vars[key].value !== themes.default[key]) {
+        const { value } = vars[key];
+        content += typeof value === 'string' && value.indexOf("'") !== -1
+          ? `  '${key}': "${value}",\n`
+          : `  '${key}': '${value}',\n`;
+        theme[key] = vars[key].value;
+      }
+      // 全量保存
+      // const { value } = vars[key];
+      // content += typeof value === 'string' && value.indexOf("'") !== -1
+      //   ? `  '${key}': "${value}",\n`
+      //   : `  '${key}': '${value}',\n`;
+      // theme[key] = vars[key].value;
     });
 
     if (content) {
-      content = `export default {\n${content}};\n`;
+      content = `module.exports = {\n${content}};\n`;
     }
 
     return content;
@@ -210,6 +217,10 @@ class ThemeCard extends Component {
         theme[key] = vars[key].value;
       }
     });
+
+    if (content) {
+      content = `@import '~antd/lib/style/themes/default.less';\n\n${content}`;
+    }
 
     return content;
   }
