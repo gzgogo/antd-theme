@@ -1,5 +1,6 @@
 import React from 'react';
-import { Icon, Modal } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Modal } from 'antd';
 
 const Loading = ({ pastDelay, timedOut, error }) => {
   if (pastDelay) {
@@ -12,7 +13,7 @@ const Loading = ({ pastDelay, timedOut, error }) => {
         bodyStyle={{ background: 'rgba(208, 164, 34, 0)' }}
         style={{ textAlign: 'center', background: 'none' }}
       >
-        <Icon type="loading" style={{ fontSize: 32, color: '#1890ff' }} theme="outlined" />
+        <LoadingOutlined style={{ fontSize: 32, color: '#1890ff' }} />
         <p>Loading...</p>
       </Modal>
     );

@@ -46,13 +46,13 @@
       {
         "name": "@error-color",
         "type": "color",
-        "value": "@red-6",
+        "value": "@red-5",
         "desc": "错误色"
       },
       {
         "name": "@highlight-color",
         "type": "color",
-        "value": "@red-6",
+        "value": "@red-5",
         "desc": ""
       },
       {
@@ -147,7 +147,7 @@
       {
         "name": "@border-color-split",
         "type": "color",
-        "value": "hsv(0, 0, 91%) ",
+        "value": "hsv(0, 0, 94%) ",
         "desc": "split border inside a component"
       },
       {
@@ -326,7 +326,7 @@
       {
         "name": "@border-radius-base",
         "type": "number",
-        "value": 4,
+        "value": 2,
         "unit": "px",
         "desc": ""
       },
@@ -467,7 +467,7 @@
       {
         "name": "@item-hover-bg",
         "type": "string",
-        "value": "@primary-1",
+        "value": "#f5f5f5",
         "desc": "The background colors for active and hover states for things like list items or table cells"
       }
     ]
@@ -490,37 +490,37 @@
       {
         "name": "@box-shadow-base",
         "type": "string",
-        "value": "@shadow-1-down",
+        "value": "@shadow-2",
         "desc": ""
       },
       {
         "name": "@shadow-1-up",
         "type": "string",
-        "value": "0 -2px 8px @shadow-color",
+        "value": "0 -6px 16px -8px rgba(0, 0, 0, 0.08), 0 -9px 28px 0 rgba(0, 0, 0, 0.05),",
         "desc": ""
       },
       {
         "name": "@shadow-1-down",
         "type": "string",
-        "value": "0 2px 8px @shadow-color",
+        "value": "0 6px 16px -8px rgba(0, 0, 0, 0.08), 0 9px 28px 0 rgba(0, 0, 0, 0.05),",
         "desc": ""
       },
       {
         "name": "@shadow-1-left",
         "type": "string",
-        "value": "-2px 0 8px @shadow-color",
+        "value": "-6px 0 16px -8px rgba(0, 0, 0, 0.08), -9px 0 28px 0 rgba(0, 0, 0, 0.05),",
         "desc": ""
       },
       {
         "name": "@shadow-1-right",
         "type": "string",
-        "value": "2px 0 8px @shadow-color",
+        "value": "6px 0 16px -8px rgba(0, 0, 0, 0.08), 9px 0 28px 0 rgba(0, 0, 0, 0.05),",
         "desc": ""
       },
       {
         "name": "@shadow-2",
         "type": "string",
-        "value": "0 4px 12px @shadow-color",
+        "value": "0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08),",
         "desc": ""
       }
     ]
@@ -616,13 +616,13 @@
       {
         "name": "@btn-danger-bg",
         "type": "string",
-        "value": "color(~`colorPalette('@{error-color}', 5) `)",
+        "value": "@error-color",
         "desc": ""
       },
       {
         "name": "@btn-danger-border",
         "type": "string",
-        "value": "color(~`colorPalette('@{error-color}', 5) `)",
+        "value": "@error-color",
         "desc": ""
       },
       {
@@ -1476,7 +1476,7 @@
       {
         "name": "@menu-item-active-bg",
         "type": "string",
-        "value": "@item-active-bg",
+        "value": "@primary-1",
         "desc": ""
       },
       {
@@ -1586,7 +1586,7 @@
       {
         "name": "@table-row-hover-bg",
         "type": "string",
-        "value": "@primary-1",
+        "value": "@item-hover-bg",
         "desc": ""
       },
       {
@@ -1598,7 +1598,7 @@
       {
         "name": "@table-selected-row-bg",
         "type": "color",
-        "value": "#fafafa",
+        "value": "@primary-1",
         "desc": ""
       },
       {
@@ -1683,7 +1683,7 @@
       {
         "name": "@time-picker-selected-bg",
         "type": "string",
-        "value": "@background-color-base",
+        "value": "@item-active-bg",
         "desc": ""
       }
     ]
@@ -1832,13 +1832,13 @@
       {
         "name": "@card-shadow",
         "type": "string",
-        "value": "0 2px 8px rgba(0, 0, 0, 0.09)",
+        "value": "0 1px 2px -2px rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.12),",
         "desc": ""
       },
       {
         "name": "@card-radius",
         "type": "string",
-        "value": "@border-radius-sm",
+        "value": "@border-radius-base",
         "desc": ""
       }
     ]

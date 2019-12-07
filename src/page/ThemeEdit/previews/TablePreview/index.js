@@ -1,5 +1,8 @@
 import React from 'react';
-import { Table, Icon, Switch, Radio, Form, Divider } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { DownOutlined } from '@ant-design/icons';
+import { Table, Switch, Radio, Divider } from 'antd';
 import PreviewWrapper from '../PreviewWrapper';
 // import './style.less';
 
@@ -81,7 +84,7 @@ const columns = [
         <a>Delete</a>
         <Divider type="vertical" />
         <a className="ant-dropdown-link">
-          More <Icon type="down" />
+          More <DownOutlined />
         </a>
       </span>
     )

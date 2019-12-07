@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Icon, Menu } from 'antd';
+import { BuildOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
+import { Menu } from 'antd';
 
 const { SubMenu } = Menu;
 
@@ -32,7 +33,7 @@ class Menus extends Component {
           key="sub2"
           title={
             <span>
-              <Icon type="laptop" />Form
+              <LaptopOutlined />Form
             </span>
               }
         >
@@ -57,7 +58,7 @@ class Menus extends Component {
           key="sub3"
           title={
             <span>
-              <Icon type="build" />View
+              <BuildOutlined />View
             </span>
               }
         >
@@ -80,7 +81,7 @@ class Menus extends Component {
           key="sub4"
           title={
             <span>
-              <Icon type="notification" />Hint
+              <NotificationOutlined />Hint
             </span>
               }
         >

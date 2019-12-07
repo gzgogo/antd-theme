@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Icon } from 'antd';
+import { DownloadOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
 import PreviewWrapper from '../PreviewWrapper';
 // import './style.less';
 
@@ -42,27 +43,27 @@ const ButtonPreview = ({ size, disabled }) => (
       </div>
       <div className="component-row">
         <div className="component-col">
-          <Button type="primary" icon="download" size={size} disabled={disabled} />
+          <Button type="primary" icon={<DownloadOutlined />} size={size} disabled={disabled} />
         </div>
         <div className="component-col">
-          <Button type="primary" shape="circle" icon="download" size={size} disabled={disabled} />
+          <Button type="primary" shape="circle" icon={<DownloadOutlined />} size={size} disabled={disabled} />
         </div>
         <div className="component-col">
-          <Button type="primary" shape="round" icon="download" size={size} disabled={disabled}>Download</Button>
+          <Button type="primary" shape="round" icon={<DownloadOutlined />} size={size} disabled={disabled}>Download</Button>
         </div>
         <div className="component-col">
-          <Button type="primary" icon="download" size={size} disabled={disabled}>Download</Button>
+          <Button type="primary" icon={<DownloadOutlined />} size={size} disabled={disabled}>Download</Button>
         </div>
       </div>
       <div className="component-row">
         <Button.Group size={size}>
           <Button type="primary" disabled={disabled}>
-            <Icon type="left" />
+            <LeftOutlined />
             Backward
           </Button>
           <Button type="primary" disabled={disabled}>
             Forward
-            <Icon type="right" disabled={disabled} />
+            <RightOutlined disabled={disabled} />
           </Button>
         </Button.Group>
       </div>

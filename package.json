@@ -69,8 +69,10 @@
   },
   "dependencies": {
     "@ant-design/aliyun-theme": "0.0.4",
+    "@ant-design/compatible": "0.0.1-alpha.7",
     "@ant-design/dark-theme": "^0.2.2",
-    "antd": "^3.23.6",
+    "@ant-design/icons": "^4.0.0-alpha.11",
+    "antd": "^4.0.0-alpha.14",
     "axios": "^0.18.0",
     "jszip": "^3.2.2",
     "mobx": "^5.1.0",

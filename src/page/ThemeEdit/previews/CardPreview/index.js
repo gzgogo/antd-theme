@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card, Icon, Avatar } from 'antd';
+import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import { Card, Avatar } from 'antd';
 import PreviewWrapper from '../PreviewWrapper';
 // import './style.less';
 
@@ -35,9 +36,9 @@ const CardPreview = ({ size }) => (
               />
             }
             actions={[
-              <Icon type="setting" key="setting" />,
-              <Icon type="edit" key="edit" />,
-              <Icon type="ellipsis" key="ellipsis" />
+              <SettingOutlined key="setting" />,
+              <EditOutlined key="edit" />,
+              <EllipsisOutlined key="ellipsis" />
             ]}
           >
             <Meta

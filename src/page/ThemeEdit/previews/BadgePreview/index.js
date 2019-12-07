@@ -1,5 +1,6 @@
 import React from 'react';
-import { Badge, Icon } from 'antd';
+import { ClockCircleOutlined } from '@ant-design/icons';
+import { Badge } from 'antd';
 import PreviewWrapper from '../PreviewWrapper';
 // import './style.less';
 
@@ -18,7 +19,7 @@ const BadgePreview = ({ size, disabled }) => (
           </Badge>
         </div>
         <div className="component-col">
-          <Badge count={<Icon type="clock-circle" style={{ color: '#f5222d' }} />} size={size} disabled={disabled}>
+          <Badge count={<ClockCircleOutlined style={{ color: '#f5222d' }} />} size={size} disabled={disabled}>
             <a href="#" className="badge-square" />
           </Badge>
         </div>

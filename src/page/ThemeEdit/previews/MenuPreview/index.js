@@ -1,5 +1,15 @@
 import React from 'react';
-import { Menu, Icon } from 'antd';
+
+import {
+  AppstoreOutlined,
+  DesktopOutlined,
+  InboxOutlined,
+  MailOutlined,
+  PieChartOutlined,
+  SettingOutlined,
+} from '@ant-design/icons';
+
+import { Menu } from 'antd';
 import PreviewWrapper from '../PreviewWrapper';
 // import './style.less';
 
@@ -11,11 +21,11 @@ const MenuPreview = ({ size, disabled }) => (
       <div className="component-row">
         <Menu mode="horizontal">
           <Menu.Item key="mail" size={size} disabled={disabled}>
-            <Icon type="mail" />
+            <MailOutlined />
             Navigation One
           </Menu.Item>
           <Menu.Item key="app" size={size} disabled={disabled}>
-            <Icon type="appstore" />
+            <AppstoreOutlined />
             Navigation Two
           </Menu.Item>
           <SubMenu
@@ -23,7 +33,7 @@ const MenuPreview = ({ size, disabled }) => (
             disabled={disabled}
             title={
               <span className="submenu-title-wrapper">
-                <Icon type="setting" />
+                <SettingOutlined />
                 Navigation Three - Submenu
               </span>
             }
@@ -56,7 +66,7 @@ const MenuPreview = ({ size, disabled }) => (
               key="sub1"
               title={
                 <span>
-                  <Icon type="mail" />
+                  <MailOutlined />
                   <span>Navigation One</span>
                 </span>
               }
@@ -74,7 +84,7 @@ const MenuPreview = ({ size, disabled }) => (
               key="sub2"
               title={
                 <span>
-                  <Icon type="appstore" />
+                  <AppstoreOutlined />
                   <span>Navigation Two</span>
                 </span>
               }
@@ -90,7 +100,7 @@ const MenuPreview = ({ size, disabled }) => (
               key="sub4"
               title={
                 <span>
-                  <Icon type="setting" />
+                  <SettingOutlined />
                   <span>Navigation Three</span>
                 </span>
               }
@@ -111,22 +121,22 @@ const MenuPreview = ({ size, disabled }) => (
             theme="dark"
           >
             <Menu.Item key="1" size={size} disabled={disabled}>
-              <Icon type="pie-chart" />
+              <PieChartOutlined />
               <span>Option 1</span>
             </Menu.Item>
             <Menu.Item key="2" size={size} disabled={disabled}>
-              <Icon type="desktop" />
+              <DesktopOutlined />
               <span>Option 2</span>
             </Menu.Item>
             <Menu.Item key="3" size={size} disabled={disabled}>
-              <Icon type="inbox" />
+              <InboxOutlined />
               <span>Option 3</span>
             </Menu.Item>
             <SubMenu
               key="sub1"
               title={
                 <span>
-                  <Icon type="mail" />
+                  <MailOutlined />
                   <span>Navigation One</span>
                 </span>
               }
@@ -140,7 +150,7 @@ const MenuPreview = ({ size, disabled }) => (
               key="sub2"
               title={
                 <span>
-                  <Icon type="appstore" />
+                  <AppstoreOutlined />
                   <span>Navigation Two</span>
                 </span>
               }

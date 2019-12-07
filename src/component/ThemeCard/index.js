@@ -1,18 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import JSZip from 'jszip';
-import {
-  Card,
-  message,
-  // Button,
-  InputNumber,
-  Input,
-  Tooltip,
-  Collapse,
-  Select,
-  Icon,
-  Popconfirm
-} from 'antd';
+import { QuestionCircleTwoTone } from '@ant-design/icons';
+import { Card, message, /* Button, */ InputNumber, Input, Tooltip, Collapse, Select, Popconfirm } from 'antd';
 import ColorPicker from 'component/ColorPicker';
 import themes from 'theme';
 import './style.less';
@@ -41,7 +31,8 @@ class ThemeCard extends Component {
     window.less
       .modifyVars(this.extractTheme(vars))
       .then(() => { })
-      .catch(() => {
+      .catch((err) => {
+        console.error(err.message);
         message.error('Failed to update theme');
       });
   }
@@ -56,8 +47,11 @@ class ThemeCard extends Component {
         selectedTheme: nextTheme
       });
 
+      const theme = this.extractTheme(vars);
+      console.log(theme);
+
       window.less
-        .modifyVars(this.extractTheme(vars))
+        .modifyVars(theme)
         .then(() => { })
         .catch(() => {
           message.error('Failed to update theme');
@@ -426,13 +420,10 @@ class ThemeCard extends Component {
               </div>
             }
           >
-            <Icon
-              type="question-circle"
-              theme="twoTone"
+            <QuestionCircleTwoTone
               style={{
                 marginLeft: 6
-              }}
-            />
+              }} />
           </Tooltip>
         </div>
         <Select

@@ -1,4 +1,5 @@
 import React from 'react';
+import { UserOutlined } from '@ant-design/icons';
 import { Avatar } from 'antd';
 import PreviewWrapper from '../PreviewWrapper';
 // import './style.less';
@@ -8,15 +9,15 @@ const AvatarPreview = ({ size }) => (
     <div className="components">
       <div className="component-row">
         <div className="component-col">
-          <Avatar size={size} icon="user" />
+          <Avatar size={size} icon={<UserOutlined />} />
         </div>
         <div className="component-col">
-          <Avatar size={size} shape="square" icon="user" />
+          <Avatar size={size} shape="square" icon={<UserOutlined />} />
         </div>
       </div>
       <div className="component-row">
         <div className="component-col">
-          <Avatar size={size} icon="user" />
+          <Avatar size={size} icon={<UserOutlined />} />
         </div>
         <div className="component-col">
           <Avatar size={size}>U</Avatar>
@@ -31,7 +32,7 @@ const AvatarPreview = ({ size }) => (
           <Avatar size={size} style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>U</Avatar>
         </div>
         <div className="component-col">
-          <Avatar size={size} style={{ backgroundColor: '#87d068' }} icon="user" />
+          <Avatar size={size} style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
         </div>
       </div>
     </div>

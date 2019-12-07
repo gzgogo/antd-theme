@@ -1,5 +1,6 @@
 import React from 'react';
-import { Menu, Dropdown, Icon } from 'antd';
+import { DownOutlined, UserOutlined } from '@ant-design/icons';
+import { Menu, Dropdown } from 'antd';
 import PreviewWrapper from '../PreviewWrapper';
 // import './style.less';
 
@@ -31,12 +32,12 @@ const DropdownPreview = ({ size, disabled }) => (
         <div className="component-col">
           <Dropdown overlay={menu} size={size} disabled={disabled}>
             <a className="ant-dropdown-link" href="#">
-              Hover me <Icon type="down" />
+              Hover me <DownOutlined />
             </a>
           </Dropdown>
         </div>
         <div className="component-col">
-          <Dropdown.Button overlay={menu} icon={<Icon type="user" />} size={size} disabled={disabled}>
+          <Dropdown.Button overlay={menu} icon={<UserOutlined />} size={size} disabled={disabled}>
             Dropdown
           </Dropdown.Button>
         </div>

@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import {
-  Icon,
-  Form,
-  Select,
-  Switch,
-  Radio,
-  Button,
-  Upload,
-  DatePicker,
-  Progress,
-  Input
-} from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { UploadOutlined } from '@ant-design/icons';
+import { Select, Switch, Radio, Button, Upload, DatePicker, Progress, Input } from 'antd';
 import PreviewWrapper from '../PreviewWrapper';
 import './style.less';
 
@@ -162,7 +154,7 @@ class ExampleForm extends Component {
               listType="picture"
             >
               <Button size={size} disabled={disabled}>
-                <Icon type="upload" /> Click to upload
+                <UploadOutlined /> Click to upload
               </Button>
 
               <a href="#" style={{ marginLeft: 20 }}>上传文件</a>

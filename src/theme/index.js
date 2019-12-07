@@ -1,10 +1,15 @@
 
-import dark from '@ant-design/dark-theme';
+import dark from 'antd/dist/dark-theme';
 import aliyun from '@ant-design/aliyun-theme';
 
 const themeVars = require('../vars.json');
 
 const defaultTheme = {};
+const darkTheme = {};
+
+Object.keys(dark).forEach((key) => {
+  darkTheme[`@${key}`] = dark[key];
+});
 
 themeVars.forEach((group) => {
   group.children.forEach((item) => {
@@ -18,6 +23,6 @@ themeVars.forEach((group) => {
 
 export default {
   default: defaultTheme,
-  dark,
+  dark: darkTheme,
   aliyun
 };

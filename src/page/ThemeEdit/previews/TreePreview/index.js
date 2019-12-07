@@ -5,6 +5,36 @@ import PreviewWrapper from '../PreviewWrapper';
 
 const { TreeNode } = Tree;
 
+const treeData = [
+  {
+    title: 'parent 1',
+    key: '0-0',
+    children: [
+      {
+        title: 'parent 1-0',
+        key: '0-0-0',
+        disabled: true,
+        children: [
+          {
+            title: 'leaf',
+            key: '0-0-0-0',
+            disableCheckbox: true,
+          },
+          {
+            title: 'leaf',
+            key: '0-0-0-1',
+          },
+        ],
+      },
+      {
+        title: 'parent 1-1',
+        key: '0-0-1',
+        children: [{ title: <span style={{ color: '#1890ff' }}>sss</span>, key: '0-0-1-0' }],
+      },
+    ],
+  },
+];
+
 const TreePreview = ({ size, disabled }) => (
   <PreviewWrapper id="Tree" title="Tree">
     <div className="components tree">
@@ -17,37 +47,19 @@ const TreePreview = ({ size, disabled }) => (
             defaultExpandedKeys={['0-0-0', '0-0-1']}
             defaultSelectedKeys={['0-0-0', '0-0-1']}
             defaultCheckedKeys={['0-0-0', '0-0-1']}
-          >
-            <TreeNode title="parent 1" key="0-0">
-              <TreeNode title="parent 1-0" key="0-0-0">
-                <TreeNode title="leaf" key="0-0-0-0" />
-                <TreeNode title="leaf" key="0-0-0-1" />
-              </TreeNode>
-              <TreeNode title="parent 1-1" key="0-0-1">
-                <TreeNode title={<span style={{ color: '#1890ff' }}>sss</span>} key="0-0-1-0" />
-              </TreeNode>
-            </TreeNode>
-          </Tree>
+            treeData={treeData}
+          />
         </div>
         <div className="component-col">
           <Tree
-            clasName="component-col"
+            // checkable
             size={size}
             disabled={disabled}
             defaultExpandedKeys={['0-0-0', '0-0-1']}
             defaultSelectedKeys={['0-0-0', '0-0-1']}
             defaultCheckedKeys={['0-0-0', '0-0-1']}
-          >
-            <TreeNode title="parent 1" key="0-0">
-              <TreeNode title="parent 1-0" key="0-0-0">
-                <TreeNode title="leaf" key="0-0-0-0" />
-                <TreeNode title="leaf" key="0-0-0-1" />
-              </TreeNode>
-              <TreeNode title="parent 1-1" key="0-0-1">
-                <TreeNode title={<span style={{ color: '#1890ff' }}>sss</span>} key="0-0-1-0" />
-              </TreeNode>
-            </TreeNode>
-          </Tree>
+            treeData={treeData}
+          />
         </div>
         <div className="component-col">
           <Tree

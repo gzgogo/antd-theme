@@ -1,5 +1,6 @@
 import React from 'react';
-import { Steps, Icon } from 'antd';
+import { LoadingOutlined, SmileOutlined, SolutionOutlined, UserOutlined } from '@ant-design/icons';
+import { Steps } from 'antd';
 import PreviewWrapper from '../PreviewWrapper';
 // import './style.less';
 
@@ -22,10 +23,10 @@ const StepPreview = ({ size, disabled }) => (
       </div>
       <div className="component-row">
         <Steps size={size}>
-          <Step status="finish" title="Login" icon={<Icon type="user" />} disabled={disabled} />
-          <Step status="finish" title="Verification" icon={<Icon type="solution" />} disabled={disabled} />
-          <Step status="process" title="Pay" icon={<Icon type="loading" />} disabled={disabled} />
-          <Step status="wait" title="Done" icon={<Icon type="smile-o" />} disabled={disabled} />
+          <Step status="finish" title="Login" icon={<UserOutlined />} disabled={disabled} />
+          <Step status="finish" title="Verification" icon={<SolutionOutlined />} disabled={disabled} />
+          <Step status="process" title="Pay" icon={<LoadingOutlined />} disabled={disabled} />
+          <Step status="wait" title="Done" icon={<SmileOutlined />} disabled={disabled} />
         </Steps>
       </div>
       <div className="component-row">
