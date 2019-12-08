@@ -9,7 +9,7 @@
     "start": "npm run color && npm run vars && webpack-dev-server --open --config config/webpack.dev.js",
     "dev": "npm run color && npm run vars && webpack-dev-server --open --config config/webpack.dev.js --env.API=dev",
     "build": "npm run color && npm run vars && webpack --progress --config config/webpack.prod.js && npm run cname",
-    "cname": "echo www.antdtheme.com > dist/CNAME",
+    "cname": "echo www.antdtheme.com > docs/CNAME",
     "doc": "webpack --progress --config config/webpack.doc.js",
     "color": "node ./build/buildLess.js",
     "vars": "node ./build/buildVars.js"

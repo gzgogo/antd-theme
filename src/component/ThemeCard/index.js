@@ -423,7 +423,8 @@ class ThemeCard extends Component {
             <QuestionCircleTwoTone
               style={{
                 marginLeft: 6
-              }} />
+              }}
+            />
           </Tooltip>
         </div>
         <Select
