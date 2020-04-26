@@ -1,0 +1,23 @@
+#root {
+  height: 100%;
+
+  >section {
+    height: 100%;
+  }
+}
+
+/* 自定义滚动条样式，只有webkit内核浏览器生效 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: rgba(151, 164, 182, 0.2);
+}

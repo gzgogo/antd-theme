@@ -1,7 +1,19 @@
-.theme-card {
-  width: 320px;
+@import '~antd/lib/style/themes/default.less';
+
+.spin-container {
+  position: fixed;
+  z-index: 10000;
   height: 100%;
-  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  padding-top: 250px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.theme-card {
+  height: 100%;
 
   .toggle {
     padding: 2px 4px;
@@ -9,8 +21,8 @@
     top: -14px;
     left: 20px;
     z-index: 1000;
-    background: white;
-    border: 1px solid #e8e8e8;
+    background: @body-background;
+    border: 1px solid @border-color-split;
 
     .btn-toggle {
       width: 20px;
@@ -30,8 +42,8 @@
     // .ant-card-head {
     //   cursor: cell;
     // }
-  
-    [class*="-card-body"] {
+
+    [class*='-card-body'] {
       flex: 1;
       overflow: auto;
 
@@ -39,7 +51,7 @@
         padding: 18px 8px;
       }
     }
-  
+
     .theme-card-title {
       display: flex;
       justify-content: space-between;
