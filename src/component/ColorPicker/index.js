@@ -1,78 +1,39 @@
-import React, { Component } from 'react';
-import { Popover } from 'antd';
-import { ChromePicker, SketchPicker } from 'react-color';
-import './style.less';
+import React, { Component } from 'react'
+import { Popover, Button, message } from 'antd'
+import { SketchPicker } from 'react-color'
+import CopyToClipboard from 'react-copy-to-clipboard'
 
-const noop = () => { };
-
-const pickers = {
-  chrome: ChromePicker,
-  sketch: SketchPicker
-};
-
+const copyToClipboard = (str) => {
+  const el = document.createElement('textarea')
+  el.value = str
+  document.body.appendChild(el)
+  el.select()
+  document.execCommand('copy')
+  document.body.removeChild(el)
+}
 export default class ColorPicker extends Component {
-  static defaultProps = {
-    onChange: noop,
-    onChangeComplete: noop,
-    position: 'bottom'
+  state = {
+    color: '#3690FF',
   }
 
-  constructor(props) {
-    super();
-    this.state = {
-      color: props.color
-    };
+  onChange = (color) => {
+    this.setState({ color: color.hex })
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({ color: nextProps.color });
+  onChangeComplete = (color) => {
+    copyToClipboard(color.hex)
   }
-
-  handleChange = (color) => {
-    this.setState({ color: color.hex });
-    this.props.onChange(color.hex, color);
-  };
-
-  handleChangeComplete = (color) => {
-    this.setState({ color: color.hex });
-    this.props.onChangeComplete(color.hex);
-  };
 
   render() {
-    const { small, type } = this.props;
-
-    const Picker = pickers[type];
-
-    const styles = {
-      color: {
-        width: small ? '16px' : '120px',
-        height: small ? '16px' : '24px',
-        borderRadius: '2px',
-        background: this.state.color
-      },
-      swatch: {
-        padding: '4px',
-        background: '#fff',
-        borderRadius: '2px',
-        boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
-        display: 'inline-block',
-        cursor: 'pointer'
-      }
-    };
-
-    const swatch = (
-      <div style={styles.swatch}>
-        <div style={styles.color} />
-      </div>
-    );
     const picker = (
-      <Picker
-        {...this.props}
+      <SketchPicker
+        width={240}
+        disableAlpha={true}
         color={this.state.color}
-        onChange={this.handleChange}
-        onChangeComplete={this.handleChangeComplete}
+        onChange={this.onChange}
+        onChangeComplete={this.onChangeComplete}
       />
-    );
+    )
 
     return (
       <Popover
@@ -81,8 +42,16 @@ export default class ColorPicker extends Component {
         trigger="click"
         content={picker}
       >
-        {swatch}
+        <div
+          style={{
+            background: this.state.color,
+            border: '5px solid white',
+            width: '80px',
+            height: '32px',
+            cursor: 'pointer',
+          }}
+        ></div>
       </Popover>
-    );
+    )
   }
 }

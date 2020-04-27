@@ -1,0 +1,147 @@
+@import '~antd/lib/style/themes/default.less';
+
+.logo {
+  height: 64px;
+  position: relative;
+  line-height: 64px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  overflow: hidden;
+  color: @heading-color;
+
+  img {
+    display: inline-block;
+    vertical-align: middle;
+    height: 32px;
+  }
+
+  h1 {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 20px;
+    margin: 0 0 0 12px;
+    font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-weight: 400;
+  }
+
+  .logo-title {
+    color: @text-color-dark;
+  }
+}
+
+.ant-btn {
+  &.btn-github {
+    position: absolute;
+    right: 0px;
+    top: 15px;
+
+    img {
+      height: 24px;
+      margin-right: 8px;
+    }
+
+    span {
+      display: inline-block;
+      vertical-align: bottom;
+      color: @text-color-inverse;
+      border-bottom: 1px solid @text-color-inverse;
+    }
+  }
+}
+
+.field-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+
+  .field-name {
+    .anticon {
+      margin-left: 5px;
+    }
+  }
+
+  .filed-value {
+    width: 160px;
+  }
+}
+
+.header-actions {
+  position: absolute;
+  top: 0;
+  right: 16px;
+}
+
+.theme-card-wrapper {
+  position: absolute;
+  top: 92px;
+  right: 28px;
+  height: 86%;
+}
+
+.theme-edit {
+  .preview {
+    max-width: 1600px;
+
+    .abnormal-hint {
+      margin-bottom: 20px;
+    }
+  }
+
+  .options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+  .components {
+    &.input {
+      width: 500px;
+    }
+
+    &.tree {
+      .component-row {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+
+    .component-row {
+      margin-bottom: 12px;
+
+      &.calendar {
+        border: 1px solid @border-color-base;
+        width: 300px;
+      }
+
+      .text-secondary {
+        font-size: @font-size-sm;
+        color: @text-color-secondary;
+      }
+
+      .component-col {
+        display: inline-block;
+        margin-right: 14px;
+
+        .badge-square {
+          width: 42px;
+          height: 42px;
+          border-radius: 4px;
+          display: inline-block;
+          vertical-align: middle;
+          background: @component-background;
+        }
+      }
+    }
+  }
+
+  .menu {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+.ant-back-top {
+  right: 370px !important;
+}
