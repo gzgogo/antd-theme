@@ -10,6 +10,14 @@ const pickers = {
   sketch: SketchPicker
 };
 
+const getColorStr = (color) => {
+  let colorStr = color.hex;
+  if (color.rgb.a !== 1) {
+    colorStr = `rgba(${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b}, ${color.rgb.a})`;
+  }
+  return colorStr;
+};
+
 export default class ColorPicker extends Component {
   static defaultProps = {
     onChange: noop,
@@ -29,13 +37,15 @@ export default class ColorPicker extends Component {
   }
 
   handleChange = (color) => {
-    this.setState({ color: color.hex });
-    this.props.onChange(color.hex, color);
+    const hexColor = getColorStr(color);
+    this.setState({ color: hexColor });
+    this.props.onChange(hexColor, color);
   };
 
   handleChangeComplete = (color) => {
-    this.setState({ color: color.hex });
-    this.props.onChangeComplete(color.hex);
+    const hexColor = getColorStr(color);
+    this.setState({ color: hexColor });
+    this.props.onChangeComplete(hexColor);
   };
 
   render() {
