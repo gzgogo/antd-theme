@@ -16,3 +16,6 @@
 4. Thanks for your participation and contribution!
 
 ![](https://github.com/gzgogo/antd-theme/raw/master/guide.png)
+
+## Status
+![Alt](https://repobeats.axiom.co/api/embed/f40b59e7212720f52eb0987f9d49e522deccb54c.svg "Repobeats analytics image")
