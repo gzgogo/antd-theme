@@ -80,7 +80,7 @@
     "@ant-design/icons": "^4.0.0-alpha.11",
     "antd": "^4.0.0-alpha.14",
     "axios": "^0.18.0",
-    "jszip": "^3.2.2",
+    "jszip": "^3.7.0",
     "mobx": "^5.1.0",
     "mobx-react": "^5.2.8",
     "moment": "^2.24.0",
