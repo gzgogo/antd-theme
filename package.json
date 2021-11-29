@@ -24,6 +24,11 @@
       "eslint"
     ]
   },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.0.0",
     "@babel/polyfill": "^7.0.0",
@@ -40,6 +45,7 @@
     "clean-webpack-plugin": "^1.0.0",
     "copy-webpack-plugin": "^5.0.3",
     "css-loader": "^0.28.11",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^5.5.0",
     "eslint-config-ali": "^3.1.0",
     "eslint-plugin-import": "^2.14.0",
