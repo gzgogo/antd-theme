@@ -1,6 +1,7 @@
 
 import dark from 'antd/dist/dark-theme';
 import aliyun from '@ant-design/aliyun-theme';
+import test1 from ' dporyadintesttheme1'
 
 const themeVars = require('../vars.json');
 
@@ -24,5 +25,6 @@ themeVars.forEach((group) => {
 export default {
   default: defaultTheme,
   dark: darkTheme,
+  test1,
   aliyun
 };
