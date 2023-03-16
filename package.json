@@ -87,7 +87,7 @@
     "@ant-design/dark-theme": "^0.2.2",
     "@ant-design/icons": "^4.0.0-alpha.11",
     "antd": "^4.0.0-alpha.14",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "jszip": "^3.2.2",
     "mobx": "^5.1.0",
     "mobx-react": "^5.2.8",
